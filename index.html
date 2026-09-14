@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#101010">
-<title>Speedway Manager 2026 — Beta 3.0.2</title>
+<meta name="theme-color" content="#111827">
+<title>Speedway Manager — Beta 3.0.3</title>
 
 <style>
 * {
@@ -14,41 +14,39 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #111;
-  color: #fff;
+  background: #111827;
+  color: #f9fafb;
 }
 
-button,
-select {
-  font: inherit;
+button {
+  font-family: inherit;
 }
 
-header {
-  background: #181818;
-  border-bottom: 1px solid #333;
-  padding: 16px;
+.app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+.header {
   text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  margin-bottom: 20px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 21px;
+.header h1 {
+  margin-bottom: 6px;
+  font-size: 28px;
 }
 
 .version {
-  margin-top: 5px;
-  color: #999;
-  font-size: 12px;
-}
-
-.container {
-  width: 100%;
-  max-width: 850px;
-  margin: auto;
-  padding: 16px;
+  color: #9ca3af;
+  font-size: 14px;
 }
 
 .screen {
@@ -60,68 +58,95 @@ header h1 {
 }
 
 .card {
-  background: #1b1b1b;
-  border: 1px solid #333;
-  border-radius: 14px;
+  background: #1f2937;
+  border-radius: 16px;
   padding: 16px;
-  margin-bottom: 14px;
-}
-
-h2 {
-  margin-top: 0;
-}
-
-h3 {
-  margin-bottom: 8px;
-}
-
-.small {
-  color: #aaa;
-  font-size: 13px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 
 .club-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .club-button {
-  background: #222;
-  border: 1px solid #444;
+  width: 100%;
+  border: 1px solid #374151;
+  background: #1f2937;
   color: white;
   border-radius: 14px;
-  padding: 14px 10px;
-  cursor: pointer;
+  padding: 14px;
   text-align: left;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
 }
 
 .club-button:hover {
-  background: #2b2b2b;
+  background: #273449;
+}
+
+.club-button:active {
+  transform: scale(0.98);
+}
+
+.club-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .club-logo {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: #303030;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.club-short {
+  font-size: 18px;
   font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 10px;
 }
 
 .club-name {
-  font-weight: bold;
   font-size: 14px;
+  color: #d1d5db;
+  margin-top: 2px;
 }
 
 .club-city {
-  color: #999;
-  font-size: 12px;
-  margin-top: 4px;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.back-button,
+.primary-button,
+.secondary-button {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: #2563eb;
+  color: white;
+}
+
+.secondary-button {
+  background: #374151;
+  color: white;
+}
+
+.back-button {
+  background: #374151;
+  color: white;
+  margin-bottom: 14px;
 }
 
 .match-header {
@@ -133,116 +158,74 @@ h3 {
 }
 
 .team-box {
-  background: #222;
-  border: 1px solid #444;
+  background: #111827;
   border-radius: 12px;
   padding: 12px;
 }
 
 .team-short {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
+}
+
+.team-full {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
 }
 
 .vs {
-  color: #999;
   font-weight: bold;
+  color: #9ca3af;
 }
 
-.score {
-  font-size: 32px;
-  font-weight: bold;
-  margin-top: 8px;
-}
-
-.roster-grid {
+.slot-list {
   display: grid;
-  gap: 8px;
+  gap: 9px;
 }
 
 .slot {
-  background: #202020;
-  border: 1px solid #383838;
+  background: #111827;
+  border: 1px solid #374151;
   border-radius: 12px;
   padding: 12px;
 }
 
-.slot-header {
+.slot-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
 
 .slot-number {
   font-weight: bold;
-  font-size: 18px;
 }
 
 .slot-role {
-  color: #aaa;
-  font-size: 11px;
-  text-transform: uppercase;
-}
-
-.slot-rider {
-  margin-top: 8px;
-  font-weight: bold;
-}
-
-.slot-info {
-  margin-top: 4px;
-  color: #aaa;
   font-size: 12px;
-}
-
-.slot button {
-  margin-top: 9px;
-}
-
-button {
-  border: 0;
-  border-radius: 10px;
-  padding: 11px 14px;
-  cursor: pointer;
-}
-
-.primary {
-  width: 100%;
-  background: #fff;
-  color: #111;
-  font-weight: bold;
-}
-
-.secondary {
-  background: #2c2c2c;
-  color: white;
-  border: 1px solid #444;
-}
-
-.danger {
-  background: #421d1d;
-  color: #fff;
-}
-
-.rider-list {
-  display: grid;
-  gap: 7px;
-  max-height: 430px;
-  overflow-y: auto;
+  color: #9ca3af;
 }
 
 .rider-button {
   width: 100%;
-  background: #242424;
+  margin-top: 8px;
+  border: 1px solid #4b5563;
+  border-radius: 10px;
+  background: #1f2937;
   color: white;
-  border: 1px solid #3c3c3c;
+  padding: 10px;
   text-align: left;
-  padding: 11px;
+  cursor: pointer;
 }
 
-.rider-button:disabled {
-  opacity: .35;
+.rider-button.selected {
+  border-color: #2563eb;
+  background: #1d4ed8;
+}
+
+.rider-button.disabled {
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -250,115 +233,155 @@ button {
   font-weight: bold;
 }
 
-.rider-meta {
-  color: #999;
+.rider-info {
   font-size: 12px;
-  margin-top: 3px;
+  color: #d1d5db;
+  margin-top: 4px;
 }
 
 .badges {
   display: flex;
-  flex-wrap: wrap;
   gap: 5px;
+  flex-wrap: wrap;
   margin-top: 6px;
 }
 
 .badge {
   display: inline-block;
-  background: #333;
-  color: #ddd;
-  padding: 3px 6px;
-  border-radius: 5px;
+  padding: 3px 7px;
+  border-radius: 999px;
   font-size: 10px;
+  background: #374151;
+  color: #e5e7eb;
 }
 
-.badge.junior {
-  background: #31526a;
+.badge.blue {
+  background: #1d4ed8;
 }
 
-.badge.u24 {
-  background: #4a4024;
+.badge.green {
+  background: #166534;
 }
 
-.badge.senior {
-  background: #393939;
+.badge.orange {
+  background: #9a3412;
 }
 
-.badge.reserve {
-  background: #49304b;
+.lineup-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #374151;
 }
 
-.notice {
-  background: #222d36;
-  border: 1px solid #3c5362;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
+.lineup-row:last-child {
+  border-bottom: 0;
+}
+
+.lineup-number {
+  font-weight: bold;
+  text-align: center;
+  background: #374151;
+  border-radius: 9px;
+  padding: 8px 4px;
+}
+
+.lineup-name {
+  font-weight: bold;
+}
+
+.lineup-info {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 3px;
+}
+
+.heat-card {
+  text-align: center;
+}
+
+.heat-number {
+  color: #9ca3af;
   font-size: 13px;
-  color: #d8e7ef;
-}
-
-.error {
-  background: #351d1d;
-  border: 1px solid #633333;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
-}
-
-.heat {
-  background: #1c1c1c;
-  border: 1px solid #333;
-  border-radius: 14px;
-  padding: 15px;
 }
 
 .heat-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.riders-heat {
-  display: grid;
-  gap: 7px;
+  margin: 4px 0 16px;
 }
 
 .heat-rider {
-  display: flex;
-  justify-content: space-between;
-  background: #262626;
-  padding: 9px;
-  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  background: #111827;
+  margin-bottom: 8px;
+  text-align: left;
 }
 
-.points {
+.heat-position {
+  font-weight: bold;
+  text-align: center;
+}
+
+.heat-rider-name {
   font-weight: bold;
 }
 
-.match-result {
+.heat-team {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.heat-points {
+  font-weight: bold;
+  text-align: right;
+}
+
+.result-box {
   text-align: center;
-  padding: 18px;
-  background: #202020;
+  padding: 16px;
+  background: #111827;
   border-radius: 12px;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
-.hidden {
-  display: none !important;
+.result-score {
+  font-size: 32px;
+  font-weight: bold;
 }
 
-@media (max-width: 550px) {
+.small {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.notice {
+  background: #172554;
+  border: 1px solid #1d4ed8;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.error {
+  background: #450a0a;
+  border: 1px solid #991b1b;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 600px) {
   .club-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .match-header {
-    grid-template-columns: 1fr;
-  }
-
-  .vs {
-    display: none;
+    grid-template-columns: 1fr 1fr;
   }
 }
 </style>
@@ -366,72 +389,89 @@ button {
 
 <body>
 
-<header>
-  <h1>🏁 Speedway Manager 2026</h1>
-  <div class="version">Beta 3.0.2</div>
-</header>
+<div class="app">
 
-<div class="container">
+  <div class="header">
+    <h1>Speedway Manager</h1>
+    <div class="version">Beta 3.0.3</div>
+  </div>
 
-  <!-- ========================= -->
-  <!-- WYBÓR KLUBU -->
-  <!-- ========================= -->
+  <!-- =========================
+       EKRAN WYBORU KLUBU
+       ========================= -->
 
   <section id="clubScreen" class="screen active">
 
     <div class="card">
-      <h2>Wybierz swój klub</h2>
-      <p class="small">
-        Ty wybierasz skład swojej drużyny. AI automatycznie buduje skład przeciwnika.
-      </p>
-    </div>
+      <h2>Wybierz klub</h2>
 
-    <div id="clubGrid" class="club-grid"></div>
+      <div class="notice">
+        Wybierasz swój klub. Skład przeciwnika zostanie dobrany automatycznie.
+      </div>
+
+      <div id="clubGrid" class="club-grid"></div>
+    </div>
 
   </section>
 
 
-  <!-- ========================= -->
-  <!-- BUDOWANIE SKŁADU -->
-  <!-- ========================= -->
+  <!-- =========================
+       EKRAN SKŁADU
+       ========================= -->
 
   <section id="lineupScreen" class="screen">
 
-    <div class="card">
-      <h2 id="lineupTitle">Twój skład</h2>
-
-      <div class="notice">
-        Najpierw wybierz numer startowy, a następnie zawodnika.
-        Zawodnik nie może zostać wybrany drugi raz.
-      </div>
-
-      <div id="lineupError" class="error hidden"></div>
-
-      <div id="lineupSlots" class="roster-grid"></div>
-    </div>
-
-    <div class="card">
-      <h3>Wybierz zawodnika</h3>
-
-      <div id="riderList" class="rider-list"></div>
-    </div>
-
-    <button id="startMatchButton" class="primary">
-      Rozpocznij mecz
+    <button class="back-button" onclick="backToClubs()">
+      ← Wróć do wyboru klubu
     </button>
 
-    <br><br>
+    <div class="card">
+      <div class="match-header">
 
-    <button id="backClubButton" class="secondary">
-      ← Zmień klub
+        <div class="team-box">
+          <div id="homeShort" class="team-short">---</div>
+          <div id="homeName" class="team-full">---</div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="team-box">
+          <div id="awayShort" class="team-short">---</div>
+          <div id="awayName" class="team-full">---</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Twój skład</h2>
+
+      <div class="notice">
+        Wybierz 8 zawodników. Numery 1–5 to senior/U24,
+        6–7 to juniorzy U21, a 8 to rezerwa U24.
+      </div>
+
+      <div id="lineupSlots" class="slot-list"></div>
+    </div>
+
+    <div class="card">
+      <h3>Dostępni zawodnicy</h3>
+      <div id="riderList"></div>
+    </div>
+
+    <button id="startMatchButton"
+            class="primary-button"
+            onclick="startMatch()"
+            disabled>
+      Rozpocznij mecz
     </button>
 
   </section>
 
 
-  <!-- ========================= -->
-  <!-- MECZ -->
-  <!-- ========================= -->
+  <!-- =========================
+       EKRAN MECZU
+       ========================= -->
 
   <section id="matchScreen" class="screen">
 
@@ -440,56 +480,86 @@ button {
       <div class="match-header">
 
         <div class="team-box">
-          <div id="homeShort" class="team-short"></div>
-          <div id="homeName" class="small"></div>
-          <div id="homeScore" class="score">0</div>
+          <div id="matchHomeShort" class="team-short">---</div>
+          <div id="matchHomeScore" class="team-short">0</div>
         </div>
 
-        <div class="vs">VS</div>
+        <div class="vs">MECZ</div>
 
         <div class="team-box">
-          <div id="awayShort" class="team-short"></div>
-          <div id="awayName" class="small"></div>
-          <div id="awayScore" class="score">0</div>
+          <div id="matchAwayShort" class="team-short">---</div>
+          <div id="matchAwayScore" class="team-short">0</div>
         </div>
 
       </div>
 
     </div>
 
+    <div class="card heat-card">
 
-    <div class="card">
-
-      <div id="heatBox" class="heat">
-
-        <div id="heatTitle" class="heat-title">
-          Bieg 1
-        </div>
-
-        <div id="heatRiders" class="riders-heat"></div>
-
-        <br>
-
-        <button id="simulateButton" class="primary">
-          Symuluj bieg
-        </button>
-
+      <div id="heatNumber" class="heat-number">
+        Bieg 1 z 15
       </div>
 
-      <br>
+      <div id="heatTitle" class="heat-title">
+        Wynik biegu
+      </div>
 
-      <button id="nextHeatButton" class="primary hidden">
-        Kolejny bieg ➡️
+      <div id="heatResults"></div>
+
+      <div id="heatResultBox" class="result-box" style="display:none;">
+        <div class="small">Wynik biegu</div>
+        <div id="heatScore" class="result-score">0:0</div>
+      </div>
+
+    </div>
+
+    <button id="simulateButton"
+            class="primary-button"
+            onclick="simulateCurrentHeat()">
+      🏁 Jedź bieg
+    </button>
+
+    <button id="nextHeatButton"
+            class="primary-button"
+            onclick="nextHeat()"
+            style="display:none; margin-top:10px;">
+      Kolejny bieg ➡️
+    </button>
+
+    <button id="finishMatchButton"
+            class="secondary-button"
+            onclick="finishMatch()"
+            style="display:none; margin-top:10px;">
+      Zakończ mecz
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       KONIEC MECZU
+       ========================= -->
+
+  <section id="finishScreen" class="screen">
+
+    <div class="card" style="text-align:center;">
+
+      <h2>Koniec meczu</h2>
+
+      <div id="finalScore"
+           class="result-score">
+        0:0
+      </div>
+
+      <div id="finalMessage"
+           style="margin:12px 0 18px;">
+      </div>
+
+      <button class="primary-button"
+              onclick="backToClubs()">
+        Wybierz klub ponownie
       </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>Składy</h3>
-
-      <div id="matchLineups"></div>
 
     </div>
 
@@ -501,14 +571,702 @@ button {
 <script>
 
 /* =========================================================
-   BETA 3.0.2
+   BETA 3.0.3
    ========================================================= */
+
+const VERSION = "3.0.3";
 
 const GAME_DATE = new Date("2026-09-14T12:00:00");
 
 
 /* =========================================================
-   FUNKCJE POMOCNICZE
+   OFICJALNE LOGA KLUBÓW
+   ========================================================= */
+
+const LOGO_BASE =
+  "https://media.speedwayekstraliga.pl/teams/";
+
+
+/* =========================================================
+   KLUBY
+   ========================================================= */
+
+const clubs = {
+
+  LUB: {
+    short: "LUB",
+    name: "ORLEN OIL MOTOR Lublin",
+    city: "Lublin",
+    logoUrl: LOGO_BASE + "14_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Bartosz Zmarzlik",
+        birthDate: "1995-04-12",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Kacper Woryna",
+        birthDate: "1996-08-31",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Martin Vaculik",
+        birthDate: "1990-04-05",
+        nationality: "SK",
+        type: "senior"
+      },
+
+      {
+        name: "Mateusz Cierniak",
+        birthDate: "2002-10-03",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Fredrik Lindgren",
+        birthDate: "1985-09-15",
+        nationality: "SE",
+        type: "senior"
+      },
+
+      {
+        name: "Bartosz Bańbor",
+        birthDate: "2007-01-13",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Bartosz Jaworski",
+        birthDate: "2007-08-10",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Michał Psiuk",
+        birthDate: "2009-12-29",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Paweł Czaus",
+        birthDate: "2007-03-16",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Dawid Cepielik",
+        birthDate: "2009-06-04",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Karol Szmyd",
+        birthDate: "2009-12-04",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Sam Hagon",
+        birthDate: "2004-10-10",
+        nationality: "GB",
+        type: "u24"
+      },
+
+      {
+        name: "Sven Cerjak",
+        birthDate: "2009-08-13",
+        nationality: "SI",
+        type: "junior"
+      }
+
+    ]
+  },
+
+
+  TOR: {
+    short: "TOR",
+    name: "PRES GRUPA DEWELOPERSKA Toruń",
+    city: "Toruń",
+    logoUrl: LOGO_BASE + "1_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Emil Sajfutdinow",
+        birthDate: "1989-10-26",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Robert Lambert",
+        birthDate: "1998-04-05",
+        nationality: "GB",
+        type: "senior"
+      },
+
+      {
+        name: "Patryk Dudek",
+        birthDate: "1992-06-20",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Mikkel Michelsen",
+        birthDate: "1994-08-19",
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Norick Bloedorn",
+        birthDate: "2004-08-06",
+        nationality: "DE",
+        type: "u24"
+      },
+
+      {
+        name: "Antoni Kawczyński",
+        birthDate: "2006-05-29",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Mikołaj Duchiński",
+        birthDate: "2008-09-13",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Nicolai Heiselberg",
+        birthDate: "2007-07-10",
+        nationality: "DK",
+        type: "u24"
+      },
+
+      {
+        name: "Bartosz Derek",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Ksawery Słomski",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Jan Heleniak",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      }
+
+    ]
+  },
+
+
+  WRO: {
+    short: "WRO",
+    name: "BETARD SPARTA Wrocław",
+    city: "Wrocław",
+    logoUrl: LOGO_BASE + "3_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Artem Laguta",
+        birthDate: "1990-11-12",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Brady Kurtz",
+        birthDate: "1996-02-27",
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Daniel Bewley",
+        birthDate: "1999-05-20",
+        nationality: "GB",
+        type: "senior"
+      },
+
+      {
+        name: "Maciej Janowski",
+        birthDate: "1991-08-06",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Bartłomiej Kowalski",
+        birthDate: "2002-03-04",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Mikkel Andersen",
+        birthDate: "2006-06-06",
+        nationality: "DK",
+        type: "u24"
+      },
+
+      {
+        name: "Marcel Kowolik",
+        birthDate: "2008-02-18",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Anders Rowe",
+        birthDate: "2002-05-09",
+        nationality: "GB",
+        type: "u24"
+      },
+
+      {
+        name: "Mikkel Bech Laursen",
+        birthDate: "1994-08-31",
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Michał Obst",
+        birthDate: "2010-09-02",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Krystian Gręda",
+        birthDate: "2009-04-10",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Krzysztof Harendarczyk",
+        birthDate: "2010-12-21",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Nikodem Mikołajczyk",
+        birthDate: "2007-08-04",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Błażej Pasieka",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Rafał Grzędziński",
+        birthDate: null,
+        nationality: "PL",
+        type: "senior"
+      }
+
+    ]
+  },
+
+
+  LES: {
+    short: "LES",
+    name: "FOGO UNIA Leszno",
+    city: "Leszno",
+    logoUrl: LOGO_BASE + "6_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Janusz Kołodziej",
+        birthDate: "1984-05-27",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Benjamin Cook",
+        birthDate: "1997-10-27",
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Nazar Parnitskyi",
+        birthDate: "2006-10-13",
+        nationality: "UA",
+        type: "u24"
+      },
+
+      {
+        name: "Piotr Pawlicki",
+        birthDate: "1994-11-30",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Grzegorz Zengota",
+        birthDate: "1988-08-29",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Keynan Rew",
+        birthDate: "2003-04-02",
+        nationality: "AU",
+        type: "u24"
+      },
+
+      {
+        name: "Kacper Mania",
+        birthDate: "2009-02-21",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Filip Gano",
+        birthDate: "2009-11-04",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Emil Konieczny",
+        birthDate: "2008-06-14",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Cooper Rushen",
+        birthDate: "2010-03-29",
+        nationality: "AU",
+        type: "junior"
+      }
+
+    ]
+  },
+
+
+  GKM: {
+    short: "GKM",
+    name: "GKM Grudziądz",
+    city: "Grudziądz",
+    logoUrl: LOGO_BASE + "2_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Max Fricke",
+        birthDate: "1996-03-29",
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Michael Jepsen Jensen",
+        birthDate: null,
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Jaimon Lidsey",
+        birthDate: null,
+        nationality: "AU",
+        type: "u24"
+      },
+
+      {
+        name: "Kacper Pludra",
+        birthDate: null,
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Kevin Małkiewicz",
+        birthDate: "2007-08-03",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Bastian Pedersen",
+        birthDate: "2006-04-28",
+        nationality: "DK",
+        type: "u24"
+      },
+
+      {
+        name: "Kacper Szarszewski",
+        birthDate: "2009-01-28",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Kevin Iwański-Helt",
+        birthDate: "2010-01-20",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Damian Miller",
+        birthDate: "2009-02-12",
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Jan Przanowski",
+        birthDate: "2007-09-10",
+        nationality: "PL",
+        type: "u24"
+      }
+
+    ]
+  },
+
+
+  GOR: {
+    short: "GOR",
+    name: "STAL Gorzów",
+    city: "Gorzów Wielkopolski",
+    logoUrl: LOGO_BASE + "8_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Jack Holder",
+        birthDate: "1996-03-23",
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Anders Thomsen",
+        birthDate: "1994-01-01",
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Adam Bednar",
+        birthDate: "2007-09-02",
+        nationality: "CZ",
+        type: "u24"
+      },
+
+      {
+        name: "Oskar Paluch",
+        birthDate: "2006-06-07",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Hubert Jabłoński",
+        birthDate: "2006-02-02",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Marcel Szymko",
+        birthDate: "1992-02-23",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Oskar Chatłas",
+        birthDate: "2007-09-19",
+        nationality: "PL",
+        type: "u24"
+      }
+
+    ]
+  },
+
+
+  ZIE: {
+    short: "ZIE",
+    name: "STELMET FALUBAZ Zielona Góra",
+    city: "Zielona Góra",
+    logoUrl: LOGO_BASE + "5_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Przemysław Pawlicki",
+        birthDate: null,
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Jarosław Hampel",
+        birthDate: null,
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Rasmus Jensen",
+        birthDate: null,
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Leon Madsen",
+        birthDate: null,
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Kacper Gomólski",
+        birthDate: null,
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Wiktor Trofimow",
+        birthDate: null,
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Oskar Hurysz",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Maksym Borowiak",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      }
+
+    ]
+  },
+
+
+  CZE: {
+    short: "CZE",
+    name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
+    city: "Częstochowa",
+    logoUrl: LOGO_BASE + "9_2026_alt_128x128.png?fmtjwtp39",
+
+    riders: [
+
+      {
+        name: "Kacper Woryna",
+        birthDate: "1996-08-31",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Mikkel Michelsen",
+        birthDate: "1994-08-19",
+        nationality: "DK",
+        type: "senior"
+      },
+
+      {
+        name: "Jason Doyle",
+        birthDate: null,
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Piotr Pawlicki",
+        birthDate: "1994-11-30",
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Bartosz Smektała",
+        birthDate: null,
+        nationality: "PL",
+        type: "senior"
+      },
+
+      {
+        name: "Kacper Halkiewicz",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Szymon Ludwiczak",
+        birthDate: null,
+        nationality: "PL",
+        type: "junior"
+      },
+
+      {
+        name: "Wiktor Walasek",
+        birthDate: null,
+        nationality: "PL",
+        type: "u24"
+      }
+
+    ]
+  }
+
+};
+
+
+/* =========================================================
+   WIEK
    ========================================================= */
 
 function calculateAge(birthDate) {
@@ -541,989 +1299,124 @@ function calculateAge(birthDate) {
 }
 
 
-function formatDate(dateString) {
+/* =========================================================
+   FORMAT DATY
+   ========================================================= */
 
-  if (!dateString) {
+function formatDate(birthDate) {
+
+  if (!birthDate) {
     return "brak danych";
   }
 
-  const d = new Date(dateString);
+  const date = new Date(birthDate);
 
-  return d.toLocaleDateString("pl-PL");
+  const day =
+    String(date.getDate()).padStart(2, "0");
+
+  const month =
+    String(date.getMonth() + 1).padStart(2, "0");
+
+  const year =
+    date.getFullYear();
+
+  return `${day}.${month}.${year}`;
 }
 
 
-function isU21(rider) {
+/* =========================================================
+   INFORMACJE O ZAWODNIKU
+   ========================================================= */
 
-  return rider.roles.includes("JUNIOR");
+function getRiderAgeText(rider) {
+
+  const age = calculateAge(rider.birthDate);
+
+  if (age === null) {
+    return "wiek: brak danych";
+  }
+
+  return `wiek: ${age} • ur. ${formatDate(rider.birthDate)}`;
 }
 
 
-function isU24(rider) {
+/* =========================================================
+   ROLE
+   ========================================================= */
 
-  return rider.roles.includes("U24");
-}
+const roles = {
+
+  guest: [
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "U21",
+    "U21",
+    "REZERWA U24"
+  ],
+
+  home: [
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "SEN/U24",
+    "U21",
+    "U21",
+    "REZERWA U24"
+  ]
+
+};
 
 
-function isSenior(rider) {
+/* =========================================================
+   SLOTY
+   ========================================================= */
 
-  return rider.roles.includes("SENIOR");
-}
+function slotAllowed(rider, slotIndex) {
 
+  if (slotIndex >= 0 && slotIndex <= 4) {
+    return true;
+  }
 
-function isReserveEligible(rider) {
-
-  return rider.roles.includes("REZERWA") && isU24(rider);
-}
-
-
-function isForeign(rider) {
-
-  return rider.nationality !== "POL";
-}
-
-
-function roleText(rider) {
-
-  return rider.roles.join(" • ");
-}
-
-
-function slotAllowed(rider, slot) {
-
-  /*
-    1–5 / 9–13:
-    normalny numer seniorki/U24.
-    Junior może tutaj wystąpić, jeśli posiada również
-    odpowiednią rolę.
-
-    6–7 / 14–15:
-    JUNIOR.
-
-    8 / 16:
-    REZERWA + U24.
-  */
-
-  if (slot >= 1 && slot <= 5) {
+  if (slotIndex === 5 || slotIndex === 6) {
     return (
-      isSenior(rider) ||
-      isU24(rider)
+      rider.birthDate &&
+      calculateAge(rider.birthDate) <= 21
     );
   }
 
-  if (slot >= 9 && slot <= 13) {
+  if (slotIndex === 7) {
     return (
-      isSenior(rider) ||
-      isU24(rider)
+      rider.birthDate &&
+      calculateAge(rider.birthDate) < 24
     );
-  }
-
-  if (
-    slot === 6 ||
-    slot === 7 ||
-    slot === 14 ||
-    slot === 15
-  ) {
-    return isU21(rider);
-  }
-
-  if (
-    slot === 8 ||
-    slot === 16
-  ) {
-    return isReserveEligible(rider);
   }
 
   return false;
 }
 
 
-function slotLabel(slot) {
-
-  if (
-    slot === 6 ||
-    slot === 7 ||
-    slot === 14 ||
-    slot === 15
-  ) {
-    return "JUNIOR";
-  }
-
-  if (
-    slot === 8 ||
-    slot === 16
-  ) {
-    return "REZERWA U24";
-  }
-
-  return "SENIOR / U24";
-}
-
-
-/* =========================================================
-   DANE KLUBÓW
-   ========================================================= */
-
-const clubs = {
-
-  motor: {
-
-    id: "motor",
-    short: "LUB",
-    name: "ORLEN OIL MOTOR Lublin",
-    city: "Lublin",
-
-    /*
-      logoUrl zostawiamy jako pole danych.
-      Można później podpiąć oficjalny plik logo.
-    */
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Bartosz Zmarzlik",
-        birthDate: "1995-04-12",
-        nationality: "POL",
-        roles: ["SENIOR", "REZERWA"],
-        aiPriority: 100
-      },
-
-      {
-        name: "Kacper Woryna",
-        birthDate: "1996-08-31",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 95
-      },
-
-      {
-        name: "Martin Vaculik",
-        birthDate: "1990-04-05",
-        nationality: "SVK",
-        roles: ["SENIOR"],
-        aiPriority: 94
-      },
-
-      {
-        name: "Mateusz Cierniak",
-        birthDate: "2002-11-29",
-        nationality: "POL",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 90
-      },
-
-      {
-        name: "Fredrik Lindgren",
-        birthDate: "1985-09-15",
-        nationality: "SWE",
-        roles: ["SENIOR"],
-        aiPriority: 89
-      },
-
-      {
-        name: "Bartosz Bańbor",
-        birthDate: "2007-01-13",
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 75
-      },
-
-      {
-        name: "Bartosz Jaworski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 55
-      },
-
-      {
-        name: "Michał Psiuk",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Paweł Czaus",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 40
-      },
-
-      {
-        name: "Dawid Cepielik",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 38
-      },
-
-      {
-        name: "Karol Szmyd",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 36
-      },
-
-      {
-        name: "Sam Hagon",
-        birthDate: null,
-        nationality: "GBR",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Sven Cerjak",
-        birthDate: null,
-        nationality: "SLO",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 32
-      }
-
-    ]
-  },
-
-
-  torun: {
-
-    id: "torun",
-    short: "TOR",
-    name: "PRES GRUPA DEWELOPERSKA Toruń",
-    city: "Toruń",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Emil Sajfutdinow",
-        birthDate: "1989-10-26",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 100
-      },
-
-      {
-        name: "Robert Lambert",
-        birthDate: "1998-04-05",
-        nationality: "GBR",
-        roles: ["SENIOR"],
-        aiPriority: 98
-      },
-
-      {
-        name: "Patryk Dudek",
-        birthDate: "1992-06-20",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 96
-      },
-
-      {
-        name: "Mikkel Michelsen",
-        birthDate: "1995-08-19",
-        nationality: "DEN",
-        roles: ["SENIOR"],
-        aiPriority: 91
-      },
-
-      {
-        name: "Norick Bloedorn",
-        birthDate: "2004-01-18",
-        nationality: "GER",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 75
-      },
-
-      {
-        name: "Antoni Kawczyński",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 70
-      },
-
-      {
-        name: "Mikołaj Duchiński",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 60
-      },
-
-      {
-        name: "Nicolai Heiselberg",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Bartosz Derek",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 40
-      },
-
-      {
-        name: "Ksawery Słomski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Jan Heleniak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      }
-
-    ]
-  },
-
-
-  wroclaw: {
-
-    id: "wroclaw",
-    short: "WRO",
-    name: "BETARD SPARTA Wrocław",
-    city: "Wrocław",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Artem Laguta",
-        birthDate: "1990-11-13",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 100
-      },
-
-      {
-        name: "Daniel Bewley",
-        birthDate: "1999-05-22",
-        nationality: "GBR",
-        roles: ["SENIOR"],
-        aiPriority: 96
-      },
-
-      {
-        name: "Brady Kurtz",
-        birthDate: "1996-02-27",
-        nationality: "AUS",
-        roles: ["SENIOR"],
-        aiPriority: 95
-      },
-
-      {
-        name: "Maciej Janowski",
-        birthDate: "1991-08-06",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 94
-      },
-
-      {
-        name: "Bartłomiej Kowalski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 75
-      },
-
-      {
-        name: "Mikkel Andersen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["U24", "SENIOR"],
-        aiPriority: 68
-      },
-
-      {
-        name: "Marcel Kowolik",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 67
-      },
-
-      {
-        name: "Anders Rowe",
-        birthDate: null,
-        nationality: "GBR",
-        roles: ["U24"],
-        aiPriority: 50
-      },
-
-      {
-        name: "Nikodem Mikołajczyk",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 55
-      },
-
-      {
-        name: "Michał Obst",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Krystian Gręda",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      },
-
-      {
-        name: "Krzysztof Harendarczyk",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      },
-
-      {
-        name: "Błażej Pasieka",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 25
-      }
-
-    ]
-  },
-
-
-  leszno: {
-
-    id: "leszno",
-    short: "LES",
-    name: "FOGO UNIA Leszno",
-    city: "Leszno",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Janusz Kołodziej",
-        birthDate: "1984-05-09",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 96
-      },
-
-      {
-        name: "Benjamin Cook",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 98
-      },
-
-      {
-        name: "Piotr Pawlicki",
-        birthDate: "1994-11-30",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 99
-      },
-
-      {
-        name: "Grzegorz Zengota",
-        birthDate: "1988-08-29",
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 88
-      },
-
-      {
-        /*
-          WAŻNE:
-          Parnitskyi jest juniorem i U24.
-          AI ma go preferować w miejscach juniorskich.
-        */
-        name: "Nazar Parnitskyi",
-        birthDate: "2006-10-13",
-        nationality: "UKR",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 85
-      },
-
-      {
-        /*
-          Rew NIE jest juniorem.
-          W 2026 ma 23 lata.
-        */
-        name: "Keynan Rew",
-        birthDate: "2003-04-02",
-        nationality: "AUS",
-        roles: ["SENIOR", "U24", "REZERWA"],
-        aiPriority: 78
-      },
-
-      {
-        name: "Kacper Mania",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 70
-      },
-
-      {
-        name: "Filip Gano",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Emil Konieczny",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Cooper Rushen",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      }
-
-    ]
-  },
-
-
-  grudziadz: {
-
-    id: "grudziadz",
-    short: "GRU",
-    name: "BAYERSYSTEM GKM Grudziądz",
-    city: "Grudziądz",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Michael Jepsen Jensen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["SENIOR"],
-        aiPriority: 95
-      },
-
-      {
-        name: "Vadim Tarasenko",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 88
-      },
-
-      {
-        name: "Maksym Drabik",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 90
-      },
-
-      {
-        name: "Max Fricke",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["SENIOR"],
-        aiPriority: 94
-      },
-
-      {
-        name: "Kevin Małkiewicz",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 65
-      },
-
-      {
-        name: "Bastian Pedersen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 55
-      },
-
-      {
-        name: "Kacper Szarszewski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 50
-      },
-
-      {
-        name: "Kevin Iwański-Helt",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Damian Miller",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Jan Przanowski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      }
-
-    ]
-  },
-
-
-  gorzow: {
-
-    id: "gorzow",
-    short: "GOR",
-    name: "EBUT.PL STAL Gorzów",
-    city: "Gorzów Wielkopolski",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Jack Holder",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["SENIOR"],
-        aiPriority: 98
-      },
-
-      {
-        name: "Anders Thomsen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["SENIOR"],
-        aiPriority: 92
-      },
-
-      {
-        name: "Adam Bednar",
-        birthDate: null,
-        nationality: "CZE",
-        roles: ["U24", "SENIOR"],
-        aiPriority: 70
-      },
-
-      {
-        name: "Mathias Pollestad",
-        birthDate: null,
-        nationality: "NOR",
-        roles: ["U24", "SENIOR"],
-        aiPriority: 65
-      },
-
-      {
-        name: "Oskar Paluch",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 72
-      },
-
-      {
-        name: "Paweł Przedpełski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 82
-      },
-
-      {
-        name: "Hubert Jabłoński",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 60
-      },
-
-      {
-        name: "Marcel Szymko",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 40
-      },
-
-      {
-        name: "Denis Andrzejczak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Oskar Chatłas",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      }
-
-    ]
-  },
-
-
-  zielonagora: {
-
-    id: "zielonagora",
-    short: "ZIE",
-    name: "Stelmet Falubaz Zielona Góra",
-    city: "Zielona Góra",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Leon Madsen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["SENIOR"],
-        aiPriority: 100
-      },
-
-      {
-        name: "Dominik Kubera",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 94
-      },
-
-      {
-        name: "Andzejs Lebedevs",
-        birthDate: null,
-        nationality: "LAT",
-        roles: ["SENIOR"],
-        aiPriority: 88
-      },
-
-      {
-        name: "Przemysław Pawlicki",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR"],
-        aiPriority: 86
-      },
-
-      {
-        name: "Damian Ratajczak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 75
-      },
-
-      {
-        name: "Oskar Hurysz",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 60
-      },
-
-      {
-        name: "Mitchell McDiarmid",
-        birthDate: null,
-        nationality: "NZL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Igor Gryzło",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 40
-      },
-
-      {
-        name: "William Cairns",
-        birthDate: null,
-        nationality: "GBR",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 55
-      },
-
-      {
-        name: "Szymon Piekarski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Aleksander Kornacki",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      }
-
-    ]
-  },
-
-
-  czestochowa: {
-
-    id: "czestochowa",
-    short: "CZE",
-    name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
-    city: "Częstochowa",
-    logoUrl: "",
-
-    riders: [
-
-      {
-        name: "Jakub Miśkowiak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 86
-      },
-
-      {
-        name: "Rohan Tungate",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["SENIOR"],
-        aiPriority: 80
-      },
-
-      {
-        name: "Jaimon Lidsey",
-        birthDate: null,
-        nationality: "AUS",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 82
-      },
-
-      {
-        name: "Mads Hansen",
-        birthDate: null,
-        nationality: "DEN",
-        roles: ["SENIOR", "U24"],
-        aiPriority: 78
-      },
-
-      {
-        name: "Sebastian Szostak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24", "REZERWA"],
-        aiPriority: 70
-      },
-
-      {
-        name: "Szymon Ludwiczak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 60
-      },
-
-      {
-        name: "Alan Ciurzyński",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 45
-      },
-
-      {
-        name: "Bartosz Śmigielski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 40
-      },
-
-      {
-        name: "Paweł Caban",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Franciszek Karczewski",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 35
-      },
-
-      {
-        name: "Kacper Grzelak",
-        birthDate: null,
-        nationality: "POL",
-        roles: ["JUNIOR", "U24"],
-        aiPriority: 30
-      }
-
-    ]
-  }
-
-};
-
-
 /* =========================================================
    STAN GRY
    ========================================================= */
 
-let playerClub = null;
-let opponentClub = null;
+let selectedClubKey = null;
+let opponentClubKey = null;
 
-let selectedSlot = null;
+let selectedRiders = Array(8).fill(null);
 
-let playerLineup = {};
-let aiLineup = {};
+let homeLineup = [];
+let awayLineup = [];
+
+let currentHeat = 0;
 
 let homeScore = 0;
 let awayScore = 0;
 
-let currentHeat = 1;
-
-let heatFinished = false;
+let heatAlreadySimulated = false;
 
 
 /* =========================================================
@@ -1532,18 +1425,20 @@ let heatFinished = false;
 
 function showScreen(id) {
 
-  document.querySelectorAll(".screen")
+  document
+    .querySelectorAll(".screen")
     .forEach(screen => {
       screen.classList.remove("active");
     });
 
-  document.getElementById(id)
+  document
+    .getElementById(id)
     .classList.add("active");
 }
 
 
 /* =========================================================
-   KLUBY
+   RENDER KLUBÓW
    ========================================================= */
 
 function renderClubs() {
@@ -1553,36 +1448,57 @@ function renderClubs() {
 
   grid.innerHTML = "";
 
-  Object.values(clubs).forEach(club => {
+  Object.entries(clubs).forEach(
+    ([key, club]) => {
 
-    const button =
-      document.createElement("button");
+      const button =
+        document.createElement("button");
 
-    button.className = "club-button";
+      button.className = "club-button";
 
-    button.innerHTML = `
-      <div class="club-logo">
-        ${club.short}
-      </div>
+      button.onclick = () => {
+        chooseClub(key);
+      };
 
-      <div class="club-name">
-        ${club.name}
-      </div>
+      button.innerHTML = `
 
-      <div class="club-city">
-        ${club.city}
-      </div>
-    `;
+        <div class="club-title-row">
 
-    button.addEventListener("click", () => {
+          <img
+            class="club-logo"
+            src="${club.logoUrl}"
+            alt="Herb ${club.short}"
+            onerror="this.style.display='none';"
+          >
 
-      selectClub(club.id);
+          <div>
 
-    });
+            <div class="club-short">
+              ${club.short}
+            </div>
 
-    grid.appendChild(button);
+            <div class="club-name">
+              Wybierz klub
+            </div>
 
-  });
+          </div>
+
+        </div>
+
+        <div class="club-city">
+          ${club.name}
+        </div>
+
+        <div class="small">
+          ${club.city}
+        </div>
+
+      `;
+
+      grid.appendChild(button);
+
+    }
+  );
 }
 
 
@@ -1590,223 +1506,132 @@ function renderClubs() {
    WYBÓR KLUBU
    ========================================================= */
 
-function selectClub(clubId) {
+function chooseClub(key) {
 
-  playerClub = clubs[clubId];
+  selectedClubKey = key;
 
-  const available =
-    Object.values(clubs)
-      .filter(club => club.id !== clubId);
+  const keys =
+    Object.keys(clubs)
+      .filter(k => k !== key);
 
-  opponentClub =
-    available[
-      Math.floor(
-        Math.random() * available.length
-      )
-    ];
+  opponentClubKey =
+    keys[Math.floor(Math.random() * keys.length)];
 
-  playerLineup = {};
-  aiLineup = {};
+  selectedRiders =
+    Array(8).fill(null);
 
-  selectedSlot = null;
+  const home =
+    clubs[selectedClubKey];
 
-  document.getElementById("lineupTitle").textContent =
-    `${playerClub.name} — wybierz skład`;
+  const away =
+    clubs[opponentClubKey];
 
-  renderLineup();
+  document.getElementById("homeShort")
+    .textContent = home.short;
 
+  document.getElementById("homeName")
+    .textContent = home.name;
+
+  document.getElementById("awayShort")
+    .textContent = away.short;
+
+  document.getElementById("awayName")
+    .textContent = away.name;
+
+  renderLineupSlots();
   renderRiders();
+
+  updateStartButton();
 
   showScreen("lineupScreen");
 }
 
 
 /* =========================================================
-   SLOTY
+   SLOTY SKŁADU
    ========================================================= */
 
-function getPlayerSlots() {
-
-  return [1,2,3,4,5,6,7,8];
-
-}
-
-
-function renderLineup() {
+function renderLineupSlots() {
 
   const container =
     document.getElementById("lineupSlots");
 
   container.innerHTML = "";
 
-  getPlayerSlots().forEach(slot => {
+  for (let i = 0; i < 8; i++) {
 
-    const rider =
-      playerLineup[slot];
-
-    const div =
+    const slot =
       document.createElement("div");
 
-    div.className = "slot";
+    slot.className = "slot";
 
-    div.innerHTML = `
+    const number = i + 1;
 
-      <div class="slot-header">
+    const selected =
+      selectedRiders[i];
+
+    slot.innerHTML = `
+
+      <div class="slot-top">
 
         <div class="slot-number">
-          #${slot}
+          ${number}
         </div>
 
         <div class="slot-role">
-          ${slotLabel(slot)}
+          ${roles.guest[i]}
         </div>
 
       </div>
 
       ${
-        rider
+        selected
+          ? `
+            <div class="rider-button selected">
 
-        ?
+              <div class="rider-name">
+                ${selected.name}
+              </div>
 
-        `
-        <div class="slot-rider">
-          ${rider.name}
-        </div>
+              <div class="rider-info">
+                ${getRiderAgeText(selected)}
+              </div>
 
-        <div class="slot-info">
-          ${getRiderAgeText(rider)}
-        </div>
+              <div class="badges">
+                <span class="badge">
+                  ${selected.nationality}
+                </span>
 
-        <div class="badges">
-          ${renderBadges(rider)}
-        </div>
+                <span class="badge blue">
+                  ${selected.type.toUpperCase()}
+                </span>
+              </div>
 
-        <button
-          class="secondary"
-          onclick="removeRider(${slot})"
-        >
-          Usuń
-        </button>
-        `
+            </div>
 
-        :
-
-        `
-        <div class="slot-info">
-          Wolne miejsce
-        </div>
-
-        <button
-          class="secondary"
-          onclick="selectSlot(${slot})"
-        >
-          Wybierz zawodnika
-        </button>
-        `
+            <button
+              class="secondary-button"
+              style="margin-top:8px;"
+              onclick="removeRider(${i})">
+              Usuń
+            </button>
+          `
+          : `
+            <div class="small" style="margin-top:8px;">
+              Brak zawodnika
+            </div>
+          `
       }
 
     `;
 
-    if (selectedSlot === slot) {
-
-      div.style.borderColor = "#fff";
-
-    }
-
-    container.appendChild(div);
-
-  });
-
-}
-
-
-function selectSlot(slot) {
-
-  selectedSlot = slot;
-
-  renderLineup();
-
-  renderRiders();
-
-}
-
-
-function removeRider(slot) {
-
-  delete playerLineup[slot];
-
-  selectedSlot = null;
-
-  renderLineup();
-
-  renderRiders();
-
-}
-
-
-/* =========================================================
-   WIEK / ROLE
-   ========================================================= */
-
-function getRiderAgeText(rider) {
-
-  const age =
-    calculateAge(rider.birthDate);
-
-  if (age === null) {
-
-    return `
-      wiek: brak danych
-      • ur.: brak danych
-    `;
-
+    container.appendChild(slot);
   }
-
-  return `
-    wiek: ${age}
-    • ur.: ${formatDate(rider.birthDate)}
-  `;
-
-}
-
-
-function renderBadges(rider) {
-
-  return rider.roles
-    .map(role => {
-
-      let className = "";
-
-      if (role === "JUNIOR") {
-        className = "junior";
-      }
-
-      if (role === "U24") {
-        className = "u24";
-      }
-
-      if (role === "SENIOR") {
-        className = "senior";
-      }
-
-      if (role === "REZERWA") {
-        className = "reserve";
-      }
-
-      return `
-        <span class="badge ${className}">
-          ${role}
-        </span>
-      `;
-
-    })
-    .join("");
-
 }
 
 
 /* =========================================================
-   WYBÓR ZAWODNIKA
+   LISTA ZAWODNIKÓW
    ========================================================= */
 
 function renderRiders() {
@@ -1816,187 +1641,128 @@ function renderRiders() {
 
   container.innerHTML = "";
 
-  if (!selectedSlot) {
+  const club =
+    clubs[selectedClubKey];
 
-    container.innerHTML = `
-      <div class="small">
-        Najpierw wybierz numer startowy.
-      </div>
-    `;
+  club.riders.forEach(
+    (rider, riderIndex) => {
 
-    return;
+      const alreadySelected =
+        selectedRiders.includes(rider);
 
-  }
+      const div =
+        document.createElement("div");
 
-  const usedIds =
-    Object.values(playerLineup)
-      .map(rider => rider.name);
+      div.style.marginBottom = "8px";
 
-  playerClub.riders.forEach(rider => {
+      const button =
+        document.createElement("button");
 
-    const button =
-      document.createElement("button");
+      button.className =
+        "rider-button" +
+        (alreadySelected ? " selected" : "");
 
-    button.className = "rider-button";
+      button.disabled =
+        alreadySelected;
 
-    const alreadyUsed =
-      usedIds.includes(rider.name);
+      button.onclick = () => {
 
-    const allowed =
-      slotAllowed(
-        rider,
-        selectedSlot
-      );
-
-    button.disabled =
-      alreadyUsed || !allowed;
-
-    button.innerHTML = `
-
-      <div class="rider-name">
-        ${rider.name}
-      </div>
-
-      <div class="rider-meta">
-        ${getRiderAgeText(rider)}
-      </div>
-
-      <div class="badges">
-        ${renderBadges(rider)}
-      </div>
-
-    `;
-
-    if (!allowed) {
-
-      button.title =
-        "Zawodnik nie spełnia wymagań tego numeru";
-
-    }
-
-    if (alreadyUsed) {
-
-      button.title =
-        "Ten zawodnik jest już wybrany";
-
-    }
-
-    button.addEventListener("click", () => {
-
-      chooseRider(rider);
-
-    });
-
-    container.appendChild(button);
-
-  });
-
-}
-
-
-/* =========================================================
-   WYBÓR ZAWODNIKA GRACZA
-   ========================================================= */
-
-function chooseRider(rider) {
-
-  if (!selectedSlot) {
-    return;
-  }
-
-  if (!slotAllowed(rider, selectedSlot)) {
-
-    showLineupError(
-      "Ten zawodnik nie może jechać z wybranym numerem."
-    );
-
-    return;
-
-  }
-
-  const duplicate =
-    Object.values(playerLineup)
-      .some(
-        selected =>
-          selected.name === rider.name
-      );
-
-  if (duplicate) {
-
-    showLineupError(
-      "Tego zawodnika wybrałeś już wcześniej."
-    );
-
-    return;
-
-  }
-
-  /*
-    Kontrola zagranicznych juniorów.
-  */
-
-  if (
-    isU21(rider) &&
-    isForeign(rider)
-  ) {
-
-    const foreignJuniorAlready =
-      Object.values(playerLineup)
-        .some(
-          selected =>
-            isU21(selected) &&
-            isForeign(selected)
+        chooseRider(
+          riderIndex
         );
 
-    if (foreignJuniorAlready) {
+      };
 
-      showLineupError(
-        "W składzie mogą być maksymalnie dwa miejsca juniorskie, ale tylko jeden zagraniczny junior."
-      );
+      button.innerHTML = `
 
-      return;
+        <div class="rider-name">
+          ${rider.name}
+        </div>
+
+        <div class="rider-info">
+          ${getRiderAgeText(rider)}
+        </div>
+
+        <div class="badges">
+
+          <span class="badge">
+            ${rider.nationality}
+          </span>
+
+          <span class="badge blue">
+            ${rider.type.toUpperCase()}
+          </span>
+
+        </div>
+
+      `;
+
+      div.appendChild(button);
+
+      container.appendChild(div);
 
     }
-
-  }
-
-  playerLineup[selectedSlot] =
-    rider;
-
-  selectedSlot = null;
-
-  clearLineupError();
-
-  renderLineup();
-
-  renderRiders();
-
+  );
 }
 
 
 /* =========================================================
-   KOMUNIKATY
+   WYBÓR ZAWODNIKA
    ========================================================= */
 
-function showLineupError(message) {
+function chooseRider(riderIndex) {
 
-  const box =
-    document.getElementById("lineupError");
+  const club =
+    clubs[selectedClubKey];
 
-  box.textContent =
-    message;
+  const rider =
+    club.riders[riderIndex];
 
-  box.classList.remove("hidden");
+  let freeSlot = -1;
 
+  for (let i = 0; i < 8; i++) {
+
+    if (
+      selectedRiders[i] === null &&
+      slotAllowed(rider, i)
+    ) {
+
+      freeSlot = i;
+      break;
+
+    }
+  }
+
+  if (freeSlot === -1) {
+
+    alert(
+      "Ten zawodnik nie może zostać przypisany do żadnego wolnego numeru."
+    );
+
+    return;
+  }
+
+  selectedRiders[freeSlot] =
+    rider;
+
+  renderLineupSlots();
+  renderRiders();
+  updateStartButton();
 }
 
 
-function clearLineupError() {
+/* =========================================================
+   USUWANIE ZAWODNIKA
+   ========================================================= */
 
-  document
-    .getElementById("lineupError")
-    .classList.add("hidden");
+function removeRider(slotIndex) {
 
+  selectedRiders[slotIndex] =
+    null;
+
+  renderLineupSlots();
+  renderRiders();
+  updateStartButton();
 }
 
 
@@ -2004,393 +1770,250 @@ function clearLineupError() {
    SPRAWDZENIE SKŁADU
    ========================================================= */
 
-function validateLineup() {
+function lineupIsValid() {
 
-  const requiredSlots =
-    [1,2,3,4,5,6,7,8];
-
-  for (const slot of requiredSlots) {
-
-    if (!playerLineup[slot]) {
-
-      showLineupError(
-        `Uzupełnij numer ${slot}.`
-      );
-
-      return false;
-
-    }
-
+  if (
+    selectedRiders.filter(Boolean).length !== 8
+  ) {
+    return false;
   }
-
-  const riders =
-    Object.values(playerLineup);
 
   const unique =
-    new Set(
-      riders.map(
-        rider => rider.name
+    new Set(selectedRiders);
+
+  if (unique.size !== 8) {
+    return false;
+  }
+
+  for (let i = 0; i < 8; i++) {
+
+    if (
+      !slotAllowed(
+        selectedRiders[i],
+        i
       )
-    );
-
-  if (
-    unique.size !== riders.length
-  ) {
-
-    showLineupError(
-      "Ten sam zawodnik został wybrany więcej niż raz."
-    );
-
-    return false;
-
-  }
-
-
-  /*
-    Dokładnie dwóch juniorów.
-  */
-
-  const juniorSlots =
-    [6,7];
-
-  const juniors =
-    juniorSlots
-      .map(slot => playerLineup[slot]);
-
-  if (
-    juniors.some(
-      rider => !isU21(rider)
-    )
-  ) {
-
-    showLineupError(
-      "Numery 6 i 7 muszą być obsadzone juniorami."
-    );
-
-    return false;
-
-  }
-
-
-  /*
-    Maksymalnie jeden zagraniczny junior.
-  */
-
-  const foreignJuniors =
-    juniors.filter(
-      rider => isForeign(rider)
-    );
-
-  if (
-    foreignJuniors.length > 1
-  ) {
-
-    showLineupError(
-      "Maksymalnie jeden junior zagraniczny."
-    );
-
-    return false;
-
-  }
-
-
-  /*
-    Rezerwa musi być U24.
-  */
-
-  if (
-    !isReserveEligible(
-      playerLineup[8]
-    )
-  ) {
-
-    showLineupError(
-      "Numer 8 musi być obsadzony rezerwą U24."
-    );
-
-    return false;
-
+    ) {
+      return false;
+    }
   }
 
   return true;
+}
+
+
+/* =========================================================
+   PRZYCISK STARTU
+   ========================================================= */
+
+function updateStartButton() {
+
+  document.getElementById(
+    "startMatchButton"
+  ).disabled =
+    !lineupIsValid();
 
 }
 
 
 /* =========================================================
-   AI — BUDOWANIE SKŁADU
+   AI — SKŁAD PRZECIWNIKA
    ========================================================= */
 
-function buildAI() {
+function buildAI(club) {
 
-  const riders =
-    [...opponentClub.riders];
+  const lineup =
+    Array(8).fill(null);
 
-  const lineup = {};
+  const available =
+    [...club.riders];
 
-  const used = new Set();
+  const used =
+    new Set();
 
-  let foreignJuniorCount = 0;
+  let foreignJuniorUsed = false;
 
 
-  function chooseBest(candidates) {
-
-    const available =
-      candidates.filter(
-        rider =>
-          !used.has(rider.name)
-      );
-
-    available.sort(
-      (a,b) =>
-        b.aiPriority - a.aiPriority
-    );
-
-    return available[0] || null;
-
-  }
-
-
-  /*
-    KROK 1
-    JUNIOR 1
-  */
-
-  let juniorCandidates =
-    riders.filter(
-      rider =>
-        isU21(rider)
-    );
-
-  let junior1 =
-    chooseBest(juniorCandidates);
-
-  if (junior1) {
-
-    lineup[6] =
-      junior1;
-
-    used.add(junior1.name);
-
-    if (isForeign(junior1)) {
-      foreignJuniorCount++;
-    }
-
-  }
-
-
-  /*
-    KROK 2
-    JUNIOR 2
-
-    Jeżeli pierwszy junior jest zagraniczny,
-    wybieramy Polaka.
-  */
-
-  juniorCandidates =
-    riders.filter(
-      rider =>
-        isU21(rider) &&
-        !used.has(rider.name) &&
-        (
-          !isForeign(rider) ||
-          foreignJuniorCount === 0
-        )
-    );
-
-  let junior2 =
-    chooseBest(juniorCandidates);
-
-  if (!junior2) {
-
-    /*
-      Awaryjnie szukamy dowolnego legalnego
-      juniora, który nie łamie zasady.
-    */
-
-    junior2 =
-      riders.find(
-        rider =>
-          isU21(rider) &&
-          !used.has(rider.name) &&
-          (
-            !isForeign(rider) ||
-            foreignJuniorCount < 1
-          )
-      );
-
-  }
-
-  if (junior2) {
-
-    lineup[7] =
-      junior2;
-
-    used.add(junior2.name);
-
-    if (isForeign(junior2)) {
-      foreignJuniorCount++;
-    }
-
-  }
-
-
-  /*
-    KROK 3
-    NUMERY 1–5
-
-    Najpierw najmocniejsi zawodnicy
-    SENIOR / U24.
-  */
-
-  const normalCandidates =
-    riders
-      .filter(
-        rider =>
-          !used.has(rider.name) &&
-          (
-            isSenior(rider) ||
-            isU24(rider)
-          )
-      )
-      .sort(
-        (a,b) =>
-          b.aiPriority - a.aiPriority
-      );
-
-
-  const normalSlots =
-    [1,2,3,4,5];
-
-  normalSlots.forEach(slot => {
-
-    const rider =
-      normalCandidates.find(
-        candidate =>
-          !used.has(
-            candidate.name
-          )
-      );
-
-    if (rider) {
-
-      lineup[slot] =
-        rider;
-
-      used.add(
-        rider.name
-      );
-
-    }
-
-  });
-
-
-  /*
-    KROK 4
-    REZERWA #8
-  */
-
-  let reserveCandidates =
-    riders
-      .filter(
-        rider =>
-          !used.has(rider.name) &&
-          isReserveEligible(rider)
-      )
-      .sort(
-        (a,b) =>
-          b.aiPriority - a.aiPriority
-      );
-
-
-  /*
-    Jeżeli nie ma wolnego zawodnika
-    z rolą REZERWA, dopuszczamy dowolnego
-    U24 — system później oznaczy go jako
-    kandydat do rezerwy.
-  */
-
-  let reserve =
-    reserveCandidates[0];
-
-
-  if (!reserve) {
-
-    reserve =
-      riders
-        .filter(
-          rider =>
-            !used.has(rider.name) &&
-            isU24(rider)
-        )
-        .sort(
-          (a,b) =>
-            b.aiPriority - a.aiPriority
-        )[0];
-
-  }
-
-
-  if (reserve) {
-
-    lineup[8] =
-      reserve;
-
-    used.add(
-      reserve.name
-    );
-
-  }
-
-
-  /*
-    KROK 5
-    Jeżeli z jakiegoś powodu skład nie ma 8 zawodników,
-    uzupełniamy wolne miejsce legalnym zawodnikiem.
-  */
-
-  for (
-    let slot = 1;
-    slot <= 8;
-    slot++
+  function findForSlot(
+    slotIndex,
+    juniorOnly = false
   ) {
 
-    if (lineup[slot]) {
-      continue;
+    const candidates =
+      available.filter(
+        rider => {
+
+          if (used.has(rider)) {
+            return false;
+          }
+
+          if (
+            !slotAllowed(
+              rider,
+              slotIndex
+            )
+          ) {
+            return false;
+          }
+
+          if (
+            juniorOnly &&
+            rider.type !== "junior"
+          ) {
+            return false;
+          }
+
+          return true;
+        }
+      );
+
+    if (!candidates.length) {
+      return null;
     }
 
-    const candidate =
-      riders
-        .filter(
+    return candidates[
+      Math.floor(
+        Math.random() * candidates.length
+      )
+    ];
+  }
+
+
+  /* najpierw juniorzy 6 i 7 */
+
+  for (const slotIndex of [5, 6]) {
+
+    let candidate =
+      findForSlot(
+        slotIndex,
+        true
+      );
+
+    if (
+      candidate &&
+      candidate.nationality !== "PL" &&
+      foreignJuniorUsed
+    ) {
+
+      candidate = null;
+
+    }
+
+    if (!candidate) {
+
+      const alternatives =
+        available.filter(
           rider =>
-            !used.has(rider.name) &&
+            !used.has(rider) &&
             slotAllowed(
               rider,
-              slot
+              slotIndex
+            ) &&
+            (
+              rider.nationality === "PL" ||
+              !foreignJuniorUsed
             )
-        )
-        .sort(
-          (a,b) =>
-            b.aiPriority - a.aiPriority
-        )[0];
+        );
+
+      if (alternatives.length) {
+
+        candidate =
+          alternatives[
+            Math.floor(
+              Math.random() *
+              alternatives.length
+            )
+          ];
+
+      }
+
+    }
 
     if (candidate) {
 
-      lineup[slot] =
+      lineup[slotIndex] =
         candidate;
 
-      used.add(
-        candidate.name
-      );
+      used.add(candidate);
+
+      if (
+        candidate.nationality !== "PL"
+      ) {
+        foreignJuniorUsed = true;
+      }
 
     }
 
   }
 
 
-  return lineup;
+  /* numery 1–5 */
 
+  for (
+    let slotIndex = 0;
+    slotIndex <= 4;
+    slotIndex++
+  ) {
+
+    const candidate =
+      findForSlot(slotIndex);
+
+    if (candidate) {
+
+      lineup[slotIndex] =
+        candidate;
+
+      used.add(candidate);
+
+    }
+
+  }
+
+
+  /* rezerwa 8 */
+
+  const reserve =
+    findForSlot(7);
+
+  if (reserve) {
+
+    lineup[7] =
+      reserve;
+
+    used.add(reserve);
+
+  }
+
+
+  /* awaryjne uzupełnienie */
+
+  for (let i = 0; i < 8; i++) {
+
+    if (lineup[i]) {
+      continue;
+    }
+
+    const fallback =
+      available.find(
+        rider =>
+          !used.has(rider) &&
+          slotAllowed(
+            rider,
+            i
+          )
+      );
+
+    if (fallback) {
+
+      lineup[i] =
+        fallback;
+
+      used.add(fallback);
+
+    }
+
+  }
+
+  return lineup;
 }
 
 
@@ -2400,286 +2023,293 @@ function buildAI() {
 
 function startMatch() {
 
-  clearLineupError();
+  if (!lineupIsValid()) {
 
-  if (!validateLineup()) {
-    return;
-  }
-
-  aiLineup =
-    buildAI();
-
-  const aiSlots =
-    [1,2,3,4,5,6,7,8];
-
-  const missing =
-    aiSlots.some(
-      slot =>
-        !aiLineup[slot]
-    );
-
-  if (missing) {
-
-    showLineupError(
-      "AI nie mogło zbudować legalnego składu przeciwnika."
+    alert(
+      "Najpierw wybierz poprawny skład 8 zawodników."
     );
 
     return;
-
   }
+
+  homeLineup =
+    [...selectedRiders];
+
+  awayLineup =
+    buildAI(
+      clubs[opponentClubKey]
+    );
+
+  if (
+    awayLineup.filter(Boolean).length !== 8
+  ) {
+
+    alert(
+      "Nie udało się zbudować pełnego składu przeciwnika."
+    );
+
+    return;
+  }
+
+  currentHeat = 0;
 
   homeScore = 0;
   awayScore = 0;
 
-  currentHeat = 1;
+  heatAlreadySimulated = false;
 
-  heatFinished = false;
+  document.getElementById(
+    "matchHomeShort"
+  ).textContent =
+    clubs[selectedClubKey].short;
 
-  setupMatchScreen();
+  document.getElementById(
+    "matchAwayShort"
+  ).textContent =
+    clubs[opponentClubKey].short;
+
+  document.getElementById(
+    "matchHomeScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "matchAwayScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "simulateButton"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "nextHeatButton"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "finishMatchButton"
+  ).style.display =
+    "none";
 
   showScreen("matchScreen");
 
+  renderCurrentHeat();
 }
 
 
 /* =========================================================
-   EKRAN MECZU
-   ========================================================= */
-
-function setupMatchScreen() {
-
-  /*
-    Gracz = gospodarz.
-  */
-
-  document.getElementById("homeShort")
-    .textContent =
-    playerClub.short;
-
-  document.getElementById("homeName")
-    .textContent =
-    playerClub.name;
-
-  document.getElementById("awayShort")
-    .textContent =
-    opponentClub.short;
-
-  document.getElementById("awayName")
-    .textContent =
-    opponentClub.name;
-
-  updateScore();
-
-  renderMatchLineups();
-
-  prepareHeat();
-
-}
-
-
-/* =========================================================
-   SKŁADY MECZOWE
-   ========================================================= */
-
-function renderMatchLineups() {
-
-  const container =
-    document.getElementById(
-      "matchLineups"
-    );
-
-  let html = "";
-
-  html += `
-    <h3>
-      ${playerClub.short}
-    </h3>
-  `;
-
-  for (
-    let slot = 1;
-    slot <= 8;
-    slot++
-  ) {
-
-    const rider =
-      playerLineup[slot];
-
-    html += `
-      <div class="slot">
-        <b>#${slot}</b>
-        — ${rider.name}
-
-        <div class="slot-info">
-          ${getRiderAgeText(rider)}
-        </div>
-
-        <div class="badges">
-          ${renderBadges(rider)}
-        </div>
-      </div>
-    `;
-
-  }
-
-
-  html += `
-    <br>
-    <h3>
-      ${opponentClub.short}
-    </h3>
-  `;
-
-  for (
-    let slot = 1;
-    slot <= 8;
-    slot++
-  ) {
-
-    const rider =
-      aiLineup[slot];
-
-    html += `
-      <div class="slot">
-        <b>#${slot}</b>
-        — ${rider.name}
-
-        <div class="slot-info">
-          ${getRiderAgeText(rider)}
-        </div>
-
-        <div class="badges">
-          ${renderBadges(rider)}
-        </div>
-      </div>
-    `;
-
-  }
-
-  container.innerHTML =
-    html;
-
-}
-
-
-/* =========================================================
-   BIEGI
+   OFICJALNE UKŁADY BIEGÓW
    ========================================================= */
 
 const heatMatrix = [
 
-  [1,9,3,11],
-  [15,6,14,7],
-  [5,12,2,13],
-  [14,4,10,6],
-  [11,3,12,4],
-  [13,2,15,1],
-  [7,10,5,9],
-  [3,13,4,14],
-  [9,1,10,2],
-  [6,11,5,12],
-  [12,4,9,1],
-  [2,15,7,11],
-  [10,5,13,3],
+  [1, 9, 3, 11],
 
-  /*
-    Biegi XIV i XV zostawiamy
-    na późniejszą wersję.
-  */
+  [15, 6, 14, 7],
+
+  [5, 12, 2, 13],
+
+  [14, 4, 10, 6],
+
+  [11, 3, 12, 4],
+
+  [13, 2, 15, 1],
+
+  [7, 10, 5, 9],
+
+  [3, 13, 4, 14],
+
+  [9, 1, 10, 2],
+
+  [6, 11, 5, 12],
+
+  [12, 4, 9, 1],
+
+  [2, 15, 7, 11],
+
+  [10, 5, 13, 3],
+
+  [9, 1, 15, 7],
+
+  [1, 9, 7, 15]
 
 ];
 
 
-function prepareHeat() {
+/* =========================================================
+   ZAWODNIK Z NUMERU
+   ========================================================= */
 
-  heatFinished = false;
+function riderForNumber(number) {
 
-  document.getElementById(
-    "simulateButton"
-  ).classList.remove("hidden");
+  if (number >= 1 && number <= 8) {
 
-  document.getElementById(
-    "nextHeatButton"
-  ).classList.add("hidden");
+    return awayLineup[
+      number - 1
+    ];
 
+  }
+
+  if (number >= 9 && number <= 16) {
+
+    return homeLineup[
+      number - 9
+    ];
+
+  }
+
+  return null;
+}
+
+
+/* =========================================================
+   RENDER BIEGU
+   ========================================================= */
+
+function renderCurrentHeat() {
 
   const heat =
-    heatMatrix[
-      currentHeat - 1
-    ];
+    heatMatrix[currentHeat];
+
+  document.getElementById(
+    "heatNumber"
+  ).textContent =
+    `Bieg ${currentHeat + 1} z 15`;
 
   document.getElementById(
     "heatTitle"
   ).textContent =
-    `Bieg ${currentHeat}`;
+    "Obsada biegu";
 
-
-  const ridersContainer =
+  const container =
     document.getElementById(
-      "heatRiders"
+      "heatResults"
     );
 
-  ridersContainer.innerHTML = "";
-
+  container.innerHTML = "";
 
   heat.forEach(
     (number, index) => {
 
-      let rider;
+      const rider =
+        riderForNumber(number);
 
-      let team;
-
-      if (number <= 8) {
-
-        rider =
-          aiLineup[number];
-
-        team =
-          opponentClub;
-
-      } else {
-
-        const realNumber =
-          number - 8;
-
-        rider =
-          playerLineup[
-            realNumber
-          ];
-
-        team =
-          playerClub;
-
-      }
-
-
-      const div =
+      const row =
         document.createElement("div");
 
-      div.className =
+      row.className =
         "heat-rider";
 
-      div.innerHTML = `
+      const team =
+        number <= 8
+          ? clubs[opponentClubKey]
+          : clubs[selectedClubKey];
 
-        <span>
-          <b>${index + 1}.</b>
-          ${rider.name}
-          <span class="small">
-            (${team.short})
-          </span>
-        </span>
+      row.innerHTML = `
 
-        <span class="points">
-          ?
-        </span>
+        <div class="heat-position">
+          ${index + 1}
+        </div>
+
+        <div>
+
+          <div class="heat-rider-name">
+            ${
+              rider
+                ? rider.name
+                : "Brak zawodnika"
+            }
+          </div>
+
+          <div class="heat-team">
+            ${team.short} • nr ${number}
+          </div>
+
+        </div>
+
+        <div class="heat-points">
+          —
+        </div>
 
       `;
 
-      ridersContainer.appendChild(div);
+      container.appendChild(row);
 
     }
   );
 
+  document.getElementById(
+    "heatResultBox"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "simulateButton"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "nextHeatButton"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "finishMatchButton"
+  ).style.display =
+    "none";
+
+  heatAlreadySimulated = false;
+}
+
+
+/* =========================================================
+   LOSOWANIE WYNIKU BIEGU
+   ========================================================= */
+
+function generateHeatResult() {
+
+  const heat =
+    heatMatrix[currentHeat];
+
+  const riders =
+    heat.map(
+      number => ({
+        number,
+        rider: riderForNumber(number),
+        team:
+          number <= 8
+            ? "away"
+            : "home"
+      })
+    );
+
+  const validRiders =
+    riders.filter(
+      item => item.rider
+    );
+
+  validRiders.sort(
+    () =>
+      Math.random() - 0.5
+  );
+
+  const points = [
+    3,
+    2,
+    1,
+    0
+  ];
+
+  validRiders.forEach(
+    (item, index) => {
+
+      item.points =
+        points[index] ?? 0;
+
+    }
+  );
+
+  return validRiders;
 }
 
 
@@ -2687,351 +2317,224 @@ function prepareHeat() {
    SYMULACJA BIEGU
    ========================================================= */
 
-function simulateHeat() {
+function simulateCurrentHeat() {
 
-  if (heatFinished) {
+  if (heatAlreadySimulated) {
     return;
   }
 
-  const heat =
-    heatMatrix[
-      currentHeat - 1
-    ];
-
-  const competitors =
-    heat.map(
-      number => {
-
-        if (number <= 8) {
-
-          return {
-            rider:
-              aiLineup[number],
-            team:
-              "away",
-            score:
-              randomPerformance(
-                aiLineup[number]
-              )
-          };
-
-        }
-
-        const realNumber =
-          number - 8;
-
-        return {
-          rider:
-            playerLineup[realNumber],
-          team:
-            "home",
-          score:
-            randomPerformance(
-              playerLineup[realNumber]
-            )
-        };
-
-      }
-    );
-
-
-  competitors.sort(
-    (a,b) =>
-      b.score - a.score
-  );
-
-
-  /*
-    Punktacja:
-    3-2-1-0
-  */
-
-  const points =
-    [3,2,1,0];
-
-
-  competitors.forEach(
-    (competitor,index) => {
-
-      competitor.points =
-        points[index];
-
-      if (
-        competitor.team === "home"
-      ) {
-
-        homeScore +=
-          competitor.points;
-
-      } else {
-
-        awayScore +=
-          competitor.points;
-
-      }
-
-    }
-  );
-
-
-  updateHeatResult(
-    competitors
-  );
-
-  updateScore();
-
-  heatFinished = true;
-
-
-  document.getElementById(
-    "simulateButton"
-  ).classList.add("hidden");
-
-
-  if (
-    currentHeat <
-    heatMatrix.length
-  ) {
-
-    document.getElementById(
-      "nextHeatButton"
-    ).classList.remove("hidden");
-
-  } else {
-
-    showFinalResult();
-
-  }
-
-}
-
-
-/* =========================================================
-   LOSOWANIE FORMY
-   ========================================================= */
-
-function randomPerformance(rider) {
-
-  const base =
-    rider.aiPriority || 50;
-
-  /*
-    Lekki wpływ formy zawodnika,
-    ale wynik nadal jest symulacją.
-  */
-
-  return (
-    base +
-    Math.random() * 35
-  );
-
-}
-
-
-/* =========================================================
-   WYNIK BIEGU
-   ========================================================= */
-
-function updateHeatResult(
-  competitors
-) {
+  const results =
+    generateHeatResult();
 
   const container =
     document.getElementById(
-      "heatRiders"
+      "heatResults"
     );
 
   container.innerHTML = "";
 
+  let heatHomeScore = 0;
+  let heatAwayScore = 0;
 
-  competitors.forEach(
-    (competitor,index) => {
+  results.forEach(
+    (result, index) => {
 
-      const div =
+      if (result.team === "home") {
+
+        heatHomeScore +=
+          result.points;
+
+      } else {
+
+        heatAwayScore +=
+          result.points;
+
+      }
+
+      const team =
+        result.team === "home"
+          ? clubs[selectedClubKey]
+          : clubs[opponentClubKey];
+
+      const row =
         document.createElement("div");
 
-      div.className =
+      row.className =
         "heat-rider";
 
-      const teamShort =
-        competitor.team === "home"
-          ? playerClub.short
-          : opponentClub.short;
+      row.innerHTML = `
 
-      div.innerHTML = `
+        <div class="heat-position">
+          ${index + 1}
+        </div>
 
-        <span>
-          <b>${index + 1}.</b>
-          ${competitor.rider.name}
+        <div>
 
-          <span class="small">
-            (${teamShort})
-          </span>
-        </span>
+          <div class="heat-rider-name">
+            ${result.rider.name}
+          </div>
 
-        <span class="points">
-          ${competitor.points}
-        </span>
+          <div class="heat-team">
+            ${team.short} • nr ${result.number}
+          </div>
+
+        </div>
+
+        <div class="heat-points">
+          ${result.points}
+        </div>
 
       `;
 
-      container.appendChild(div);
+      container.appendChild(row);
 
     }
   );
+
+
+  homeScore +=
+    heatHomeScore;
+
+  awayScore +=
+    heatAwayScore;
+
+
+  document.getElementById(
+    "matchHomeScore"
+  ).textContent =
+    homeScore;
+
+  document.getElementById(
+    "matchAwayScore"
+  ).textContent =
+    awayScore;
+
+
+  document.getElementById(
+    "heatTitle"
+  ).textContent =
+    "Wynik biegu";
+
+
+  document.getElementById(
+    "heatScore"
+  ).textContent =
+    `${heatHomeScore}:${heatAwayScore}`;
+
+
+  document.getElementById(
+    "heatResultBox"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "simulateButton"
+  ).style.display =
+    "none";
+
+
+  heatAlreadySimulated = true;
+
+
+  if (currentHeat >= 14) {
+
+    document.getElementById(
+      "finishMatchButton"
+    ).style.display =
+      "block";
+
+  } else {
+
+    document.getElementById(
+      "nextHeatButton"
+    ).style.display =
+      "block";
+
+  }
 
 }
 
 
 /* =========================================================
-   KOLEJNY BIEG
+   NASTĘPNY BIEG
    ========================================================= */
 
 function nextHeat() {
 
-  if (!heatFinished) {
+  if (!heatAlreadySimulated) {
     return;
   }
 
   currentHeat++;
 
-  prepareHeat();
-
+  renderCurrentHeat();
 }
 
 
 /* =========================================================
-   TABLICA WYNIKÓW
+   ZAKOŃCZENIE MECZU
    ========================================================= */
 
-function updateScore() {
+function finishMatch() {
 
   document.getElementById(
-    "homeScore"
+    "finalScore"
   ).textContent =
-    homeScore;
+    `${homeScore}:${awayScore}`;
 
-  document.getElementById(
-    "awayScore"
-  ).textContent =
-    awayScore;
+  let message = "";
 
-}
+  if (homeScore > awayScore) {
 
+    message =
+      `${clubs[selectedClubKey].name} wygrywa mecz.`;
 
-/* =========================================================
-   KONIEC MECZU
-   ========================================================= */
+  } else if (homeScore < awayScore) {
 
-function showFinalResult() {
-
-  const box =
-    document.getElementById(
-      "heatBox"
-    );
-
-  let winnerText;
-
-  if (
-    homeScore > awayScore
-  ) {
-
-    winnerText =
-      `${playerClub.name} wygrywa!`;
-
-  } else if (
-    awayScore > homeScore
-  ) {
-
-    winnerText =
-      `${opponentClub.name} wygrywa!`;
+    message =
+      `${clubs[opponentClubKey].name} wygrywa mecz.`;
 
   } else {
 
-    winnerText =
-      "Remis!";
+    message =
+      "Mecz zakończył się remisem.";
 
   }
 
+  document.getElementById(
+    "finalMessage"
+  ).textContent =
+    message;
 
-  box.innerHTML = `
-
-    <div class="heat-title">
-      Koniec meczu
-    </div>
-
-    <div class="match-result">
-
-      <div style="font-size:18px;font-weight:bold;">
-        ${winnerText}
-      </div>
-
-      <div style="font-size:30px;font-weight:bold;margin-top:10px;">
-        ${homeScore} : ${awayScore}
-      </div>
-
-    </div>
-
-    <br>
-
-    <button
-      class="primary"
-      onclick="location.reload()"
-    >
-      Nowy mecz
-    </button>
-
-  `;
-
+  showScreen("finishScreen");
 }
 
 
 /* =========================================================
-   PRZYCISKI
+   POWRÓT DO KLUBÓW
    ========================================================= */
 
-document
-  .getElementById("startMatchButton")
-  .addEventListener(
-    "click",
-    startMatch
-  );
+function backToClubs() {
 
+  selectedClubKey = null;
+  opponentClubKey = null;
 
-document
-  .getElementById("simulateButton")
-  .addEventListener(
-    "click",
-    simulateHeat
-  );
+  selectedRiders =
+    Array(8).fill(null);
 
+  homeLineup = [];
+  awayLineup = [];
 
-document
-  .getElementById("nextHeatButton")
-  .addEventListener(
-    "click",
-    nextHeat
-  );
+  currentHeat = 0;
 
+  homeScore = 0;
+  awayScore = 0;
 
-document
-  .getElementById("backClubButton")
-  .addEventListener(
-    "click",
-    () => {
+  heatAlreadySimulated = false;
 
-      playerClub = null;
-      opponentClub = null;
-
-      playerLineup = {};
-      aiLineup = {};
-
-      showScreen(
-        "clubScreen"
-      );
-
-    }
-  );
+  showScreen("clubScreen");
+}
 
 
 /* =========================================================
