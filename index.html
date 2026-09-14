@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 
-<title>SMFK — Speedway Manager — Beta 3.1.0</title>
+<title>SMFK — Speedway Manager — Beta 3.1.1</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Rubik+Dirt&display=swap" rel="stylesheet">
 
 <style>
 
 /* =========================================================
-   BETA 3.1.0 — WYGLĄD
+   BETA 3.1.1 — WYGLĄD
    Mechanika gry pozostaje bez zmian.
    ========================================================= */
 
@@ -30,7 +31,7 @@ body {
 }
 
 body {
-  font-family: "Nunito", Arial, Helvetica, sans-serif;
+  font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
   color: #f9fafb;
   overflow-x: hidden;
 }
@@ -50,7 +51,7 @@ button {
 
 
 /* =========================================================
-   GÓRNY LOGO GRY
+   GÓRNE LOGO GRY
    ========================================================= */
 
 .header {
@@ -63,20 +64,26 @@ button {
 
 .header h1 {
   margin: 0;
-  font-size: 42px;
+  font-family: "Rubik Dirt", cursive;
+  font-size: 48px;
   line-height: 1;
-  font-weight: 900;
-  letter-spacing: 5px;
+  font-weight: 400;
+  letter-spacing: 4px;
   color: #ffffff;
+
+  transform: rotate(-2deg);
+
   text-shadow:
-    0 3px 12px rgba(0,0,0,0.7);
+    3px 3px 0 rgba(0,0,0,0.85),
+    -2px 1px 0 rgba(0,0,0,0.65),
+    0 5px 18px rgba(0,0,0,0.75);
 }
 
 .version {
-  margin-top: 8px;
+  margin-top: 10px;
   color: rgba(255,255,255,0.68);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -308,6 +315,63 @@ h3 {
 
 
 /* =========================================================
+   EKRAN MECZU — TŁO Z BARTOSZEM ZMARZLIKIEM
+   ========================================================= */
+
+#matchScreen {
+  position: relative;
+  min-height: calc(100vh - 120px);
+  margin-left: -18px;
+  margin-right: -18px;
+  margin-top: -4px;
+  padding: 28px 18px 40px;
+  overflow: hidden;
+  background: #000;
+}
+
+#matchScreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.55),
+      rgba(0,0,0,0.55)
+    ),
+    url("https://media.speedwayekstraliga.pl/users/97_big.png?fmtjwtp39");
+
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+#matchScreen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.48) 0%,
+      rgba(0,0,0,0.30) 40%,
+      rgba(0,0,0,0.82) 100%
+    );
+
+  pointer-events: none;
+}
+
+#matchScreen > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
    MECZ
    ========================================================= */
 
@@ -320,12 +384,26 @@ h3 {
 }
 
 .team-box {
-  background: #111;
+  background: rgba(17,17,17,0.88);
   border-radius: 12px;
   padding: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.team-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 6px;
 }
 
 .team-short {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.match-team-short {
   font-size: 22px;
   font-weight: 900;
 }
@@ -572,6 +650,11 @@ h3 {
     margin-right: -18px;
   }
 
+  #matchScreen {
+    margin-left: -18px;
+    margin-right: -18px;
+  }
+
 }
 
 </style>
@@ -586,7 +669,7 @@ h3 {
     <h1>SMFK</h1>
 
     <div class="version">
-      BETA 3.1.0
+      BETA 3.1.1
     </div>
 
   </div>
@@ -690,15 +773,47 @@ h3 {
       <div class="match-header">
 
         <div class="team-box">
-          <div id="matchHomeShort" class="team-short">---</div>
-          <div id="matchHomeScore" class="team-short">0</div>
+
+          <img
+            id="matchHomeLogo"
+            class="team-logo"
+            src=""
+            alt="Logo gospodarzy"
+          >
+
+          <div id="matchHomeShort" class="match-team-short">
+            ---
+          </div>
+
+          <div id="matchHomeScore" class="team-short">
+            0
+          </div>
+
         </div>
 
-        <div class="vs">MECZ</div>
+
+        <div class="vs">
+          MECZ
+        </div>
+
 
         <div class="team-box">
-          <div id="matchAwayShort" class="team-short">---</div>
-          <div id="matchAwayScore" class="team-short">0</div>
+
+          <img
+            id="matchAwayLogo"
+            class="team-logo"
+            src=""
+            alt="Logo gości"
+          >
+
+          <div id="matchAwayShort" class="match-team-short">
+            ---
+          </div>
+
+          <div id="matchAwayScore" class="team-short">
+            0
+          </div>
+
         </div>
 
       </div>
@@ -803,11 +918,11 @@ h3 {
 <script>
 
 /* =========================================================
-   BETA 3.1.0
+   BETA 3.1.1
    MECHANIKA POZOSTAJE BEZ ZMIAN
    ========================================================= */
 
-const VERSION = "3.1.0";
+const VERSION = "3.1.1";
 
 const GAME_DATE =
   new Date("2026-09-14T12:00:00");
@@ -1554,6 +1669,8 @@ function calculateAge(birthDate) {
 
 /* =========================================================
    FORMAT DATY
+   Dane pozostają w systemie,
+   ale data nie jest pokazywana użytkownikowi.
    ========================================================= */
 
 function formatDate(birthDate) {
@@ -1597,7 +1714,7 @@ function getRiderAgeText(rider) {
     return "wiek: brak danych";
   }
 
-  return `wiek: ${age} • ur. ${formatDate(rider.birthDate)}`;
+  return `wiek: ${age}`;
 }
 
 
@@ -2460,6 +2577,11 @@ function startMatch() {
   heatAlreadySimulated =
     false;
 
+
+  /* =======================================================
+     INFORMACJE O KLUBACH W EKRANIE MECZU
+     ======================================================= */
+
   document.getElementById(
     "matchHomeShort"
   ).textContent =
@@ -2473,6 +2595,24 @@ function startMatch() {
     clubs[
       opponentClubKey
     ].short;
+
+
+  /* LOGA KLUBÓW */
+
+  document.getElementById(
+    "matchHomeLogo"
+  ).src =
+    clubs[
+      selectedClubKey
+    ].logoUrl;
+
+  document.getElementById(
+    "matchAwayLogo"
+  ).src =
+    clubs[
+      opponentClubKey
+    ].logoUrl;
+
 
   document.getElementById(
     "matchHomeScore"
