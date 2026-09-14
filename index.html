@@ -2,1723 +2,1332 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-
-<title>Speedway Manager 2026 BETA 2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Speedway Manager 2026 — Beta 3.0.0</title>
 
 <style>
-*{box-sizing:border-box}
+    * {
+        box-sizing: border-box;
+    }
 
-body{
- margin:0;
- background:#080d18;
- color:#fff;
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
-}
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+            radial-gradient(circle at top, #263449 0%, #111827 45%, #080c14 100%);
+        color: #f8fafc;
+        min-height: 100vh;
+    }
 
-header{
- padding:20px 15px;
- text-align:center;
- background:linear-gradient(135deg,#111827,#1e293b);
- border-bottom:1px solid #334155
-}
+    button {
+        font-family: inherit;
+    }
 
-header h1{
- margin:0;
- font-size:24px
-}
+    .app {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+        padding: 16px;
+    }
 
-header p{
- margin:6px 0 0;
- color:#94a3b8
-}
+    .header {
+        text-align: center;
+        padding: 18px 10px 22px;
+    }
 
-.container{
- max-width:720px;
- margin:auto;
- padding:15px
-}
+    .logo {
+        font-size: 38px;
+        margin-bottom: 5px;
+    }
 
-.card{
- background:#111827;
- border:1px solid #263244;
- border-radius:18px;
- padding:17px;
- margin-bottom:15px
-}
+    .title {
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0;
+    }
 
-.hidden{
- display:none
-}
+    .version {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: #1e293b;
+        color: #93c5fd;
+        font-size: 13px;
+        font-weight: 700;
+    }
 
-button,select{
- width:100%;
- padding:13px;
- margin-top:9px;
- border:0;
- border-radius:12px;
- font-size:16px;
- font-weight:700
-}
+    .subtitle {
+        margin: 12px auto 0;
+        max-width: 700px;
+        color: #cbd5e1;
+        line-height: 1.5;
+    }
 
-button{
- background:#2563eb;
- color:white
-}
+    .screen {
+        display: none;
+    }
 
-button.secondary{
- background:#334155
-}
+    .screen.active {
+        display: block;
+    }
 
-button.green{
- background:#15803d
-}
+    .panel {
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid #334155;
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+        margin-bottom: 18px;
+    }
 
-button.red{
- background:#b91c1c
-}
+    .panel h2 {
+        margin: 0 0 8px;
+        font-size: 22px;
+    }
 
-select{
- background:#1e293b;
- color:white;
- border:1px solid #475569
-}
+    .panel p {
+        color: #cbd5e1;
+        line-height: 1.5;
+    }
 
-.team{
- background:#172033;
- padding:14px;
- margin-top:9px;
- border-radius:13px;
- border:1px solid #29364d
-}
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+    }
 
-.small{
- color:#94a3b8;
- font-size:13px
-}
+    .team-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        background: #111827;
+        padding: 18px;
+        cursor: pointer;
+        transition:
+            transform 0.15s ease,
+            border-color 0.15s ease,
+            background 0.15s ease;
+    }
 
-.badge{
- display:inline-block;
- background:#1d4ed8;
- padding:5px 8px;
- border-radius:7px;
- font-size:11px;
- font-weight:800
-}
+    .team-card:hover {
+        transform: translateY(-2px);
+        border-color: #60a5fa;
+        background: #172033;
+    }
 
-.line{
- display:flex;
- justify-content:space-between;
- gap:10px;
- align-items:center;
- padding:9px 0;
- border-bottom:1px solid #263244
-}
+    .team-card:active {
+        transform: scale(0.99);
+    }
 
-.line:last-child{
- border-bottom:0
-}
+    .team-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-.num{
- width:32px;
- font-weight:900;
- color:#60a5fa
-}
+    .team-logo {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: #1e293b;
+        font-size: 25px;
+        flex-shrink: 0;
+    }
 
-.rider{
- flex:1;
- font-weight:600
-}
+    .team-name {
+        font-size: 18px;
+        font-weight: 800;
+    }
 
-.type{
- color:#94a3b8;
- font-size:12px
-}
+    .team-city {
+        color: #94a3b8;
+        margin-top: 3px;
+        font-size: 13px;
+    }
 
-.scoreboard{
- display:grid;
- grid-template-columns:1fr auto 1fr;
- text-align:center;
- align-items:center;
- gap:8px
-}
+    .team-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        padding-top: 12px;
+        border-top: 1px solid #263244;
+        color: #94a3b8;
+        font-size: 13px;
+    }
 
-.score{
- font-size:40px;
- font-weight:900
-}
+    .team-rank {
+        color: #f8fafc;
+        font-weight: 700;
+    }
 
-.vs{
- color:#64748b;
- font-weight:900
-}
+    .back-button,
+    .primary-button,
+    .secondary-button {
+        border: 0;
+        border-radius: 12px;
+        padding: 13px 17px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+    }
 
-.heat{
- background:#172033;
- border-radius:13px;
- padding:12px;
- margin-top:8px
-}
+    .back-button {
+        background: #1e293b;
+        color: #e2e8f0;
+        margin-bottom: 16px;
+    }
 
-.result{
- padding:11px 5px;
- border-bottom:1px solid #334155;
- display:flex;
- justify-content:space-between;
- gap:10px
-}
+    .primary-button {
+        width: 100%;
+        background: #2563eb;
+        color: white;
+    }
 
-.result:last-child{
- border:0
-}
+    .primary-button:disabled {
+        background: #334155;
+        color: #64748b;
+        cursor: not-allowed;
+    }
 
-.notice{
- background:#172033;
- border-left:4px solid #2563eb;
- padding:12px;
- border-radius:8px;
- margin:10px 0
-}
+    .secondary-button {
+        background: #1e293b;
+        color: #e2e8f0;
+    }
 
-.center{
- text-align:center
-}
+    .club-heading {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 15px;
+    }
 
-.good{
- color:#4ade80
-}
+    .club-big-logo {
+        width: 64px;
+        height: 64px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: #1e293b;
+        font-size: 30px;
+    }
 
-.warn{
- color:#fbbf24
-}
+    .club-heading h2 {
+        margin: 0;
+    }
 
-.bad{
- color:#f87171
-}
+    .club-heading p {
+        margin: 4px 0 0;
+    }
 
-.next-button{
- margin-top:15px;
- background:#15803d
-}
+    .selected-count {
+        margin: 12px 0;
+        padding: 11px 13px;
+        background: #172033;
+        border-radius: 10px;
+        color: #cbd5e1;
+    }
 
-.match-result{
- background:#0f172a;
- border:1px solid #334155;
- border-radius:14px;
- padding:14px;
- margin-top:15px
-}
+    .selected-count strong {
+        color: #fff;
+    }
+
+    .rider-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .rider-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 13px;
+        background: #111827;
+        border: 1px solid #334155;
+        cursor: pointer;
+        transition: 0.15s ease;
+    }
+
+    .rider-card:hover {
+        border-color: #64748b;
+    }
+
+    .rider-card.selected {
+        border-color: #3b82f6;
+        background: #172554;
+    }
+
+    .rider-card.disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+    }
+
+    .rider-number {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: #1e293b;
+        color: #93c5fd;
+        font-weight: 900;
+    }
+
+    .rider-card.selected .rider-number {
+        background: #2563eb;
+        color: white;
+    }
+
+    .rider-name {
+        font-weight: 800;
+        font-size: 14px;
+    }
+
+    .rider-meta {
+        margin-top: 4px;
+        color: #94a3b8;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .slot-preview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin: 14px 0;
+    }
+
+    .slot {
+        min-height: 58px;
+        padding: 9px;
+        border: 1px dashed #475569;
+        border-radius: 10px;
+        background: #0f172a;
+    }
+
+    .slot-number {
+        color: #60a5fa;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .slot-name {
+        margin-top: 4px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .notice {
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+        line-height: 1.45;
+    }
+
+    .notice.info {
+        background: #172033;
+        border: 1px solid #334155;
+        color: #cbd5e1;
+    }
+
+    .notice.success {
+        background: #052e1b;
+        border: 1px solid #166534;
+        color: #bbf7d0;
+    }
+
+    .notice.error {
+        background: #3b0a0a;
+        border: 1px solid #991b1b;
+        color: #fecaca;
+    }
+
+    .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .summary-card {
+        background: #111827;
+        border: 1px solid #334155;
+        border-radius: 13px;
+        padding: 13px;
+    }
+
+    .summary-card h3 {
+        margin: 0 0 10px;
+        font-size: 15px;
+    }
+
+    .summary-rider {
+        padding: 8px 0;
+        border-bottom: 1px solid #263244;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .summary-rider:last-child {
+        border-bottom: 0;
+    }
+
+    .small {
+        color: #94a3b8;
+        font-size: 12px;
+    }
+
+    .footer {
+        text-align: center;
+        color: #64748b;
+        font-size: 12px;
+        padding: 10px 0 25px;
+    }
+
+    @media (max-width: 700px) {
+        .team-grid,
+        .rider-grid,
+        .slot-preview,
+        .summary-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .title {
+            font-size: 24px;
+        }
+
+        .app {
+            padding: 10px;
+        }
+
+        .panel {
+            padding: 14px;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>🏁 Speedway Manager 2026</h1>
-<p>BETA 2.1 — Manager żużlowy</p>
-</header>
+<div class="app">
 
-<div class="container">
+    <header class="header">
+        <div class="logo">🏁</div>
+        <h1 class="title">Speedway Manager 2026</h1>
+        <div class="version">BETA 3.0.0</div>
+        <p class="subtitle">
+            Menedżer żużlowy — nowa, czysta baza gry.
+        </p>
+    </header>
 
-<!-- KLUB -->
 
-<section id="clubScreen">
+    <!-- =========================
+         EKRAN 1 — WYBÓR KLUBU
+         ========================= -->
 
-<div class="card">
+    <section id="screenClub" class="screen active">
 
-<span class="badge">KARIERA 2026</span>
+        <div class="panel">
+            <h2>Wybierz swój klub</h2>
+            <p>
+                Wybierz drużynę, którą będziesz prowadzić w karierze 2026.
+                W kolejnych wersjach dojdą mecze, taktyka, transfery i cały sezon.
+            </p>
 
-<h2>Wybierz klub</h2>
+            <div id="teamList" class="team-grid"></div>
+        </div>
 
-<p class="small">
-W tej wersji gramy demonstracyjnie w PGE Ekstralidze.
-</p>
+    </section>
 
-<div id="teamList"></div>
 
-</div>
+    <!-- =========================
+         EKRAN 2 — SKŁAD
+         ========================= -->
 
-</section>
+    <section id="screenSquad" class="screen">
 
+        <button class="back-button" onclick="backToClubs()">
+            ← Wróć do wyboru klubu
+        </button>
 
-<!-- PRZECIWNIK -->
+        <div class="panel">
 
-<section id="opponentScreen" class="hidden">
+            <div id="clubHeading"></div>
 
-<div class="card">
+            <div class="notice info">
+                <strong>Beta 3.0.0:</strong>
+                wybierz dokładnie 8 zawodników do swojego podstawowego składu.
+                Każdego zawodnika można wybrać tylko raz.
+            </div>
 
-<span class="badge">MECZ</span>
+            <div id="selectedCount" class="selected-count">
+                Wybrano: <strong>0 / 8</strong>
+            </div>
 
-<h2 id="myTeamTitle"></h2>
+            <div id="selectionMessage"></div>
 
-<p class="small">
-Wybierz przeciwnika i miejsce rozegrania meczu.
-</p>
+            <div id="slotPreview" class="slot-preview"></div>
 
-<div id="opponentList"></div>
+            <h3>Twoja kadra</h3>
 
-<button class="secondary" onclick="show('clubScreen')">
-← Wróć
-</button>
+            <div id="riderList" class="rider-grid"></div>
 
-</div>
+            <div style="margin-top:16px;">
+                <button
+                    id="continueButton"
+                    class="primary-button"
+                    onclick="confirmSquad()"
+                    disabled
+                >
+                    Potwierdź skład
+                </button>
+            </div>
 
-</section>
+        </div>
 
+    </section>
 
-<!-- SKŁAD -->
 
-<section id="lineupScreen" class="hidden">
+    <!-- =========================
+         EKRAN 3 — POTWIERDZENIE
+         ========================= -->
 
-<div class="card">
+    <section id="screenReady" class="screen">
 
-<span class="badge">TWÓJ SKŁAD</span>
+        <button class="back-button" onclick="backToSquad()">
+            ← Wróć do składu
+        </button>
 
-<h2 id="lineupTitle"></h2>
+        <div class="panel">
 
-<div class="notice">
-Wybierz dokładnie 8 różnych zawodników.
-</div>
+            <div id="readyHeading"></div>
 
-<div id="lineup"></div>
+            <div class="notice success">
+                Skład został zapisany.
+                To jest stabilny punkt startowy Beta 3.0.0.
+            </div>
 
-<button class="green" onclick="validateLineup()">
-✓ Zatwierdź skład
-</button>
+            <div class="notice info">
+                Następny moduł gry będzie wykorzystywał ten skład do stworzenia
+                prawdziwego meczu żużlowego.
+            </div>
 
-<button class="secondary" onclick="backToOpponents()">
-← Zmień przeciwnika
-</button>
+            <div id="squadSummary"></div>
 
-<div id="lineupMessage"></div>
+            <button
+                class="primary-button"
+                onclick="startDemoMatch()"
+                style="margin-top:16px;"
+            >
+                🏁 Przejdź do demonstracji meczu
+            </button>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
 
-<!-- PODGLĄD -->
+    <!-- =========================
+         EKRAN 4 — DEMO
+         ========================= -->
 
-<section id="preMatchScreen" class="hidden">
+    <section id="screenMatch" class="screen">
 
-<div class="card">
+        <button class="back-button" onclick="backToReady()">
+            ← Wróć
+        </button>
 
-<span class="badge">PRZED MECZEM</span>
+        <div class="panel">
 
-<h2>Składy meczowe</h2>
+            <div id="matchHeading"></div>
 
-<h3 id="myPreName"></h3>
-<div id="myPreLineup"></div>
+            <div class="notice info">
+                <strong>Demo Beta 3.0.0</strong><br>
+                Ten ekran jest przygotowany jako fundament przyszłego silnika
+                meczowego. W następnej wersji zostanie podłączona właściwa
+                tabela 15 biegów.
+            </div>
 
-<h3 id="aiPreName"></h3>
-<div id="aiPreLineup"></div>
+            <div class="summary-grid">
 
-<button onclick="startMatch()">
-🏁 Rozpocznij mecz
-</button>
+                <div class="summary-card">
+                    <h3 id="homeTeamTitle">Twój klub</h3>
+                    <div id="homeDemoRiders"></div>
+                </div>
 
-</div>
+                <div class="summary-card">
+                    <h3>Przeciwnik AI</h3>
+                    <div id="awayDemoRiders"></div>
+                </div>
 
-</section>
+            </div>
 
+        </div>
 
-<!-- MECZ -->
+    </section>
 
-<section id="matchScreen" class="hidden">
 
-<div class="card">
-
-<div class="scoreboard">
-
-<div>
-<strong id="matchHome"></strong>
-<div id="homeScore" class="score">0</div>
-</div>
-
-<div class="vs">:</div>
-
-<div>
-<strong id="matchAway"></strong>
-<div id="awayScore" class="score">0</div>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<span class="badge">
-BIEG <span id="heatNo">1</span> / 15
-</span>
-
-<h2 id="heatTitle"></h2>
-
-<div id="heatInfo"></div>
-
-<button id="heatButton" onclick="runHeat()">
-🏁 Symuluj bieg
-</button>
-
-<button
-id="nextHeatButton"
-class="next-button hidden"
-onclick="nextHeat()">
-
-Kolejny bieg ➡️
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h3>Aktualny wynik</h3>
-
-<div class="scoreboard">
-
-<div>
-<span id="homeShort"></span>
-<div id="homeScore2">0</div>
-</div>
-
-<div>:</div>
-
-<div>
-<span id="awayShort"></span>
-<div id="awayScore2">0</div>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- NOMINOWANE -->
-
-<section id="nominatedScreen" class="hidden">
-
-<div class="card">
-
-<span class="badge">BIEGI NOMINOWANE</span>
-
-<h2>Po 13. biegu</h2>
-
-<div id="nominatedNotice" class="notice"></div>
-
-<h3>Bieg 14</h3>
-<div id="heat14Select"></div>
-
-<h3>Bieg 15</h3>
-<div id="heat15Select"></div>
-
-<button class="green" onclick="confirmNominated()">
-✓ Zatwierdź obsadę
-</button>
-
-</div>
-
-</section>
-
-
-<!-- KONIEC -->
-
-<section id="resultScreen" class="hidden">
-
-<div class="card center">
-
-<span class="badge">KONIEC MECZU</span>
-
-<h2>Wynik końcowy</h2>
-
-<div class="score">
-<span id="finalHome">0</span>
-:
-<span id="finalAway">0</span>
-</div>
-
-<p id="finalMessage"></p>
-
-<button onclick="showClubs()">
-🏠 Wróć do klubów
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h3>Twoi zawodnicy</h3>
-
-<div id="finalStats"></div>
-
-</div>
-
-</section>
+    <div class="footer">
+        Speedway Manager 2026 · Beta 3.0.0
+    </div>
 
 </div>
 
 
 <script>
+"use strict";
 
-/* =====================================================
-   DANE DEMO
-   ===================================================== */
+/* =========================================================
+   SPEEDWAY MANAGER 2026
+   BETA 3.0.0
+   =========================================================
+
+   WAŻNE:
+   Ta wersja jest celowo prosta i stabilna.
+
+   Nie ma jeszcze:
+   - symulatora biegów,
+   - zmian taktycznych,
+   - transferów,
+   - kontuzji,
+   - tabeli sezonu.
+
+   Najpierw stabilizujemy fundament.
+   ========================================================= */
+
+
+/* =========================================================
+   DANE KLUBÓW
+   ========================================================= */
 
 const teams = [
 
-{
-name:"ORLEN OIL MOTOR Lublin",
-city:"Lublin",
-riders:[
-{name:"Bartosz Zmarzlik",type:"SENIOR",age:31},
-{name:"Fredrik Lindgren",type:"SENIOR",age:40},
-{name:"Mateusz Cierniak",type:"U24",age:23},
-{name:"Martin Vaculik",type:"SENIOR",age:36},
-{name:"Kacper Woryna",type:"SENIOR",age:29},
-{name:"Bartosz Bańbor",type:"JUNIOR",age:19},
-{name:"Bartosz Jaworski",type:"JUNIOR",age:18},
-{name:"Dawid Cepielik",type:"REZERWA",age:20}
-]
-},
+    {
+        id: "wro",
+        name: "Betard Sparta Wrocław",
+        city: "Wrocław",
+        short: "WRO",
+        logo: "🟢",
+        rank: 1,
+        riders: [
+            { name: "Maciej Janowski", age: 35, type: "SENIOR" },
+            { name: "Daniel Bewley", age: 27, type: "SENIOR" },
+            { name: "Artiom Łaguta", age: 35, type: "SENIOR" },
+            { name: "Brady Kurtz", age: 29, type: "SENIOR" },
+            { name: "Jakub Krawczyk", age: 22, type: "U24" },
+            { name: "Kacper Andrzejewski", age: 20, type: "U21" },
+            { name: "Filip Seniuk", age: 20, type: "U21" },
+            { name: "Damian Dróżdż", age: 29, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"PRES GRUPA DEWELOPERSKA Toruń",
-city:"Toruń",
-riders:[
-{name:"Emil Sajfutdinow",type:"SENIOR",age:36},
-{name:"Robert Lambert",type:"SENIOR",age:28},
-{name:"Patryk Dudek",type:"SENIOR",age:34},
-{name:"Mikkel Michelsen",type:"SENIOR",age:31},
-{name:"Norick Bloedorn",type:"U24",age:22},
-{name:"Antoni Kawczyński",type:"JUNIOR",age:18},
-{name:"Mikołaj Duchiński",type:"JUNIOR",age:20},
-{name:"Nicolai Heiselberg",type:"REZERWA",age:19}
-]
-},
+    {
+        id: "tor",
+        name: "Pres Grupa Deweloperska Toruń",
+        city: "Toruń",
+        short: "TOR",
+        logo: "🔵",
+        rank: 2,
+        riders: [
+            { name: "Patryk Dudek", age: 33, type: "SENIOR" },
+            { name: "Robert Lambert", age: 28, type: "SENIOR" },
+            { name: "Mikkel Michelsen", age: 30, type: "SENIOR" },
+            { name: "Emil Sajfutdinow", age: 36, type: "SENIOR" },
+            { name: "Norick Bloedorn", age: 22, type: "U24" },
+            { name: "Mikołaj Duchiński", age: 21, type: "U21" },
+            { name: "Antoni Kawczyński", age: 19, type: "U21" },
+            { name: "Bartosz Derek", age: 20, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"BETARD SPARTA Wrocław",
-city:"Wrocław",
-riders:[
-{name:"Artem Laguta",type:"SENIOR",age:35},
-{name:"Maciej Janowski",type:"SENIOR",age:35},
-{name:"Daniel Bewley",type:"SENIOR",age:27},
-{name:"Brady Kurtz",type:"SENIOR",age:29},
-{name:"Anders Rowe",type:"U24",age:23},
-{name:"Marcel Kowolik",type:"JUNIOR",age:19},
-{name:"Nikodem Mikołajczyk",type:"JUNIOR",age:20},
-{name:"Bartosz Curzytek",type:"REZERWA",age:22}
-]
-},
+    {
+        id: "lub",
+        name: "Orlen Oil Motor Lublin",
+        city: "Lublin",
+        short: "LUB",
+        logo: "🟡",
+        rank: 3,
+        riders: [
+            { name: "Bartosz Zmarzlik", age: 31, type: "SENIOR" },
+            { name: "Martin Vaculik", age: 36, type: "SENIOR" },
+            { name: "Fredrik Lindgren", age: 41, type: "SENIOR" },
+            { name: "Kacper Woryna", age: 29, type: "SENIOR" },
+            { name: "Mateusz Cierniak", age: 23, type: "U24" },
+            { name: "Bartosz Bańbor", age: 19, type: "U21" },
+            { name: "Bartosz Jaworski", age: 19, type: "U21" },
+            { name: "Michał Psiuk", age: 20, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"FOGO UNIA Leszno",
-city:"Leszno",
-riders:[
-{name:"Janusz Kołodziej",type:"SENIOR",age:41},
-{name:"Piotr Pawlicki",type:"SENIOR",age:31},
-{name:"Grzegorz Zengota",type:"SENIOR",age:37},
-{name:"Benjamin Cook",type:"SENIOR",age:28},
-{name:"Keynan Rew",type:"U24",age:23},
-{name:"Nazar Parnitskyi",type:"JUNIOR",age:19},
-{name:"Kacper Mania",type:"JUNIOR",age:18},
-{name:"Jakub Stojanowski",type:"REZERWA",age:22}
-]
-},
+    {
+        id: "les",
+        name: "Fogo Unia Leszno",
+        city: "Leszno",
+        short: "LES",
+        logo: "⚪",
+        rank: 4,
+        riders: [
+            { name: "Janusz Kołodziej", age: 42, type: "SENIOR" },
+            { name: "Ben Cook", age: 28, type: "SENIOR" },
+            { name: "Rasmus Jensen", age: 33, type: "SENIOR" },
+            { name: "Dominik Kubera", age: 27, type: "SENIOR" },
+            { name: "Nazariy Bondarenko", age: 22, type: "U24" },
+            { name: "Kacper Mania", age: 19, type: "U21" },
+            { name: "Wiktor Jasiński", age: 25, type: "U21" },
+            { name: "Hubert Jabłoński", age: 20, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"BAYERSYSTEM GKM Grudziądz",
-city:"Grudziądz",
-riders:[
-{name:"Max Fricke",type:"SENIOR",age:30},
-{name:"Michael Jepsen Jensen",type:"SENIOR",age34},
-{name:"Vadim Tarasenko",type:"SENIOR",age31},
-{name:"Maksym Drabik",type:"SENIOR",age28},
-{name:"Kevin Małkiewicz",type:"U24",age:21},
-{name:"Kacper Szarszewski",type:"JUNIOR",age:20},
-{name:"Kevin Iwański-Helt",type:"JUNIOR",age:19},
-{name:"Wiktor Przyjemski",type:"REZERWA",age:21}
-]
-},
+    {
+        id: "gru",
+        name: "Bayersystem GKM Grudziądz",
+        city: "Grudziądz",
+        short: "GRU",
+        logo: "🟠",
+        rank: 5,
+        riders: [
+            { name: "Michael Jepsen Jensen", age: 34, type: "SENIOR" },
+            { name: "Max Fricke", age: 30, type: "SENIOR" },
+            { name: "Maksym Drabik", age: 28, type: "SENIOR" },
+            { name: "Vadim Tarasenko", age: 31, type: "SENIOR" },
+            { name: "Kevin Małkiewicz", age: 21, type: "U24" },
+            { name: "Bastian Pedersen", age: 19, type: "U21" },
+            { name: "Kacper Szarszewski", age: 21, type: "U21" },
+            { name: "Kevin Iwański-Helt", age: 21, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"GEZET STAL Gorzów",
-city:"Gorzów Wielkopolski",
-riders:[
-{name:"Anders Thomsen",type:"SENIOR",age:32},
-{name:"Jack Holder",type:"SENIOR",age:30},
-{name:"Paweł Przedpełski",type:"SENIOR",age:31},
-{name:"Adam Bednar",type:"U24",age:23},
-{name:"Oskar Paluch",type:"JUNIOR",age:20},
-{name:"Marcel Szymko",type:"JUNIOR",age:19},
-{name:"Igor Kordun",type:"JUNIOR",age:19},
-{name:"REZERWA",type:"REZERWA",age:0}
-]
-},
+    {
+        id: "gor",
+        name: "Stal Gorzów",
+        city: "Gorzów Wielkopolski",
+        short: "GOR",
+        logo: "🔵",
+        rank: 6,
+        riders: [
+            { name: "Anders Thomsen", age: 32, type: "SENIOR" },
+            { name: "Martin Vaculik", age: 36, type: "SENIOR" },
+            { name: "Oskar Fajfer", age: 31, type: "SENIOR" },
+            { name: "Szymon Woźniak", age: 33, type: "SENIOR" },
+            { name: "Jens Rønholt", age: 22, type: "U24" },
+            { name: "Oskar Paluch", age: 20, type: "U21" },
+            { name: "Jakub Stojanowski", age: 21, type: "U21" },
+            { name: "Kacper Nowacki", age: 20, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"STELMET FALUBAZ Zielona Góra",
-city:"Zielona Góra",
-riders:[
-{name:"Leon Madsen",type:"SENIOR",age:37},
-{name:"Dominik Kubera",type:"SENIOR",age:27},
-{name:"Przemysław Pawlicki",type:"SENIOR",age:35},
-{name:"Andzejs Lebedevs",type:"SENIOR",age:31},
-{name:"Damian Ratajczak",type:"U24",age:21},
-{name:"Oskar Hurysz",type:"JUNIOR",age:20},
-{name:"Rafał Sękowski",type:"JUNIOR",age:19},
-{name:"Kacper Grzelak",type:"REZERWA",age:23}
-]
-},
+    {
+        id: "zie",
+        name: "Stelmet Falubaz Zielona Góra",
+        city: "Zielona Góra",
+        short: "ZIE",
+        logo: "🟢",
+        rank: 7,
+        riders: [
+            { name: "Leon Madsen", age: 37, type: "SENIOR" },
+            { name: "Dominik Kubera", age: 27, type: "SENIOR" },
+            { name: "Andzejs Lebedevs", age: 31, type: "SENIOR" },
+            { name: "Przemysław Pawlicki", age: 34, type: "SENIOR" },
+            { name: "Rafał Sękowski", age: 22, type: "U24" },
+            { name: "Oskar Hurysz", age: 21, type: "U21" },
+            { name: "Damian Ratajczak", age: 20, type: "U21" },
+            { name: "Wojciech Jasiński", age: 20, type: "REZERWA" }
+        ]
+    },
 
-{
-name:"KRONO-PLAST WŁÓKNIARZ Częstochowa",
-city:"Częstochowa",
-riders:[
-{name:"Jaimon Lidsey",type:"SENIOR",age:27},
-{name:"Jakub Miśkowiak",type:"SENIOR",age:25},
-{name:"Mads Hansen",type:"SENIOR",age:25},
-{name:"Rohan Tungate",type:"SENIOR",age:35},
-{name:"Sebastian Szostak",type:"U24",age:22},
-{name:"Franciszek Karczewski",type:"JUNIOR",age:20},
-{name:"Alan Ciurzyński",type:"JUNIOR",age:19},
-{name:"Kacper Pludra",type:"REZERWA",age:24}
-]
-}
+    {
+        id: "cze",
+        name: "Krono-Plast Włókniarz Częstochowa",
+        city: "Częstochowa",
+        short: "CZE",
+        logo: "⚫",
+        rank: 8,
+        riders: [
+            { name: "Rohan Tungate", age: 36, type: "SENIOR" },
+            { name: "Jaimon Lidsey", age: 26, type: "SENIOR" },
+            { name: "Jakub Miśkowiak", age: 25, type: "SENIOR" },
+            { name: "Mads Hansen", age: 24, type: "SENIOR" },
+            { name: "Sebastian Szostak", age: 21, type: "U24" },
+            { name: "Szymon Ludwiczak", age: 20, type: "U21" },
+            { name: "Bartosz Śmigielski", age: 20, type: "U21" },
+            { name: "Franciszek Karczewski", age: 19, type: "REZERWA" }
+        ]
+    }
 
 ];
 
 
-/* =====================================================
-   STAN
-   ===================================================== */
+/* =========================================================
+   STAN GRY
+   ========================================================= */
 
-let myTeam=null;
-let opponent=null;
-
-let isHome=true;
-
-let myNumbers=[];
-let opponentNumbers=[];
-
-let myLineup={};
-let aiLineup={};
-
-let homeScore=0;
-let awayScore=0;
-
-let heat=1;
-let heatFinished=false;
-
-let stats={};
-
-let nominated14=[];
-let nominated15=[];
+let selectedTeam = null;
+let selectedRiders = [];
 
 
-/* =====================================================
-   EKRANY
-   ===================================================== */
+/* =========================================================
+   FUNKCJE POMOCNICZE
+   ========================================================= */
 
-function hideAll(){
-
-[
-"clubScreen",
-"opponentScreen",
-"lineupScreen",
-"preMatchScreen",
-"matchScreen",
-"nominatedScreen",
-"resultScreen"
-
-].forEach(id=>{
-document.getElementById(id).classList.add("hidden");
-});
-
-}
-
-function show(id){
-
-hideAll();
-
-document.getElementById(id).classList.remove("hidden");
-
+function getTeamById(id) {
+    return teams.find(team => team.id === id);
 }
 
 
-/* =====================================================
-   KLUBY
-   ===================================================== */
+function showScreen(screenId) {
 
-function renderTeams(){
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
 
-const box=document.getElementById("teamList");
+    const target = document.getElementById(screenId);
 
-box.innerHTML="";
+    if (target) {
+        target.classList.add("active");
+    }
 
-teams.forEach((team,i)=>{
-
-const div=document.createElement("div");
-
-div.className="team";
-
-div.innerHTML=`
-
-<strong>${team.name}</strong>
-
-<div class="small">
-${team.city}
-</div>
-
-<button onclick="chooseTeam(${i})">
-Wybierz
-</button>
-
-`;
-
-box.appendChild(div);
-
-});
-
-}
-
-function chooseTeam(i){
-
-myTeam=teams[i];
-
-document.getElementById("myTeamTitle").textContent=
-myTeam.name;
-
-const box=document.getElementById("opponentList");
-
-box.innerHTML="";
-
-teams.forEach((team,index)=>{
-
-if(team===myTeam)return;
-
-const div=document.createElement("div");
-
-div.className="team";
-
-div.innerHTML=`
-
-<strong>${team.name}</strong>
-
-<div class="small">
-${team.city}
-</div>
-
-<button onclick="chooseOpponent(${index},true)">
-🏠 Zagraj u siebie
-</button>
-
-<button class="secondary"
-onclick="chooseOpponent(${index},false)">
-✈️ Zagraj na wyjeździe
-</button>
-
-`;
-
-box.appendChild(div);
-
-});
-
-show("opponentScreen");
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* =====================================================
-   WYBÓR PRZECIWNIKA
-   ===================================================== */
+/* =========================================================
+   RENDER — KLUBY
+   ========================================================= */
 
-function chooseOpponent(i,home){
+function renderTeams() {
 
-opponent=teams[i];
+    const container = document.getElementById("teamList");
 
-isHome=home;
+    if (!container) {
+        return;
+    }
 
-myNumbers=isHome
-?[9,10,11,12,13,14,15,16]
-:[1,2,3,4,5,6,7,8];
+    container.innerHTML = "";
 
-opponentNumbers=isHome
-?[1,2,3,4,5,6,7,8]
-:[9,10,11,12,13,14,15,16];
+    teams.forEach(team => {
 
-createLineup();
+        const card = document.createElement("button");
 
-document.getElementById("lineupTitle").textContent=
-isHome
-?"Wybierz 8 zawodników — numery 9–16"
-:"Wybierz 8 zawodników — numery 1–8";
+        card.type = "button";
+        card.className = "team-card";
 
-show("lineupScreen");
+        card.innerHTML = `
+            <div class="team-top">
+                <div class="team-logo">${team.logo}</div>
 
+                <div>
+                    <div class="team-name">${team.name}</div>
+                    <div class="team-city">${team.city}</div>
+                </div>
+            </div>
+
+            <div class="team-info">
+                <span>Pozycja 2026</span>
+                <span class="team-rank">${team.rank}. miejsce</span>
+            </div>
+        `;
+
+        card.addEventListener("click", function() {
+            selectTeam(team.id);
+        });
+
+        container.appendChild(card);
+    });
 }
 
 
-/* =====================================================
-   WYBÓR SKŁADU
-   ===================================================== */
+/* =========================================================
+   WYBÓR KLUBU
+   ========================================================= */
 
-function createLineup(){
+function selectTeam(teamId) {
 
-const box=document.getElementById("lineup");
+    const team = getTeamById(teamId);
 
-box.innerHTML="";
+    if (!team) {
+        return;
+    }
 
-myNumbers.forEach(number=>{
+    selectedTeam = team;
+    selectedRiders = [];
 
-let allowed="";
+    renderSquad();
 
-if([6,7,14,15].includes(number))
-allowed="JUNIOR";
-
-else if([8,16].includes(number))
-allowed="REZERWA";
-
-else
-allowed="NORMALNY";
-
-const options=myTeam.riders.filter(r=>{
-
-if(allowed==="JUNIOR")
-return r.type==="JUNIOR";
-
-if(allowed==="REZERWA")
-return r.type==="REZERWA";
-
-return r.type!=="JUNIOR" &&
-r.type!=="REZERWA";
-
-});
-
-const div=document.createElement("div");
-
-div.className="line";
-
-div.innerHTML=`
-
-<span class="num">
-${number}
-</span>
-
-<select id="slot${number}"
-onchange="preventDuplicateSelections()">
-
-<option value="">
-Wybierz zawodnika
-</option>
-
-${options.map(r=>`
-
-<option value="${r.name}">
-${r.name} — ${r.age} lat — ${r.type}
-</option>
-
-`).join("")}
-
-</select>
-
-`;
-
-box.appendChild(div);
-
-});
-
+    showScreen("screenSquad");
 }
 
 
-/* =====================================================
-   BLOKOWANIE DUPLIKATÓW
-   ===================================================== */
+/* =========================================================
+   EKRAN SKŁADU
+   ========================================================= */
 
-function preventDuplicateSelections(){
+function renderSquad() {
 
-const selects=
-myNumbers.map(n=>
-document.getElementById("slot"+n)
-);
+    if (!selectedTeam) {
+        return;
+    }
 
-const used=new Set();
+    const heading = document.getElementById("clubHeading");
 
-selects.forEach(select=>{
+    heading.innerHTML = `
+        <div class="club-heading">
+            <div class="club-big-logo">${selectedTeam.logo}</div>
 
-const value=select.value;
+            <div>
+                <h2>${selectedTeam.name}</h2>
+                <p>${selectedTeam.city} · ${selectedTeam.short}</p>
+            </div>
+        </div>
+    `;
 
-if(!value)return;
-
-if(used.has(value)){
-
-alert(
-"Ten zawodnik został już wybrany. Każdy zawodnik może wystąpić tylko raz."
-);
-
-select.value="";
-
-}else{
-
-used.add(value);
-
-}
-
-});
-
+    renderSelectedCount();
+    renderSlots();
+    renderRiders();
 }
 
 
-/* =====================================================
-   WALIDACJA
-   ===================================================== */
+/* =========================================================
+   LICZNIK
+   ========================================================= */
 
-function validateLineup(){
+function renderSelectedCount() {
 
-myLineup={};
+    const element = document.getElementById("selectedCount");
 
-const used=new Set();
+    if (!element) {
+        return;
+    }
 
-for(const number of myNumbers){
+    element.innerHTML = `
+        Wybrano:
+        <strong>${selectedRiders.length} / 8</strong>
+    `;
 
-const value=
-document.getElementById("slot"+number).value;
+    const button = document.getElementById("continueButton");
 
-if(!value){
-
-showLineupError(
-"Musisz obsadzić wszystkie 8 pozycji."
-);
-
-return;
-
-}
-
-if(used.has(value)){
-
-showLineupError(
-"Ten sam zawodnik nie może być wybrany dwa razy."
-);
-
-return;
-
-}
-
-used.add(value);
-
-const rider=
-myTeam.riders.find(r=>r.name===value);
-
-myLineup[number]=rider;
-
+    if (button) {
+        button.disabled = selectedRiders.length !== 8;
+    }
 }
 
 
-/* kontrola juniorów */
+/* =========================================================
+   SLOTY
+   ========================================================= */
 
-const juniorNumbers=
-isHome
-?[14,15]
-:[6,7];
+function renderSlots() {
 
-for(const n of juniorNumbers){
+    const container = document.getElementById("slotPreview");
 
-if(!myLineup[n] ||
-myLineup[n].type!=="JUNIOR"){
+    if (!container) {
+        return;
+    }
 
-showLineupError(
-`Numer ${n} musi obsadzić junior U21.`
-);
+    container.innerHTML = "";
 
-return;
+    for (let i = 0; i < 8; i++) {
 
-}
+        const rider = selectedRiders[i];
 
-}
+        const slot = document.createElement("div");
+        slot.className = "slot";
 
+        slot.innerHTML = `
+            <div class="slot-number">
+                Miejsce ${i + 1}
+            </div>
 
-/* kontrola rezerwy */
+            <div class="slot-name">
+                ${rider ? rider.name : "— wolne —"}
+            </div>
+        `;
 
-const reserveNumber=
-isHome?16:8;
-
-if(!myLineup[reserveNumber] ||
-myLineup[reserveNumber].type!=="REZERWA"){
-
-showLineupError(
-`Numer ${reserveNumber} musi być obsadzony rezerwowym.`
-);
-
-return;
-
-}
-
-createAI();
-
-renderPreMatch();
-
-show("preMatchScreen");
-
-}
-
-function showLineupError(text){
-
-document.getElementById("lineupMessage").innerHTML=`
-
-<div class="notice bad">
-${text}
-</div>
-
-`;
-
+        container.appendChild(slot);
+    }
 }
 
 
-/* =====================================================
-   AI — DOKŁADNIE 8 RÓŻNYCH ZAWODNIKÓW
-   ===================================================== */
+/* =========================================================
+   LISTA ZAWODNIKÓW
+   ========================================================= */
 
-function createAI(){
+function renderRiders() {
 
-aiLineup={};
+    const container = document.getElementById("riderList");
 
-const seniors=
-opponent.riders.filter(r=>
-r.type==="SENIOR" ||
-r.type==="U24"
-);
+    if (!container || !selectedTeam) {
+        return;
+    }
 
-const juniors=
-opponent.riders.filter(r=>
-r.type==="JUNIOR"
-);
+    container.innerHTML = "";
 
-const reserve=
-opponent.riders.find(r=>
-r.type==="REZERWA"
-);
+    selectedTeam.riders.forEach((rider, index) => {
 
-const aiSeniorNumbers=
-opponentNumbers.filter(n=>
-![6,7,8,14,15,16].includes(n)
-);
+        const isSelected = selectedRiders.some(
+            selected => selected.name === rider.name
+        );
 
-const aiJuniorNumbers=
-opponentNumbers.filter(n=>
-[6,7,14,15].includes(n)
-);
+        const card = document.createElement("div");
 
-const aiReserveNumber=
-opponentNumbers.includes(8)
-?8
-:16;
+        card.className = "rider-card";
 
+        if (isSelected) {
+            card.classList.add("selected");
+        }
 
-/* senior / U24 */
+        if (!isSelected && selectedRiders.length >= 8) {
+            card.classList.add("disabled");
+        }
 
-seniors.forEach((r,index)=>{
+        card.innerHTML = `
+            <div class="rider-number">
+                ${index + 1}
+            </div>
 
-if(index<aiSeniorNumbers.length){
+            <div>
+                <div class="rider-name">
+                    ${rider.name}
+                </div>
 
-aiLineup[
-aiSeniorNumbers[index]
-]=r;
+                <div class="rider-meta">
+                    Wiek: ${rider.age} lat<br>
+                    Status: ${rider.type}
+                </div>
+            </div>
+        `;
 
-}
+        card.addEventListener("click", function() {
+            toggleRider(rider);
+        });
 
-});
-
-
-/* juniorzy */
-
-juniors.forEach((r,index)=>{
-
-if(index<aiJuniorNumbers.length){
-
-aiLineup[
-aiJuniorNumbers[index]
-]=r;
-
-}
-
-});
-
-
-/* rezerwa */
-
-if(reserve){
-
-aiLineup[aiReserveNumber]=reserve;
-
-}
-
+        container.appendChild(card);
+    });
 }
 
 
-/* =====================================================
-   PODGLĄD SKŁADÓW
-   ===================================================== */
+/* =========================================================
+   WYBÓR ZAWODNIKA
+   ========================================================= */
 
-function lineupHTML(lineup,numbers){
+function toggleRider(rider) {
 
-let html="";
+    const existingIndex = selectedRiders.findIndex(
+        selected => selected.name === rider.name
+    );
 
-numbers.forEach(n=>{
+    if (existingIndex !== -1) {
 
-const r=lineup[n];
+        selectedRiders.splice(existingIndex, 1);
 
-if(!r)return;
+    } else {
 
-html+=`
+        if (selectedRiders.length >= 8) {
+            showMessage(
+                "Masz już wybranych 8 zawodników.",
+                "error"
+            );
+            return;
+        }
 
-<div class="line">
+        selectedRiders.push(rider);
+    }
 
-<span class="num">
-${n}
-</span>
-
-<span class="rider">
-
-${r.name}
-
-<div class="type">
-${r.age} lat · ${r.type}
-</div>
-
-</span>
-
-</div>
-
-`;
-
-});
-
-return html;
-
-}
-
-function renderPreMatch(){
-
-document.getElementById("myPreName").textContent=
-myTeam.name+
-(isHome?" — GOSPODARZ":" — GOŚĆ");
-
-document.getElementById("aiPreName").textContent=
-opponent.name+
-(isHome?" — GOŚĆ":" — GOSPODARZ");
-
-document.getElementById("myPreLineup").innerHTML=
-lineupHTML(myLineup,myNumbers);
-
-document.getElementById("aiPreLineup").innerHTML=
-lineupHTML(aiLineup,opponentNumbers);
-
+    renderSelectedCount();
+    renderSlots();
+    renderRiders();
 }
 
 
-/* =====================================================
-   START MECZU
-   ===================================================== */
+/* =========================================================
+   KOMUNIKAT
+   ========================================================= */
 
-function startMatch(){
+function showMessage(message, type = "info") {
 
-homeScore=0;
-awayScore=0;
+    const container = document.getElementById("selectionMessage");
 
-heat=1;
-heatFinished=false;
+    if (!container) {
+        return;
+    }
 
-stats={};
+    container.innerHTML = `
+        <div class="notice ${type}">
+            ${message}
+        </div>
+    `;
 
-Object.values(myLineup).forEach(r=>{
-stats[r.name]=0;
-});
+    setTimeout(() => {
 
-document.getElementById("matchHome").textContent=
-isHome?myTeam.city:opponent.city;
+        if (container) {
+            container.innerHTML = "";
+        }
 
-document.getElementById("matchAway").textContent=
-isHome?opponent.city:myTeam.city;
-
-document.getElementById("homeShort").textContent=
-isHome?myTeam.city:opponent.city;
-
-document.getElementById("awayShort").textContent=
-isHome?opponent.city:myTeam.city;
-
-updateScore();
-
-show("matchScreen");
-
-prepareHeat();
-
+    }, 2500);
 }
 
 
-/* =====================================================
-   PRZYGOTOWANIE BIEGU
-   ===================================================== */
+/* =========================================================
+   POTWIERDZENIE SKŁADU
+   ========================================================= */
 
-function prepareHeat(){
+function confirmSquad() {
 
-heatFinished=false;
+    if (!selectedTeam) {
+        return;
+    }
 
-document.getElementById("heatNo").textContent=heat;
+    if (selectedRiders.length !== 8) {
 
-document.getElementById("heatTitle").textContent=
-`Bieg ${heat}`;
+        showMessage(
+            "Musisz wybrać dokładnie 8 zawodników.",
+            "error"
+        );
 
-document.getElementById("heatButton").classList.remove("hidden");
+        return;
+    }
 
-document.getElementById("nextHeatButton").classList.add("hidden");
+    renderReadyScreen();
 
-const riders=getHeatRiders();
-
-let html="";
-
-riders.forEach((r,i)=>{
-
-html+=`
-
-<div class="heat">
-
-<strong>
-${i+1}. ${r.rider.name}
-</strong>
-
-<div class="small">
-${r.home ? "Gospodarz":"Gość"}
-· nr ${r.number}
-· ${r.rider.age} lat
-· ${r.rider.type}
-</div>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("heatInfo").innerHTML=html;
-
+    showScreen("screenReady");
 }
 
 
-/* =====================================================
-   OBSADA BIEGÓW
-   ===================================================== */
+/* =========================================================
+   EKRAN POTWIERDZENIA
+   ========================================================= */
 
-function getHeatRiders(){
+function renderReadyScreen() {
+
+    const heading = document.getElementById("readyHeading");
+
+    heading.innerHTML = `
+        <div class="club-heading">
+            <div class="club-big-logo">${selectedTeam.logo}</div>
+
+            <div>
+                <h2>${selectedTeam.name}</h2>
+                <p>Skład zapisany</p>
+            </div>
+        </div>
+    `;
+
+    const summary = document.getElementById("squadSummary");
+
+    summary.innerHTML = `
+        <div class="summary-card">
+            <h3>Twój skład — 8 zawodników</h3>
+
+            ${selectedRiders.map((rider, index) => `
+                <div class="summary-rider">
+                    <span>
+                        <strong>${index + 1}.</strong>
+                        ${rider.name}
+                    </span>
+
+                    <span class="small">
+                        ${rider.age} lat · ${rider.type}
+                    </span>
+                </div>
+            `).join("")}
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   DEMO MECZU
+   ========================================================= */
+
+function startDemoMatch() {
+
+    if (!selectedTeam) {
+        return;
+    }
+
+    const opponents = teams.filter(
+        team => team.id !== selectedTeam.id
+    );
+
+    const opponent =
+        opponents[Math.floor(Math.random() * opponents.length)];
+
+    document.getElementById("matchHeading").innerHTML = `
+        <div class="club-heading">
+            <div class="club-big-logo">
+                🏁
+            </div>
+
+            <div>
+                <h2>
+                    ${selectedTeam.short}
+                    vs
+                    ${opponent.short}
+                </h2>
+
+                <p>
+                    Demonstracja silnika meczu · Beta 3.0.0
+                </p>
+            </div>
+        </div>
+    `;
+
+    document.getElementById("homeTeamTitle").textContent =
+        selectedTeam.name;
+
+    document.getElementById("homeDemoRiders").innerHTML =
+        selectedRiders.map((rider, index) => `
+            <div class="summary-rider">
+                <span>
+                    ${index + 1}. ${rider.name}
+                </span>
+
+                <span class="small">
+                    ${rider.age} l.
+                </span>
+            </div>
+        `).join("");
+
+    const aiRiders = chooseAIRiders(opponent);
+
+    document.getElementById("awayDemoRiders").innerHTML =
+        aiRiders.map((rider, index) => `
+            <div class="summary-rider">
+                <span>
+                    ${index + 1}. ${rider.name}
+                </span>
+
+                <span class="small">
+                    ${rider.age} l.
+                </span>
+            </div>
+        `).join("");
+
+    showScreen("screenMatch");
+}
+
+
+/* =========================================================
+   AI — WYBÓR 8 ZAWODNIKÓW
+   ========================================================= */
+
+function chooseAIRiders(team) {
+
+    const riders = [...team.riders];
+
+    /*
+       Prosty algorytm Beta 3.0.0:
+       najpierw seniorzy,
+       następnie U24,
+       następnie juniorzy/rezerwa.
+
+       W kolejnej wersji zostanie zastąpiony prawdziwym
+       systemem tworzenia składu meczowego.
+    */
+
+    const priority = {
+        "SENIOR": 1,
+        "U24": 2,
+        "U21": 3,
+        "REZERWA": 4
+    };
+
+    riders.sort((a, b) => {
+
+        if (priority[a.type] !== priority[b.type]) {
+            return priority[a.type] - priority[b.type];
+        }
+
+        return b.age - a.age;
+    });
+
+    return riders.slice(0, 8);
+}
+
+
+/* =========================================================
+   NAWIGACJA
+   ========================================================= */
+
+function backToClubs() {
+
+    selectedTeam = null;
+    selectedRiders = [];
+
+    showScreen("screenClub");
+}
+
+
+function backToSquad() {
+
+    if (!selectedTeam) {
+        showScreen("screenClub");
+        return;
+    }
+
+    renderSquad();
+
+    showScreen("screenSquad");
+}
+
+
+function backToReady() {
+
+    renderReadyScreen();
+
+    showScreen("screenReady");
+}
+
+
+/* =========================================================
+   START APLIKACJI
+   ========================================================= */
+
+function bootGame() {
+
+    try {
+
+        renderTeams();
+
+    } catch (error) {
+
+        console.error(
+            "Błąd podczas uruchamiania gry:",
+            error
+        );
+
+        const list = document.getElementById("teamList");
+
+        if (list) {
+
+            list.innerHTML = `
+                <div class="notice error">
+                    <strong>Błąd uruchamiania gry.</strong><br>
+                    Szczegóły zostały zapisane w konsoli przeglądarki.
+                </div>
+            `;
+        }
+    }
+}
+
 
 /*
- Tymczasowa matryca demonstracyjna.
- Docelowo podmienimy ją na oficjalną
- matrycę PGE Ekstraligi 2026.
- */
+   Skrypt znajduje się na końcu BODY,
+   więc DOM jest już dostępny.
+*/
+bootGame();
 
-const matrix={
-
-1:[1,9,2,10],
-2:[6,14,7,15],
-3:[3,11,4,12],
-4:[5,13,1,9],
-5:[3,9,5,11],
-6:[1,12,7,14],
-7:[2,10,6,16],
-8:[4,11,8,13],
-9:[1,4,9,12],
-10:[2,5,10,13],
-11:[3,7,11,15],
-12:[4,6,14,16],
-13:[1,5,9,13]
-};
-
-if(heat<=13){
-
-return matrix[heat].map(number=>{
-
-const isMyNumber=
-myLineup[number]!==undefined;
-
-const lineup=
-isMyNumber
-?myLineup
-:aiLineup;
-
-const teamIsHome=
-isMyNumber
-?isHome
-:!isHome;
-
-return{
-
-rider:lineup[number],
-number:number,
-home:teamIsHome
-
-};
-
-});
-
-}
-
-
-/* Bieg 14 */
-
-if(heat===14){
-
-return [
-
-{
-rider:myLineup[nominated14[0]],
-number:nominated14[0],
-home:isHome
-},
-
-{
-rider:myLineup[nominated14[1]],
-number:nominated14[1],
-home:isHome
-},
-
-{
-rider:aiLineup[isHome?14:6],
-number:isHome?14:6,
-home:!isHome
-},
-
-{
-rider:aiLineup[isHome?15:7],
-number:isHome?15:7,
-home:!isHome
-}
-
-];
-
-}
-
-
-/* Bieg 15 */
-
-return [
-
-{
-rider:myLineup[nominated15[0]],
-number:nominated15[0],
-home:isHome
-},
-
-{
-rider:myLineup[nominated15[1]],
-number:nominated15[1],
-home:isHome
-},
-
-{
-rider:aiLineup[isHome?14:6],
-number:isHome?14:6,
-home:!isHome
-},
-
-{
-rider:aiLineup[isHome?15:7],
-number:isHome?15:7,
-home:!isHome
-}
-
-];
-
-}
-
-
-/* =====================================================
-   SYMULACJA BIEGU
-   ===================================================== */
-
-function runHeat(){
-
-if(heatFinished)return;
-
-const riders=getHeatRiders();
-
-const shuffled=
-[...riders].sort(
-()=>Math.random()-.5
-);
-
-const points=[3,2,1,0];
-
-let html="";
-
-shuffled.forEach((r,i)=>{
-
-const p=points[i];
-
-if(r.home){
-
-homeScore+=p;
-
-if(myLineup[r.number]){
-
-stats[r.rider.name]=
-(stats[r.rider.name]||0)+p;
-
-}
-
-}else{
-
-awayScore+=p;
-
-}
-
-html+=`
-
-<div class="result">
-
-<strong>
-${i+1}. ${r.rider.name}
-</strong>
-
-<span class="${
-p===3
-?"good"
-:p===0
-?"bad"
-:""
-}">
-
-${p} pkt
-
-</span>
-
-</div>
-
-`;
-
-});
-
-
-/* pokazujemy wynik biegu */
-
-document.getElementById("heatInfo").innerHTML=`
-
-<div class="match-result">
-
-<h3>🏁 Wyniki biegu ${heat}</h3>
-
-${html}
-
-</div>
-
-`;
-
-updateScore();
-
-heatFinished=true;
-
-document.getElementById("heatButton")
-.classList.add("hidden");
-
-document.getElementById("nextHeatButton")
-.classList.remove("hidden");
-
-}
-
-
-/* =====================================================
-   KOLEJNY BIEG
-   ===================================================== */
-
-function nextHeat(){
-
-if(!heatFinished)return;
-
-if(heat===13){
-
-showNominated();
-
-return;
-
-}
-
-if(heat===15){
-
-finishMatch();
-
-return;
-
-}
-
-heat++;
-
-prepareHeat();
-
-}
-
-
-/* =====================================================
-   NOMINOWANE
-   ===================================================== */
-
-function showNominated(){
-
-let text="";
-
-if(homeScore<awayScore){
-
-text=
-`Gospodarze przegrywają ${homeScore}:${awayScore}.`;
-
-}else if(homeScore===awayScore){
-
-text=
-`Po 13. biegu jest remis ${homeScore}:${awayScore}.`;
-
-}else{
-
-text=
-`Gospodarze prowadzą ${homeScore}:${awayScore}.`;
-
-}
-
-document.getElementById("nominatedNotice").textContent=
-text+
-" Wybierz swoich zawodników do biegów nominowanych.";
-
-const available=
-Object.entries(myLineup)
-.filter(([n,r])=>
-r.type!=="REZERWA"
-)
-.map(([n,r])=>({
-number:Number(n),
-rider:r
-}));
-
-function makeSelect(id){
-
-return `
-
-<select id="${id}a">
-
-<option value="">
-Pierwszy zawodnik
-</option>
-
-${available.map(x=>
-`
-<option value="${x.number}">
-${x.rider.name} — ${x.rider.age} lat
-</option>
-`
-).join("")}
-
-</select>
-
-<select id="${id}b">
-
-<option value="">
-Drugi zawodnik
-</option>
-
-${available.map(x=>
-`
-<option value="${x.number}">
-${x.rider.name} — ${x.rider.age} lat
-</option>
-`
-).join("")}
-
-</select>
-
-`;
-
-}
-
-document.getElementById("heat14Select").innerHTML=
-makeSelect("h14");
-
-document.getElementById("heat15Select").innerHTML=
-makeSelect("h15");
-
-show("nominatedScreen");
-
-}
-
-
-/* =====================================================
-   ZATWIERDZENIE NOMINOWANYCH
-   ===================================================== */
-
-function confirmNominated(){
-
-const h14a=
-Number(document.getElementById("h14a").value);
-
-const h14b=
-Number(document.getElementById("h14b").value);
-
-const h15a=
-Number(document.getElementById("h15a").value);
-
-const h15b=
-Number(document.getElementById("h15b").value);
-
-if(!h14a||!h14b||!h15a||!h15b){
-
-alert("Obsadź oba biegi.");
-
-return;
-
-}
-
-if(h14a===h14b){
-
-alert(
-"Bieg 14: ten sam zawodnik nie może wystąpić dwa razy."
-);
-
-return;
-
-}
-
-if(h15a===h15b){
-
-alert(
-"Bieg 15: ten sam zawodnik nie może wystąpić dwa razy."
-);
-
-return;
-
-}
-
-nominated14=[
-h14a,
-h14b
-];
-
-nominated15=[
-h15a,
-h15b
-];
-
-heat=14;
-
-show("matchScreen");
-
-prepareHeat();
-
-}
-
-
-/* =====================================================
-   WYNIK
-   ===================================================== */
-
-function updateScore(){
-
-document.getElementById("homeScore").textContent=
-homeScore;
-
-document.getElementById("awayScore").textContent=
-awayScore;
-
-document.getElementById("homeScore2").textContent=
-homeScore;
-
-document.getElementById("awayScore2").textContent=
-awayScore;
-
-}
-
-
-function finishMatch(){
-
-document.getElementById("finalHome").textContent=
-homeScore;
-
-document.getElementById("finalAway").textContent=
-awayScore;
-
-let message="";
-
-if(homeScore>awayScore){
-
-message="WYGRANA!";
-
-}else if(homeScore<awayScore){
-
-message="PORAŻKA.";
-
-}else{
-
-message="REMIS.";
-
-}
-
-document.getElementById("finalMessage").textContent=
-message;
-
-const statsBox=
-document.getElementById("finalStats");
-
-statsBox.innerHTML="";
-
-Object.entries(stats)
-.sort((a,b)=>b[1]-a[1])
-.forEach(([name,points])=>{
-
-statsBox.innerHTML+=`
-
-<div class="line">
-
-<span>${name}</span>
-
-<strong>${points} pkt</strong>
-
-</div>
-
-`;
-
-});
-
-show("resultScreen");
-
-}
-
-
-/* =====================================================
-   POWROTY
-   ===================================================== */
-
-function backToOpponents(){
-
-chooseTeam(
-teams.indexOf(myTeam)
-);
-
-}
-
-function showClubs(){
-
-show("clubScreen");
-
-}
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-document.addEventListener("DOMContentLoaded", function(){
-    renderTeams();
-});
 </script>
 
 </body>
