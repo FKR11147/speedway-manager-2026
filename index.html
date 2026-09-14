@@ -5,19 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 
-<title>SMFK — Speedway Manager — Beta 3.1.1</title>
+<title>SMFK — Speedway Manager — Beta 3.1.2</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   BETA 3.1.1 — WYGLĄD
-   Mechanika gry pozostaje bez zmian.
-   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -46,12 +41,47 @@ button {
   min-height: 100vh;
   margin: 0 auto;
   padding: 18px;
-  background: #000;
+  background: transparent;
+  isolation: isolate;
 }
 
+/* =========================================================
+   WSPÓLNE TŁO CAŁEJ GRY
+   ========================================================= */
+
+.app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+
+  background-image:
+    url("https://commons.wikimedia.org/wiki/Special:Redirect/file/Bartosz_Zmarzlik_(2016).jpg");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.03);
+}
+
+.app::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.50) 35%,
+      rgba(0,0,0,0.80) 100%
+    );
+}
 
 /* =========================================================
-   GÓRNE LOGO GRY
+   LOGO SMFK
    ========================================================= */
 
 .header {
@@ -64,30 +94,33 @@ button {
 
 .header h1 {
   margin: 0;
-  font-family: "Rubik Dirt", cursive;
-  font-size: 48px;
-  line-height: 1;
+
+  font-family: "Permanent Marker", cursive;
+  font-size: 56px;
+  line-height: 0.95;
   font-weight: 400;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
+
   color: #ffffff;
 
-  transform: rotate(-2deg);
+  transform:
+    rotate(-3deg)
+    skewX(-4deg);
 
   text-shadow:
-    3px 3px 0 rgba(0,0,0,0.85),
-    -2px 1px 0 rgba(0,0,0,0.65),
-    0 5px 18px rgba(0,0,0,0.75);
+    4px 4px 0 #000,
+    7px 7px 0 rgba(0,0,0,0.55),
+    0 8px 22px rgba(0,0,0,0.85);
 }
 
 .version {
   margin-top: 10px;
-  color: rgba(255,255,255,0.68);
+  color: rgba(255,255,255,0.70);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-
 
 /* =========================================================
    EKRANY
@@ -101,9 +134,8 @@ button {
   display: block;
 }
 
-
 /* =========================================================
-   LOBBY / WYBÓR KLUBU
+   LOBBY / KLUBY
    ========================================================= */
 
 #clubScreen {
@@ -114,43 +146,7 @@ button {
   margin-top: -4px;
   padding: 28px 18px 40px;
   overflow: hidden;
-  background: #000;
-}
-
-#clubScreen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.48),
-      rgba(0,0,0,0.48)
-    ),
-    url("https://media.speedwayekstraliga.pl/users/97_big.png?fmtjwtp39");
-
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
-  opacity: 0.72;
-  pointer-events: none;
-}
-
-#clubScreen::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.48) 0%,
-      rgba(0,0,0,0.28) 35%,
-      rgba(0,0,0,0.72) 100%
-    );
-
-  pointer-events: none;
+  background: transparent;
 }
 
 #clubScreen > * {
@@ -158,28 +154,23 @@ button {
   z-index: 2;
 }
 
-
 /* =========================================================
    KARTY
    ========================================================= */
 
 .card {
-  background: rgba(17, 17, 17, 0.90);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(12,12,12,0.86);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 16px;
+
   box-shadow:
-    0 8px 28px rgba(0,0,0,0.45);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
+    0 8px 28px rgba(0,0,0,0.50);
 
-#clubScreen .card {
-  background: rgba(10,10,10,0.76);
-  border-color: rgba(255,255,255,0.10);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
-
 
 /* =========================================================
    NAGŁÓWKI
@@ -200,9 +191,8 @@ h3 {
   font-size: 18px;
 }
 
-
 /* =========================================================
-   SIATKA KLUBÓW
+   KLUBY
    ========================================================= */
 
 .club-grid {
@@ -211,14 +201,9 @@ h3 {
   gap: 12px;
 }
 
-
-/* =========================================================
-   PRZYCISK KLUBU
-   ========================================================= */
-
 .club-button {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.13);
   background: rgba(20,20,20,0.84);
   color: white;
   border-radius: 14px;
@@ -232,22 +217,17 @@ h3 {
     border-color 0.15s;
 
   box-shadow:
-    0 5px 18px rgba(0,0,0,0.35);
+    0 5px 18px rgba(0,0,0,0.38);
 }
 
 .club-button:hover {
   background: rgba(35,35,35,0.92);
-  border-color: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.22);
 }
 
 .club-button:active {
   transform: scale(0.98);
 }
-
-
-/* =========================================================
-   LOGO KLUBU
-   ========================================================= */
 
 .club-title-row {
   display: flex;
@@ -279,7 +259,6 @@ h3 {
   color: #e5e7eb;
   margin-top: 8px;
 }
-
 
 /* =========================================================
    PRZYCISKI
@@ -313,9 +292,8 @@ h3 {
   margin-bottom: 14px;
 }
 
-
 /* =========================================================
-   EKRAN MECZU — TŁO Z BARTOSZEM ZMARZLIKIEM
+   EKRAN MECZU
    ========================================================= */
 
 #matchScreen {
@@ -326,50 +304,13 @@ h3 {
   margin-top: -4px;
   padding: 28px 18px 40px;
   overflow: hidden;
-  background: #000;
-}
-
-#matchScreen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ),
-    url("https://media.speedwayekstraliga.pl/users/97_big.png?fmtjwtp39");
-
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
-  opacity: 0.72;
-  pointer-events: none;
-}
-
-#matchScreen::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.48) 0%,
-      rgba(0,0,0,0.30) 40%,
-      rgba(0,0,0,0.82) 100%
-    );
-
-  pointer-events: none;
+  background: transparent;
 }
 
 #matchScreen > * {
   position: relative;
   z-index: 2;
 }
-
 
 /* =========================================================
    MECZ
@@ -387,7 +328,7 @@ h3 {
   background: rgba(17,17,17,0.88);
   border-radius: 12px;
   padding: 12px;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .team-logo {
@@ -416,9 +357,8 @@ h3 {
 
 .vs {
   font-weight: 900;
-  color: #9ca3af;
+  color: #d1d5db;
 }
-
 
 /* =========================================================
    SKŁAD
@@ -430,7 +370,7 @@ h3 {
 }
 
 .slot {
-  background: #111;
+  background: rgba(17,17,17,0.92);
   border: 1px solid #374151;
   border-radius: 12px;
   padding: 12px;
@@ -486,8 +426,9 @@ h3 {
 
 .badges {
   display: flex;
-  gap: 5px;
+  gap: 7px;
   flex-wrap: wrap;
+  align-items: center;
   margin-top: 6px;
 }
 
@@ -512,6 +453,33 @@ h3 {
   background: #9a3412;
 }
 
+/* =========================================================
+   FLAGI
+   ========================================================= */
+
+.flag {
+  width: 28px;
+  height: 20px;
+
+  object-fit: cover;
+
+  display: inline-block;
+  vertical-align: middle;
+
+  border: 1px solid #000;
+  border-radius: 5px;
+
+  background: #fff;
+
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.55);
+}
+
+.rider-country {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+}
 
 /* =========================================================
    SKŁAD MECZOWY
@@ -548,7 +516,6 @@ h3 {
   margin-top: 3px;
 }
 
-
 /* =========================================================
    BIEGI
    ========================================================= */
@@ -575,7 +542,7 @@ h3 {
   align-items: center;
   padding: 10px;
   border-radius: 10px;
-  background: #111;
+  background: rgba(17,17,17,0.92);
   margin-bottom: 8px;
   text-align: left;
 }
@@ -602,7 +569,7 @@ h3 {
 .result-box {
   text-align: center;
   padding: 16px;
-  background: #111;
+  background: rgba(17,17,17,0.92);
   border-radius: 12px;
   margin-top: 14px;
 }
@@ -634,7 +601,6 @@ h3 {
   margin-bottom: 14px;
 }
 
-
 /* =========================================================
    RESPONSYWNOŚĆ
    ========================================================= */
@@ -645,11 +611,7 @@ h3 {
     grid-template-columns: 1fr 1fr;
   }
 
-  #clubScreen {
-    margin-left: -18px;
-    margin-right: -18px;
-  }
-
+  #clubScreen,
   #matchScreen {
     margin-left: -18px;
     margin-right: -18px;
@@ -669,15 +631,14 @@ h3 {
     <h1>SMFK</h1>
 
     <div class="version">
-      BETA 3.1.1
+      BETA 3.1.2
     </div>
 
   </div>
 
-
-  <!-- =========================
-       EKRAN WYBORU KLUBU
-       ========================= -->
+  <!-- =====================================================
+       WYBÓR KLUBU
+       ===================================================== -->
 
   <section id="clubScreen" class="screen active">
 
@@ -695,10 +656,9 @@ h3 {
 
   </section>
 
-
-  <!-- =========================
-       EKRAN SKŁADU
-       ========================= -->
+  <!-- =====================================================
+       WYBÓR SKŁADU
+       ===================================================== -->
 
   <section id="lineupScreen" class="screen">
 
@@ -711,21 +671,36 @@ h3 {
       <div class="match-header">
 
         <div class="team-box">
-          <div id="homeShort" class="team-short">---</div>
-          <div id="homeName" class="team-full">---</div>
+
+          <div id="homeShort" class="team-short">
+            ---
+          </div>
+
+          <div id="homeName" class="team-full">
+            ---
+          </div>
+
         </div>
 
-        <div class="vs">VS</div>
+        <div class="vs">
+          VS
+        </div>
 
         <div class="team-box">
-          <div id="awayShort" class="team-short">---</div>
-          <div id="awayName" class="team-full">---</div>
+
+          <div id="awayShort" class="team-short">
+            ---
+          </div>
+
+          <div id="awayName" class="team-full">
+            ---
+          </div>
+
         </div>
 
       </div>
 
     </div>
-
 
     <div class="card">
 
@@ -740,7 +715,6 @@ h3 {
 
     </div>
 
-
     <div class="card">
 
       <h3>Dostępni zawodnicy</h3>
@@ -749,11 +723,11 @@ h3 {
 
     </div>
 
-
-    <button id="startMatchButton"
-            class="primary-button"
-            onclick="startMatch()"
-            disabled>
+    <button
+      id="startMatchButton"
+      class="primary-button"
+      onclick="startMatch()"
+      disabled>
 
       Rozpocznij mecz
 
@@ -761,10 +735,9 @@ h3 {
 
   </section>
 
-
-  <!-- =========================
-       EKRAN MECZU
-       ========================= -->
+  <!-- =====================================================
+       MECZ
+       ===================================================== -->
 
   <section id="matchScreen" class="screen">
 
@@ -781,21 +754,21 @@ h3 {
             alt="Logo gospodarzy"
           >
 
-          <div id="matchHomeShort" class="match-team-short">
+          <div id="matchHomeShort"
+               class="match-team-short">
             ---
           </div>
 
-          <div id="matchHomeScore" class="team-short">
+          <div id="matchHomeScore"
+               class="team-short">
             0
           </div>
 
         </div>
 
-
         <div class="vs">
           MECZ
         </div>
-
 
         <div class="team-box">
 
@@ -806,11 +779,13 @@ h3 {
             alt="Logo gości"
           >
 
-          <div id="matchAwayShort" class="match-team-short">
+          <div id="matchAwayShort"
+               class="match-team-short">
             ---
           </div>
 
-          <div id="matchAwayScore" class="team-short">
+          <div id="matchAwayScore"
+               class="team-short">
             0
           </div>
 
@@ -820,14 +795,15 @@ h3 {
 
     </div>
 
-
     <div class="card heat-card">
 
-      <div id="heatNumber" class="heat-number">
+      <div id="heatNumber"
+           class="heat-number">
         Bieg 1 z 15
       </div>
 
-      <div id="heatTitle" class="heat-title">
+      <div id="heatTitle"
+           class="heat-title">
         Wynik biegu
       </div>
 
@@ -850,30 +826,30 @@ h3 {
 
     </div>
 
-
-    <button id="simulateButton"
-            class="primary-button"
-            onclick="simulateCurrentHeat()">
+    <button
+      id="simulateButton"
+      class="primary-button"
+      onclick="simulateCurrentHeat()">
 
       🏁 Jedź bieg
 
     </button>
 
-
-    <button id="nextHeatButton"
-            class="primary-button"
-            onclick="nextHeat()"
-            style="display:none; margin-top:10px;">
+    <button
+      id="nextHeatButton"
+      class="primary-button"
+      onclick="nextHeat()"
+      style="display:none; margin-top:10px;">
 
       Kolejny bieg ➡️
 
     </button>
 
-
-    <button id="finishMatchButton"
-            class="secondary-button"
-            onclick="finishMatch()"
-            style="display:none; margin-top:10px;">
+    <button
+      id="finishMatchButton"
+      class="secondary-button"
+      onclick="finishMatch()"
+      style="display:none; margin-top:10px;">
 
       Zakończ mecz
 
@@ -881,10 +857,9 @@ h3 {
 
   </section>
 
-
-  <!-- =========================
+  <!-- =====================================================
        KONIEC MECZU
-       ========================= -->
+       ===================================================== -->
 
   <section id="finishScreen" class="screen">
 
@@ -901,8 +876,9 @@ h3 {
            style="margin:12px 0 18px;">
       </div>
 
-      <button class="primary-button"
-              onclick="backToClubs()">
+      <button
+        class="primary-button"
+        onclick="backToClubs()">
 
         Wybierz klub ponownie
 
@@ -914,22 +890,21 @@ h3 {
 
 </div>
 
-
 <script>
 
 /* =========================================================
-   BETA 3.1.1
+   BETA 3.1.2
    MECHANIKA POZOSTAJE BEZ ZMIAN
    ========================================================= */
 
-const VERSION = "3.1.1";
+const VERSION = "3.1.2";
 
 const GAME_DATE =
   new Date("2026-09-14T12:00:00");
 
 
 /* =========================================================
-   OFICJALNE LOGA KLUBÓW
+   LOGA KLUBÓW
    ========================================================= */
 
 const LOGO_BASE =
@@ -938,8 +913,6 @@ const LOGO_BASE =
 
 /* =========================================================
    KLUBY
-   Nazwy z oficjalnej strony Speedway Ekstraligi.
-   Logotypy pozostają bez zmian.
    ========================================================= */
 
 const clubs = {
@@ -1669,8 +1642,7 @@ function calculateAge(birthDate) {
 
 /* =========================================================
    FORMAT DATY
-   Dane pozostają w systemie,
-   ale data nie jest pokazywana użytkownikowi.
+   Dane pozostają w systemie.
    ========================================================= */
 
 function formatDate(birthDate) {
@@ -1696,6 +1668,53 @@ function formatDate(birthDate) {
     date.getFullYear();
 
   return `${day}.${month}.${year}`;
+}
+
+
+/* =========================================================
+   FLAGI
+   ========================================================= */
+
+function getFlagHtml(nationality) {
+
+  if (!nationality) {
+    return "";
+  }
+
+  const code =
+    nationality.toLowerCase();
+
+  const countryNames = {
+
+    PL: "Polska",
+    GB: "Wielka Brytania",
+    DK: "Dania",
+    DE: "Niemcy",
+    AU: "Australia",
+    CZ: "Czechy",
+    SK: "Słowacja",
+    SI: "Słowenia",
+    UA: "Ukraina",
+    SE: "Szwecja"
+
+  };
+
+  const countryName =
+    countryNames[nationality] ||
+    nationality;
+
+  return `
+    <span class="rider-country">
+
+      <img
+        class="flag"
+        src="https://flagcdn.com/w40/${code}.png"
+        alt="${countryName}"
+        title="${countryName}"
+      >
+
+    </span>
+  `;
 }
 
 
@@ -2030,9 +2049,7 @@ function renderLineupSlots() {
 
               <div class="badges">
 
-                <span class="badge">
-                  ${selected.nationality}
-                </span>
+                ${getFlagHtml(selected.nationality)}
 
                 <span class="badge blue">
                   ${selected.type.toUpperCase()}
@@ -2142,9 +2159,7 @@ function renderRiders() {
 
         <div class="badges">
 
-          <span class="badge">
-            ${rider.nationality}
-          </span>
+          ${getFlagHtml(rider.nationality)}
 
           <span class="badge blue">
             ${rider.type.toUpperCase()}
@@ -2371,8 +2386,6 @@ function buildAI(club) {
   }
 
 
-  /* najpierw juniorzy 6 i 7 */
-
   for (
     const slotIndex of [5, 6]
   ) {
@@ -2448,8 +2461,6 @@ function buildAI(club) {
   }
 
 
-  /* numery 1–5 */
-
   for (
     let slotIndex = 0;
     slotIndex <= 4;
@@ -2475,8 +2486,6 @@ function buildAI(club) {
   }
 
 
-  /* rezerwa 8 */
-
   const reserve =
     findForSlot(7);
 
@@ -2491,8 +2500,6 @@ function buildAI(club) {
 
   }
 
-
-  /* awaryjne uzupełnienie */
 
   for (
     let i = 0;
@@ -2578,10 +2585,6 @@ function startMatch() {
     false;
 
 
-  /* =======================================================
-     INFORMACJE O KLUBACH W EKRANIE MECZU
-     ======================================================= */
-
   document.getElementById(
     "matchHomeShort"
   ).textContent =
@@ -2596,8 +2599,6 @@ function startMatch() {
       opponentClubKey
     ].short;
 
-
-  /* LOGA KLUBÓW */
 
   document.getElementById(
     "matchHomeLogo"
@@ -2624,6 +2625,7 @@ function startMatch() {
   ).textContent =
     "0";
 
+
   document.getElementById(
     "simulateButton"
   ).style.display =
@@ -2639,6 +2641,7 @@ function startMatch() {
   ).style.display =
     "none";
 
+
   showScreen(
     "matchScreen"
   );
@@ -2648,7 +2651,7 @@ function startMatch() {
 
 
 /* =========================================================
-   OFICJALNE UKŁADY BIEGÓW
+   UKŁADY BIEGÓW
    ========================================================= */
 
 const heatMatrix = [
@@ -2835,7 +2838,7 @@ function renderCurrentHeat() {
 
 
 /* =========================================================
-   LOSOWANIE WYNIKU BIEGU
+   LOSOWANIE WYNIKU
    ========================================================= */
 
 function generateHeatResult() {
@@ -3073,7 +3076,7 @@ function nextHeat() {
 
 
 /* =========================================================
-   ZAKOŃCZENIE MECZU
+   KONIEC MECZU
    ========================================================= */
 
 function finishMatch() {
