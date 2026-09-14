@@ -2,955 +2,1355 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111827">
-<title>Speedway Manager 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>Speedway Manager 2026 DEMO</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#080d18;
+ color:#fff;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
 }
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #0b1020;
-    color: white;
+header{
+ padding:20px 15px;
+ text-align:center;
+ background:linear-gradient(135deg,#111827,#1e293b);
+ border-bottom:1px solid #334155
 }
-
-header {
-    background: linear-gradient(135deg, #111827, #1e293b);
-    padding: 22px 16px;
-    text-align: center;
-    border-bottom: 1px solid #334155;
+header h1{margin:0;font-size:24px}
+header p{margin:6px 0 0;color:#94a3b8}
+.container{max-width:720px;margin:auto;padding:15px}
+.card{
+ background:#111827;
+ border:1px solid #263244;
+ border-radius:18px;
+ padding:17px;
+ margin-bottom:15px
 }
-
-header h1 {
-    margin: 0;
-    font-size: 25px;
+.hidden{display:none}
+button,select{
+ width:100%;
+ padding:13px;
+ margin-top:9px;
+ border:0;
+ border-radius:12px;
+ font-size:16px;
+ font-weight:700
 }
-
-header p {
-    margin: 6px 0 0;
-    color: #94a3b8;
+button{background:#2563eb;color:white}
+button.secondary{background:#334155}
+button.green{background:#15803d}
+button.red{background:#b91c1c}
+select{
+ background:#1e293b;
+ color:white;
+ border:1px solid #475569
 }
-
-.container {
-    max-width: 700px;
-    margin: auto;
-    padding: 16px;
+.team{
+ background:#172033;
+ padding:14px;
+ margin-top:9px;
+ border-radius:13px;
+ border:1px solid #29364d
 }
-
-.card {
-    background: #111827;
-    border: 1px solid #263244;
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+.small{color:#94a3b8;font-size:13px}
+.badge{
+ display:inline-block;
+ background:#1d4ed8;
+ padding:5px 8px;
+ border-radius:7px;
+ font-size:11px;
+ font-weight:800
 }
-
-h2, h3 {
-    margin-top: 0;
+.line{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ align-items:center;
+ padding:9px 0;
+ border-bottom:1px solid #263244
 }
-
-button {
-    width: 100%;
-    border: 0;
-    border-radius: 13px;
-    padding: 14px;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: 700;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
+.line:last-child{border-bottom:0}
+.num{
+ width:32px;
+ font-weight:900;
+ color:#60a5fa
 }
-
-button:active {
-    transform: scale(.98);
+.rider{
+ flex:1;
+ font-weight:600
 }
-
-.secondary {
-    background: #334155;
+.type{
+ color:#94a3b8;
+ font-size:12px
 }
-
-.green {
-    background: #15803d;
+.scoreboard{
+ display:grid;
+ grid-template-columns:1fr auto 1fr;
+ text-align:center;
+ align-items:center;
+ gap:8px
 }
-
-.red {
-    background: #b91c1c;
+.score{
+ font-size:40px;
+ font-weight:900
 }
-
-.team {
-    padding: 14px;
-    background: #172033;
-    border-radius: 14px;
-    margin-top: 10px;
-    border: 1px solid #29364d;
+.vs{color:#64748b;font-weight:900}
+.heat{
+ background:#172033;
+ border-radius:13px;
+ padding:12px;
+ margin-top:8px
 }
-
-.team strong {
-    font-size: 17px;
+.result{
+ padding:9px;
+ border-bottom:1px solid #334155
 }
-
-.small {
-    color: #94a3b8;
-    font-size: 14px;
+.result:last-child{border:0}
+.notice{
+ background:#172033;
+ border-left:4px solid #2563eb;
+ padding:12px;
+ border-radius:8px;
+ margin:10px 0
 }
-
-.hidden {
-    display: none;
+.center{text-align:center}
+.good{color:#4ade80}
+.warn{color:#fbbf24}
+.bad{color:#f87171}
+table{width:100%;border-collapse:collapse}
+td,th{
+ padding:8px 4px;
+ border-bottom:1px solid #263244;
+ text-align:left
 }
-
-.scoreboard {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 10px;
-    align-items: center;
-    text-align: center;
-}
-
-.score {
-    font-size: 38px;
-    font-weight: 800;
-}
-
-.vs {
-    color: #64748b;
-    font-weight: bold;
-}
-
-.heat-number {
-    font-size: 14px;
-    color: #94a3b8;
-}
-
-.riders {
-    display: grid;
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.rider {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #172033;
-    padding: 12px;
-    border-radius: 12px;
-}
-
-.rider-name {
-    font-weight: 600;
-}
-
-.points {
-    font-weight: 800;
-    color: #60a5fa;
-}
-
-.result {
-    background: #172033;
-    border-radius: 14px;
-    padding: 14px;
-    margin-top: 12px;
-}
-
-.result-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid #263244;
-}
-
-.result-row:last-child {
-    border-bottom: 0;
-}
-
-.position {
-    width: 30px;
-    display: inline-block;
-    font-weight: 800;
-}
-
-.big-result {
-    text-align: center;
-    font-size: 42px;
-    font-weight: 900;
-    margin: 15px 0;
-}
-
-.badge {
-    display: inline-block;
-    background: #1d4ed8;
-    padding: 5px 9px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px 5px;
-    text-align: left;
-    border-bottom: 1px solid #263244;
-}
-
-th {
-    color: #94a3b8;
-    font-size: 13px;
-}
-
-footer {
-    text-align: center;
-    color: #64748b;
-    padding: 25px;
-    font-size: 12px;
-}
+th{font-size:12px;color:#94a3b8}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>🏁 Speedway Manager 2026</h1>
-    <p>Kariera menedżera</p>
+<h1>🏁 Speedway Manager 2026</h1>
+<p>DEMO — Manager żużlowy</p>
 </header>
 
 <div class="container">
 
-    <!-- EKRAN KLUBU -->
-    <section id="clubScreen">
+<!-- KLUB -->
+<section id="clubScreen">
 
-        <div class="card">
-            <h2>Wybierz klub</h2>
-            <p class="small">
-                Rozpocznij karierę w PGE Ekstralidze 2026.
-            </p>
+<div class="card">
+<span class="badge">KARIERA 2026</span>
+<h2>Wybierz klub</h2>
+<p class="small">
+W tej wersji demo rozpoczynamy od PGE Ekstraligi.
+</p>
+<div id="teamList"></div>
+</div>
 
-            <div id="teams"></div>
-        </div>
-
-    </section>
-
-
-    <!-- EKRAN DRUŻYNY -->
-    <section id="teamScreen" class="hidden">
-
-        <div class="card">
-            <span class="badge">KARIERA 2026</span>
-            <h2 id="teamName"></h2>
-
-            <p id="teamCity" class="small"></p>
-
-            <h3>Budżet</h3>
-            <p id="teamBudget"></p>
-
-            <button onclick="startMatch()">
-                🏁 Rozegraj mecz
-            </button>
-
-            <button class="secondary" onclick="backToTeams()">
-                ← Wybierz inny klub
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>Skład</h3>
-            <div id="roster"></div>
-        </div>
-
-    </section>
+</section>
 
 
-    <!-- EKRAN MECZU -->
-    <section id="matchScreen" class="hidden">
+<!-- PRZECIWNIK -->
+<section id="opponentScreen" class="hidden">
 
-        <div class="card">
+<div class="card">
+<span class="badge">MECZ</span>
+<h2 id="myTeamTitle"></h2>
 
-            <div class="scoreboard">
+<p class="small">Wybierz przeciwnika:</p>
 
-                <div>
-                    <div id="homeName"></div>
-                    <div id="homeScore" class="score">0</div>
-                </div>
+<div id="opponentList"></div>
 
-                <div class="vs">VS</div>
+<button class="secondary" onclick="backToClubs()">
+← Wróć
+</button>
+</div>
 
-                <div>
-                    <div>RYWAL</div>
-                    <div id="awayScore" class="score">0</div>
-                </div>
-
-            </div>
-
-        </div>
+</section>
 
 
-        <div class="card">
+<!-- USTAWIANIE SKŁADU -->
+<section id="lineupScreen" class="hidden">
 
-            <div class="heat-number">
-                BIEG <span id="heatNumber">1</span> / 15
-            </div>
+<div class="card">
 
-            <h2 id="heatTitle">Bieg 1</h2>
+<span class="badge">TWÓJ SKŁAD</span>
 
-            <div id="heatRiders" class="riders"></div>
+<h2 id="lineupTitle"></h2>
 
-            <button id="nextHeatButton" onclick="runHeat()">
-                ▶️ Odjedź bieg
-            </button>
+<div class="notice">
+Wybierz zawodnika dla każdego numeru. Gra sprawdzi podstawowe wymagania pozycji.
+</div>
 
-        </div>
+<div id="lineup"></div>
 
+<button class="green" onclick="validateLineup()">
+✓ Zatwierdź skład
+</button>
 
-        <div class="card">
+<button class="secondary" onclick="backToOpponents()">
+← Zmień przeciwnika
+</button>
 
-            <h3>Wynik meczu</h3>
-
-            <div class="scoreboard">
-
-                <div>
-                    <strong id="homeName2"></strong>
-                    <div id="homeScore2">0</div>
-                </div>
-
-                <div class="vs">:</div>
-
-                <div>
-                    <strong>RYWAL</strong>
-                    <div id="awayScore2">0</div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- KONIEC MECZU -->
-    <section id="resultScreen" class="hidden">
-
-        <div class="card">
-
-            <span class="badge">KONIEC MECZU</span>
-
-            <h2 id="resultTitle">Wynik końcowy</h2>
-
-            <div class="big-result">
-                <span id="finalHome">0</span>
-                :
-                <span id="finalAway">0</span>
-            </div>
-
-            <p id="resultMessage" style="text-align:center;"></p>
-
-            <button onclick="showTeamScreen()">
-                🏠 Wróć do klubu
-            </button>
-
-            <button class="secondary" onclick="startMatch()">
-                🔄 Rozegraj ponownie
-            </button>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>Wyniki zawodników</h3>
-
-            <div id="finalRiders"></div>
-
-        </div>
-
-    </section>
+<div id="lineupMessage"></div>
 
 </div>
 
-<footer>
-    Speedway Manager 2026
-</footer>
+</section>
+
+
+<!-- PODGLĄD SKŁADÓW -->
+<section id="preMatchScreen" class="hidden">
+
+<div class="card">
+
+<span class="badge">PRZED MECZEM</span>
+
+<h2>Składy meczowe</h2>
+
+<h3 id="myPreName"></h3>
+<div id="myPreLineup"></div>
+
+<h3 id="aiPreName"></h3>
+<div id="aiPreLineup"></div>
+
+<button onclick="startMatch()">
+🏁 Rozpocznij mecz
+</button>
+
+</div>
+
+</section>
+
+
+<!-- MECZ -->
+<section id="matchScreen" class="hidden">
+
+<div class="card">
+
+<div class="scoreboard">
+
+<div>
+<strong id="matchHome"></strong>
+<div id="homeScore" class="score">0</div>
+</div>
+
+<div class="vs">:</div>
+
+<div>
+<strong id="matchAway"></strong>
+<div id="awayScore" class="score">0</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<span class="badge">
+BIEG <span id="heatNo">1</span> / 15
+</span>
+
+<h2 id="heatTitle"></h2>
+
+<div id="heatInfo"></div>
+
+<button id="heatButton" onclick="runHeat()">
+▶ Odjedź bieg
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Aktualny wynik</h3>
+
+<div class="scoreboard">
+
+<div>
+<span id="homeShort"></span>
+<div id="homeScore2">0</div>
+</div>
+
+<div>:</div>
+
+<div>
+<span id="awayShort"></span>
+<div id="awayScore2">0</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOMINOWANE -->
+<section id="nominatedScreen" class="hidden">
+
+<div class="card">
+
+<span class="badge">BIEGI NOMINOWANE</span>
+
+<h2>Po 13. biegu</h2>
+
+<div id="nominatedNotice" class="notice"></div>
+
+<h3>Bieg 14</h3>
+<div id="heat14Select"></div>
+
+<h3>Bieg 15</h3>
+<div id="heat15Select"></div>
+
+<button class="green" onclick="confirmNominated()">
+✓ Zatwierdź obsadę
+</button>
+
+</div>
+
+</section>
+
+
+<!-- KONIEC -->
+<section id="resultScreen" class="hidden">
+
+<div class="card center">
+
+<span class="badge">KONIEC MECZU</span>
+
+<h2>Wynik końcowy</h2>
+
+<div class="score">
+<span id="finalHome">0</span>
+:
+<span id="finalAway">0</span>
+</div>
+
+<p id="finalMessage"></p>
+
+<button onclick="showClubs()">
+🏠 Wróć do klubów
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Twoi zawodnicy</h3>
+
+<div id="finalStats"></div>
+
+</div>
+
+</section>
+
+</div>
 
 
 <script>
 
+/* =========================
+   DANE
+========================= */
+
 const teams = [
 
-    {
-        name: "ORLEN OIL MOTOR Lublin",
-        city: "Lublin",
-        budget: 12500000,
-        riders: [
-            "Bartosz Zmarzlik",
-            "Fredrik Lindgren",
-            "Mateusz Cierniak",
-            "Martin Vaculik",
-            "Kacper Woryna",
-            "Bartosz Bańbor",
-            "Bartosz Jaworski"
-        ]
-    },
+{
+name:"ORLEN OIL MOTOR Lublin",
+city:"Lublin",
+riders:[
+{name:"Bartosz Zmarzlik",type:"SENIOR",age:31},
+{name:"Fredrik Lindgren",type:"SENIOR",age:40},
+{name:"Mateusz Cierniak",type:"U24",age:23},
+{name:"Martin Vaculik",type:"SENIOR",age:36},
+{name:"Kacper Woryna",type:"SENIOR",age:29},
+{name:"Bartosz Bańbor",type:"JUNIOR",age:19},
+{name:"Bartosz Jaworski",type:"JUNIOR",age:20},
+{name:"Jakub Krawczyk",type:"REZERWA",age:22}
+]
+},
 
-    {
-        name: "PRES GRUPA DEWELOPERSKA Toruń",
-        city: "Toruń",
-        budget: 11800000,
-        riders: [
-            "Emil Sajfutdinow",
-            "Robert Lambert",
-            "Patryk Dudek",
-            "Mikkel Michelsen",
-            "Norick Bloedorn",
-            "Antoni Kawczyński",
-            "Mikołaj Duchiński"
-        ]
-    },
+{
+name:"PRES GRUPA DEWELOPERSKA Toruń",
+city:"Toruń",
+riders:[
+{name:"Emil Sajfutdinow",type:"SENIOR",age:36},
+{name:"Robert Lambert",type:"SENIOR",age:28},
+{name:"Patryk Dudek",type:"SENIOR",age:34},
+{name:"Mikkel Michelsen",type:"SENIOR",age:31},
+{name:"Norick Bloedorn",type:"U24",age:22},
+{name:"Antoni Kawczyński",type:"JUNIOR",age:18},
+{name:"Mikołaj Duchiński",type:"JUNIOR",age:20},
+{name:"Kacper Grzelak",type:"REZERWA",age:23}
+]
+},
 
-    {
-        name: "BETARD SPARTA Wrocław",
-        city: "Wrocław",
-        budget: 12000000,
-        riders: [
-            "Artem Laguta",
-            "Maciej Janowski",
-            "Daniel Bewley",
-            "Brady Kurtz",
-            "Anders Rowe",
-            "Marcel Kowolik",
-            "Nikodem Mikołajczyk"
-        ]
-    },
+{
+name:"BETARD SPARTA Wrocław",
+city:"Wrocław",
+riders:[
+{name:"Artem Laguta",type:"SENIOR",age:35},
+{name:"Maciej Janowski",type:"SENIOR",age:35},
+{name:"Daniel Bewley",type:"SENIOR",age:27},
+{name:"Brady Kurtz",type:"SENIOR",age:29},
+{name:"Anders Rowe",type:"U24",age:23},
+{name:"Marcel Kowolik",type:"JUNIOR",age:19},
+{name:"Nikodem Mikołajczyk",type:"JUNIOR",age:20},
+{name:"Bartosz Curzytek",type:"REZERWA",age:22}
+]
+},
 
-    {
-        name: "FOGO UNIA Leszno",
-        city: "Leszno",
-        budget: 10500000,
-        riders: [
-            "Janusz Kołodziej",
-            "Piotr Pawlicki",
-            "Grzegorz Zengota",
-            "Benjamin Cook",
-            "Keynan Rew",
-            "Nazar Parnitskyi",
-            "Kacper Mania"
-        ]
-    },
+{
+name:"FOGO UNIA Leszno",
+city:"Leszno",
+riders:[
+{name:"Janusz Kołodziej",type:"SENIOR",age:42},
+{name:"Piotr Pawlicki",type:"SENIOR",age:31},
+{name:"Grzegorz Zengota",type:"SENIOR",age:37},
+{name:"Benjamin Cook",type:"SENIOR",age:28},
+{name:"Keynan Rew",type:"U24",age:23},
+{name:"Nazar Parnitskyi",type:"JUNIOR",age:19},
+{name:"Kacper Mania",type:"JUNIOR",age:18},
+{name:"Jakub Stojanowski",type:"REZERWA",age:22}
+]
+},
 
-    {
-        name: "BAYERSYSTEM GKM Grudziądz",
-        city: "Grudziądz",
-        budget: 9500000,
-        riders: [
-            "Max Fricke",
-            "Michael Jepsen Jensen",
-            "Vadim Tarasenko",
-            "Maksym Drabik",
-            "Kevin Małkiewicz",
-            "Kacper Szarszewski",
-            "Kevin Iwański-Helt"
-        ]
-    },
+{
+name:"BAYERSYSTEM GKM Grudziądz",
+city:"Grudziądz",
+riders:[
+{name:"Max Fricke",type:"SENIOR",age:30},
+{name:"Michael Jepsen Jensen",type:"SENIOR",age:34},
+{name:"Vadim Tarasenko",type:"SENIOR",age:31},
+{name:"Maksym Drabik",type:"SENIOR",age:28},
+{name:"Kevin Małkiewicz",type:"U24",age:21},
+{name:"Kacper Szarszewski",type:"JUNIOR",age:20},
+{name:"Kevin Iwański-Helt",type:"JUNIOR",age:19},
+{name:"Wiktor Przyjemski",type:"REZERWA",age:21}
+]
+},
 
-    {
-        name: "GEZET STAL Gorzów",
-        city: "Gorzów Wielkopolski",
-        budget: 9800000,
-        riders: [
-            "Anders Thomsen",
-            "Jack Holder",
-            "Paweł Przedpełski",
-            "Adam Bednar",
-            "Oskar Paluch",
-            "Marcel Szymko",
-            "Igor Kordun"
-        ]
-    },
+{
+name:"GEZET STAL Gorzów",
+city:"Gorzów Wielkopolski",
+riders:[
+{name:"Anders Thomsen",type:"SENIOR",age:32},
+{name:"Jack Holder",type:"SENIOR",age:30},
+{name:"Paweł Przedpełski",type:"SENIOR",age:31},
+{name:"Adam Bednar",type:"U24",age:23},
+{name:"Oskar Paluch",type:"JUNIOR",age:20},
+{name:"Marcel Szymko",type:"JUNIOR",age:19},
+{name:"Igor Kordun",type:"JUNIOR",age:19},
+{name:"Jakub Stojanowski",type:"REZERWA",age:22}
+]
+},
 
-    {
-        name: "STELMET FALUBAZ Zielona Góra",
-        city: "Zielona Góra",
-        budget: 9300000,
-        riders: [
-            "Leon Madsen",
-            "Dominik Kubera",
-            "Przemysław Pawlicki",
-            "Andzejs Lebedevs",
-            "Damian Ratajczak",
-            "Oskar Hurysz",
-            "Rafał Sękowski"
-        ]
-    },
+{
+name:"STELMET FALUBAZ Zielona Góra",
+city:"Zielona Góra",
+riders:[
+{name:"Leon Madsen",type:"SENIOR",age:37},
+{name:"Dominik Kubera",type:"SENIOR",age:27},
+{name:"Przemysław Pawlicki",type:"SENIOR",age:35},
+{name:"Andzejs Lebedevs",type:"SENIOR",age:31},
+{name:"Damian Ratajczak",type:"U24",age:21},
+{name:"Oskar Hurysz",type:"JUNIOR",age:20},
+{name:"Rafał Sękowski",type:"JUNIOR",age:19},
+{name:"Kacper Grzelak",type:"REZERWA",age:23}
+]
+},
 
-    {
-        name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
-        city: "Częstochowa",
-        budget: 9000000,
-        riders: [
-            "Jaimon Lidsey",
-            "Jakub Miśkowiak",
-            "Mads Hansen",
-            "Rohan Tungate",
-            "Sebastian Szostak",
-            "Franciszek Karczewski",
-            "Alan Ciurzyński"
-        ]
-    }
+{
+name:"KRONO-PLAST WŁÓKNIARZ Częstochowa",
+city:"Częstochowa",
+riders:[
+{name:"Jaimon Lidsey",type:"SENIOR",age:27},
+{name:"Jakub Miśkowiak",type:"SENIOR",age:25},
+{name:"Mads Hansen",type:"SENIOR",age:25},
+{name:"Rohan Tungate",type:"SENIOR",age:35},
+{name:"Sebastian Szostak",type:"U24",age:22},
+{name:"Franciszek Karczewski",type:"JUNIOR",age:20},
+{name:"Alan Ciurzyński",type:"JUNIOR",age:19},
+{name:"Kacper Pludra",type:"REZERWA",age:24}
+]
+}
 
 ];
 
 
-let selectedTeam = null;
+/* =========================
+   STAN GRY
+========================= */
 
-let homeScore = 0;
-let awayScore = 0;
+let myTeam=null;
+let opponent=null;
+let myLineup={};
+let aiLineup={};
 
-let currentHeat = 1;
+let homeScore=0;
+let awayScore=0;
+let heat=1;
 
-let riderPoints = {};
+let stats={};
 
-let matchFinished = false;
+let nominated14=[];
+let nominated15=[];
 
 
-const heatNames = [
+/* =========================
+   EKRANY
+========================= */
 
-    "Bieg 1",
-    "Bieg 2",
-    "Bieg 3",
-    "Bieg 4",
-    "Bieg 5",
-    "Bieg 6",
-    "Bieg 7",
-    "Bieg 8",
-    "Bieg 9",
-    "Bieg 10",
-    "Bieg 11",
-    "Bieg 12",
-    "Bieg 13",
-    "Bieg 14",
-    "Bieg 15"
+function hideAll(){
+
+[
+"clubScreen",
+"opponentScreen",
+"lineupScreen",
+"preMatchScreen",
+"matchScreen",
+"nominatedScreen",
+"resultScreen"
+
+].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
+
+}
+
+
+function show(id){
+
+hideAll();
+
+document.getElementById(id).classList.remove("hidden");
+
+}
+
+
+/* =========================
+   KLUBY
+========================= */
+
+function renderTeams(){
+
+const box=document.getElementById("teamList");
+
+box.innerHTML="";
+
+teams.forEach((team,i)=>{
+
+const div=document.createElement("div");
+
+div.className="team";
+
+div.innerHTML=`
+
+<strong>${team.name}</strong>
+<div class="small">${team.city}</div>
+
+<button onclick="chooseTeam(${i})">
+Wybierz
+</button>
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+function chooseTeam(i){
+
+myTeam=teams[i];
+
+document.getElementById("myTeamTitle").textContent=
+myTeam.name;
+
+const box=document.getElementById("opponentList");
+
+box.innerHTML="";
+
+teams.forEach((team,index)=>{
+
+if(team===myTeam)return;
+
+const div=document.createElement("div");
+
+div.className="team";
+
+div.innerHTML=`
+
+<strong>${team.name}</strong>
+<div class="small">${team.city}</div>
+
+<button onclick="chooseOpponent(${index})">
+Wybierz przeciwnika
+</button>
+
+`;
+
+box.appendChild(div);
+
+});
+
+show("opponentScreen");
+
+}
+
+
+function chooseOpponent(i){
+
+opponent=teams[i];
+
+createLineup();
+
+show("lineupScreen");
+
+}
+
+
+/* =========================
+   USTAWIANIE SKŁADU
+========================= */
+
+function createLineup(){
+
+const box=document.getElementById("lineup");
+
+box.innerHTML="";
+
+const slots=[
+1,2,3,4,5,6,7,8,
+9,10,11,12,13,14,15,16
+];
+
+slots.forEach(number=>{
+
+let allowed="";
+
+if([6,7,14,15].includes(number))
+allowed="JUNIOR";
+
+else if([8,16].includes(number))
+allowed="REZERWA";
+
+else
+allowed="NORMALNY";
+
+const options=myTeam.riders.filter(r=>{
+
+if(allowed==="JUNIOR")
+return r.type==="JUNIOR";
+
+if(allowed==="REZERWA")
+return r.type==="REZERWA";
+
+return r.type!=="JUNIOR" &&
+r.type!=="REZERWA";
+
+});
+
+const div=document.createElement("div");
+
+div.className="line";
+
+div.innerHTML=`
+
+<span class="num">${number}</span>
+
+<select id="slot${number}">
+
+<option value="">
+Wybierz zawodnika
+</option>
+
+${options.map(r=>`
+
+<option value="${r.name}">
+${r.name} — ${r.type}
+</option>
+
+`).join("")}
+
+</select>
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =========================
+   WALIDACJA
+========================= */
+
+function validateLineup(){
+
+myLineup={};
+
+const used=new Set();
+
+for(let number=1;number<=16;number++){
+
+const value=
+document.getElementById("slot"+number).value;
+
+if(!value){
+
+showLineupError(
+"Musisz obsadzić wszystkie pozycje."
+);
+
+return;
+
+}
+
+if(used.has(value)){
+
+showLineupError(
+"Ten zawodnik został wybrany więcej niż raz."
+);
+
+return;
+
+}
+
+used.add(value);
+
+myLineup[number]=
+myTeam.riders.find(r=>r.name===value);
+
+}
+
+
+/* podstawowa kontrola juniorów */
+
+for(const n of [6,7,14,15]){
+
+if(myLineup[n].type!=="JUNIOR"){
+
+showLineupError(
+`Numer ${n} musi obsadzić junior.`
+);
+
+return;
+
+}
+
+}
+
+
+createAI();
+
+renderPreMatch();
+
+show("preMatchScreen");
+
+}
+
+
+function showLineupError(text){
+
+document.getElementById("lineupMessage").innerHTML=`
+
+<div class="notice bad">
+${text}
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   AI
+========================= */
+
+function createAI(){
+
+aiLineup={};
+
+const riders=opponent.riders;
+
+const seniors=riders.filter(r=>
+r.type==="SENIOR" || r.type==="U24"
+);
+
+const juniors=riders.filter(r=>
+r.type==="JUNIOR"
+);
+
+const reserve=riders.filter(r=>
+r.type==="REZERWA"
+)[0];
+
+let s=0;
+let j=0;
+
+for(let n=1;n<=16;n++){
+
+if([6,7,14,15].includes(n)){
+
+aiLineup[n]=
+juniors[j%juniors.length];
+
+j++;
+
+}
+
+else if([8,16].includes(n)){
+
+aiLineup[n]=reserve;
+
+}
+
+else{
+
+aiLineup[n]=
+seniors[s%seniors.length];
+
+s++;
+
+}
+
+}
+
+}
+
+
+/* =========================
+   PODGLĄD
+========================= */
+
+function lineupHTML(lineup){
+
+let html="";
+
+for(let n=1;n<=16;n++){
+
+const r=lineup[n];
+
+html+=`
+
+<div class="line">
+
+<span class="num">${n}</span>
+
+<span class="rider">
+${r.name}
+<div class="type">${r.type}</div>
+</span>
+
+</div>
+
+`;
+
+}
+
+return html;
+
+}
+
+
+function renderPreMatch(){
+
+document.getElementById("myPreName").textContent=
+myTeam.name;
+
+document.getElementById("aiPreName").textContent=
+opponent.name;
+
+document.getElementById("myPreLineup").innerHTML=
+lineupHTML(myLineup);
+
+document.getElementById("aiPreLineup").innerHTML=
+lineupHTML(aiLineup);
+
+}
+
+
+/* =========================
+   MECZ
+========================= */
+
+function startMatch(){
+
+homeScore=0;
+awayScore=0;
+heat=1;
+
+stats={};
+
+Object.values(myLineup).forEach(r=>{
+stats[r.name]=0;
+});
+
+document.getElementById("matchHome").textContent=
+myTeam.city;
+
+document.getElementById("matchAway").textContent=
+opponent.city;
+
+document.getElementById("homeShort").textContent=
+myTeam.city;
+
+document.getElementById("awayShort").textContent=
+opponent.city;
+
+updateScore();
+
+show("matchScreen");
+
+prepareHeat();
+
+}
+
+
+function prepareHeat(){
+
+document.getElementById("heatNo").textContent=heat;
+
+document.getElementById("heatTitle").textContent=
+`Bieg ${heat}`;
+
+let riders=getHeatRiders();
+
+let html="";
+
+riders.forEach((r,i)=>{
+
+html+=`
+
+<div class="heat">
+
+<strong>${i+1}. ${r.rider.name}</strong>
+
+<div class="small">
+${r.home ? myTeam.city : opponent.city}
+· nr ${r.number}
+· ${r.rider.type}
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("heatInfo").innerHTML=html;
+
+}
+
+
+/* =========================
+   OBSADA BIEGÓW
+========================= */
+
+function getHeatRiders(){
+
+/*
+ Demo wykorzystuje stałą matrycę.
+ Biegi 14/15 są ustawiane przez trenera.
+ */
+
+const matrix={
+
+1:[1,9,2,10],
+2:[6,14,7,15],
+3:[3,11,4,12],
+4:[5,13,1,9],
+5:[3,9,5,11],
+6:[1,12,7,14],
+7:[2,10,6,16],
+8:[4,11,8,13],
+9:[1,4,9,12],
+10:[2,5,10,13],
+11:[3,7,11,15],
+12:[4,6,14,16],
+13:[1,5,9,13]
+};
+
+if(heat<=13){
+
+return matrix[heat].map((number,i)=>{
+
+const isHome=i<2;
+
+const lineup=
+isHome ? myLineup : aiLineup;
+
+return{
+
+rider:lineup[number],
+number:number,
+home:isHome
+
+};
+
+});
+
+}
+
+if(heat===14){
+
+return [
+
+{rider:myLineup[nominated14[0]],number:nominated14[0],home:true},
+{rider:myLineup[nominated14[1]],number:nominated14[1],home:true},
+{rider:aiLineup[14],number:14,home:false},
+{rider:aiLineup[15],number:15,home:false}
 
 ];
 
+}
 
-function money(value) {
+return [
 
-    return new Intl.NumberFormat(
-        "pl-PL",
-        {
-            style: "currency",
-            currency: "PLN",
-            maximumFractionDigits: 0
-        }
-    ).format(value);
+{rider:myLineup[nominated15[0]],number:nominated15[0],home:true},
+{rider:myLineup[nominated15[1]],number:nominated15[1],home:true},
+{rider:aiLineup[14],number:14,home:false},
+{rider:aiLineup[15],number:15,home:false}
+
+];
 
 }
 
 
-function show(element) {
-    document.getElementById(element).classList.remove("hidden");
-}
+/* =========================
+   BIEG
+========================= */
 
+function runHeat(){
 
-function hide(element) {
-    document.getElementById(element).classList.add("hidden");
-}
+const riders=getHeatRiders();
 
+const shuffled=
+[...riders].sort(
+()=>Math.random()-.5
+);
 
-function renderTeams() {
+const points=[3,2,1,0];
 
-    const box = document.getElementById("teams");
+let html="";
 
-    box.innerHTML = "";
+shuffled.forEach((r,i)=>{
 
-    teams.forEach((team, index) => {
+const p=points[i];
 
-        const div = document.createElement("div");
+if(r.home){
 
-        div.className = "team";
+homeScore+=p;
 
-        div.innerHTML = `
-            <strong>${team.name}</strong>
-            <p class="small">${team.city}</p>
-            <button onclick="selectTeam(${index})">
-                Wybierz klub
-            </button>
-        `;
+stats[r.rider.name]=
+(stats[r.rider.name]||0)+p;
 
-        box.appendChild(div);
+}else{
 
-    });
+awayScore+=p;
 
 }
 
+html+=`
 
-function selectTeam(index) {
+<div class="result">
 
-    selectedTeam = teams[index];
+<strong>${i+1}. ${r.rider.name}</strong>
 
-    document.getElementById("teamName").textContent =
-        selectedTeam.name;
+<span class="${p===3?"good":p===0?"bad":""}">
+${p} pkt
+</span>
 
-    document.getElementById("teamCity").textContent =
-        selectedTeam.city;
+</div>
 
-    document.getElementById("teamBudget").textContent =
-        money(selectedTeam.budget);
+`;
 
-    const roster = document.getElementById("roster");
+});
 
-    roster.innerHTML = "";
+document.getElementById("heatInfo").innerHTML=html;
 
-    selectedTeam.riders.forEach((rider, index) => {
+updateScore();
 
-        const div = document.createElement("div");
+if(heat===13){
 
-        div.className = "rider";
+setTimeout(
+showNominated,
+700
+);
 
-        div.innerHTML = `
-            <span>
-                <span class="position">${index + 1}</span>
-                <span class="rider-name">${rider}</span>
-            </span>
-            <span class="points">0 pkt</span>
-        `;
-
-        roster.appendChild(div);
-
-    });
-
-    hide("clubScreen");
-    hide("matchScreen");
-    hide("resultScreen");
-    show("teamScreen");
+return;
 
 }
 
+if(heat===15){
 
-function showTeamScreen() {
+setTimeout(
+finishMatch,
+700
+);
 
-    hide("clubScreen");
-    hide("matchScreen");
-    hide("resultScreen");
-    show("teamScreen");
+return;
+
+}
+
+heat++;
+
+setTimeout(
+prepareHeat,
+700
+);
 
 }
 
 
-function backToTeams() {
+/* =========================
+   NOMINOWANE
+========================= */
 
-    hide("teamScreen");
-    hide("matchScreen");
-    hide("resultScreen");
-    show("clubScreen");
+function showNominated(){
+
+const losingTeam=
+homeScore<awayScore
+?myTeam
+:opponent;
+
+let text="";
+
+if(homeScore<awayScore){
+
+text=
+`Przegrywasz ${homeScore}:${awayScore}. `+
+`Musisz teraz wybrać obsadę biegów nominowanych.`;
+
+}else if(homeScore===awayScore){
+
+text=
+`Jest remis ${homeScore}:${awayScore}. `+
+`Wybierz swoich zawodników do biegów nominowanych.`;
+
+}else{
+
+text=
+`Prowadzisz ${homeScore}:${awayScore}. `+
+`Wybierz swoich zawodników do biegów nominowanych.`;
+
+}
+
+document.getElementById("nominatedNotice").textContent=text;
+
+const available=
+Object.values(myLineup)
+.filter(r=>r.type!=="REZERWA");
+
+const makeSelect=(id)=>{
+
+return `
+
+<select id="${id}a">
+<option value="">Pierwszy zawodnik</option>
+${available.map(r=>
+`<option value="${r.name}">${r.name}</option>`
+).join("")}
+</select>
+
+<select id="${id}b">
+<option value="">Drugi zawodnik</option>
+${available.map(r=>
+`<option value="${r.name}">${r.name}</option>`
+).join("")}
+</select>
+
+`;
+
+};
+
+document.getElementById("heat14Select").innerHTML=
+makeSelect("h14");
+
+document.getElementById("heat15Select").innerHTML=
+makeSelect("h15");
+
+show("nominatedScreen");
 
 }
 
 
-function startMatch() {
+function confirmNominated(){
 
-    homeScore = 0;
-    awayScore = 0;
+const h14a=
+document.getElementById("h14a").value;
 
-    currentHeat = 1;
+const h14b=
+document.getElementById("h14b").value;
 
-    matchFinished = false;
+const h15a=
+document.getElementById("h15a").value;
 
-    riderPoints = {};
+const h15b=
+document.getElementById("h15b").value;
 
-    selectedTeam.riders.forEach(rider => {
-        riderPoints[rider] = 0;
-    });
+if(!h14a||!h14b||!h15a||!h15b){
 
-    document.getElementById("homeName").textContent =
-        selectedTeam.city;
+alert("Obsadź oba biegi.");
 
-    document.getElementById("homeName2").textContent =
-        selectedTeam.city;
+return;
 
-    updateScore();
+}
 
-    hide("teamScreen");
-    hide("resultScreen");
+if(h14a===h14b||h15a===h15b){
 
-    show("matchScreen");
+alert("Ten sam zawodnik nie może być wybrany dwa razy w jednym biegu.");
 
-    prepareHeat();
+return;
+
+}
+
+nominated14=[
+findNumber(h14a),
+findNumber(h14b)
+];
+
+nominated15=[
+findNumber(h15a),
+findNumber(h15b)
+];
+
+heat=14;
+
+show("matchScreen");
+
+prepareHeat();
 
 }
 
 
-function prepareHeat() {
+function findNumber(name){
 
-    document.getElementById("heatNumber").textContent =
-        currentHeat;
+for(let n=1;n<=16;n++){
 
-    document.getElementById("heatTitle").textContent =
-        heatNames[currentHeat - 1];
+if(myLineup[n] &&
+myLineup[n].name===name){
 
-    const ridersBox =
-        document.getElementById("heatRiders");
+return n;
 
-    ridersBox.innerHTML = "";
+}
 
-    const riders = getHeatRiders();
+}
 
-    riders.forEach((rider, index) => {
-
-        const div = document.createElement("div");
-
-        div.className = "rider";
-
-        div.innerHTML = `
-            <span>
-                <span class="position">${index + 1}</span>
-                ${rider.name}
-            </span>
-            <span class="small">
-                ${rider.team}
-            </span>
-        `;
-
-        ridersBox.appendChild(div);
-
-    });
-
-    document.getElementById("nextHeatButton").textContent =
-        currentHeat === 15
-        ? "🏁 Odjedź bieg 15"
-        : "▶️ Odjedź bieg";
+return null;
 
 }
 
 
-function getHeatRiders() {
+/* =========================
+   WYNIK
+========================= */
 
-    const home = selectedTeam.riders;
+function updateScore(){
 
-    const indexes = [
+document.getElementById("homeScore").textContent=
+homeScore;
 
-        [0, 1],
-        [2, 3],
-        [4, 5],
-        [6, 0],
-        [2, 4],
-        [1, 6],
-        [3, 5],
-        [0, 4],
-        [1, 5],
-        [2, 6],
-        [0, 3],
-        [1, 4],
-        [2, 5],
-        [3, 6],
-        [0, 2]
+document.getElementById("awayScore").textContent=
+awayScore;
 
-    ];
+document.getElementById("homeScore2").textContent=
+homeScore;
 
-    const pair = indexes[currentHeat - 1];
-
-    return [
-
-        {
-            name: home[pair[0]],
-            team: selectedTeam.city,
-            home: true
-        },
-
-        {
-            name: home[pair[1]],
-            team: selectedTeam.city,
-            home: true
-        },
-
-        {
-            name: "Zawodnik rywala 1",
-            team: "Rywal",
-            home: false
-        },
-
-        {
-            name: "Zawodnik rywala 2",
-            team: "Rywal",
-            home: false
-        }
-
-    ];
+document.getElementById("awayScore2").textContent=
+awayScore;
 
 }
 
 
-function runHeat() {
+function finishMatch(){
 
-    if (matchFinished) return;
+document.getElementById("finalHome").textContent=
+homeScore;
 
-    const riders = getHeatRiders();
+document.getElementById("finalAway").textContent=
+awayScore;
 
-    const shuffled = [...riders].sort(
-        () => Math.random() - 0.5
-    );
+let message="";
 
-    const points = [3, 2, 1, 0];
+if(homeScore>awayScore){
 
-    shuffled.forEach((rider, index) => {
+message="WYGRANA!";
 
-        const pts = points[index];
+}else if(homeScore<awayScore){
 
-        if (rider.home) {
+message="PORAŻKA.";
 
-            homeScore += pts;
+}else{
 
-            riderPoints[rider.name] =
-                (riderPoints[rider.name] || 0) + pts;
+message="REMIS.";
 
-        } else {
+}
 
-            awayScore += pts;
+document.getElementById("finalMessage").textContent=
+message;
 
-        }
+const statsBox=
+document.getElementById("finalStats");
 
-    });
+statsBox.innerHTML="";
 
-    updateScore();
+Object.entries(stats)
+.sort((a,b)=>b[1]-a[1])
+.forEach(([name,points])=>{
 
-    showHeatResult(shuffled, points);
+statsBox.innerHTML+=`
 
-    if (currentHeat >= 15) {
+<div class="line">
 
-        finishMatch();
+<span>${name}</span>
 
-    } else {
+<strong>${points} pkt</strong>
 
-        currentHeat++;
+</div>
 
-        setTimeout(() => {
+`;
 
-            prepareHeat();
+});
 
-        }, 1000);
-
-    }
+show("resultScreen");
 
 }
 
 
-function showHeatResult(riders, points) {
+/* =========================
+   POWROTY
+========================= */
 
-    const box =
-        document.getElementById("heatRiders");
+function backToClubs(){
+show("clubScreen");
+}
 
-    box.innerHTML = "";
-
-    riders.forEach((rider, index) => {
-
-        const div = document.createElement("div");
-
-        div.className = "result";
-
-        div.innerHTML = `
-            <div class="result-row">
-                <span>
-                    <span class="position">${index + 1}.</span>
-                    ${rider.name}
-                </span>
-                <strong>${points[index]} pkt</strong>
-            </div>
-        `;
-
-        box.appendChild(div);
-
-    });
-
+function backToOpponents(){
+chooseTeam(
+teams.indexOf(myTeam)
+);
 }
 
 
-function updateScore() {
-
-    document.getElementById("homeScore").textContent =
-        homeScore;
-
-    document.getElementById("awayScore").textContent =
-        awayScore;
-
-    document.getElementById("homeScore2").textContent =
-        homeScore;
-
-    document.getElementById("awayScore2").textContent =
-        awayScore;
-
-}
-
-
-function finishMatch() {
-
-    matchFinished = true;
-
-    document.getElementById("finalHome").textContent =
-        homeScore;
-
-    document.getElementById("finalAway").textContent =
-        awayScore;
-
-    let message = "";
-
-    if (homeScore > awayScore) {
-
-        message =
-            "Wygrana! Twój zespół zdobywa 2 punkty meczowe.";
-
-    } else if (homeScore < awayScore) {
-
-        message =
-            "Porażka. Czas przeanalizować wynik i przygotować się do następnego meczu.";
-
-    } else {
-
-        message =
-            "Remis. Obie drużyny zdobywają po jednym punkcie meczowym.";
-
-    }
-
-    document.getElementById("resultMessage").textContent =
-        message;
-
-    const finalBox =
-        document.getElementById("finalRiders");
-
-    finalBox.innerHTML = "";
-
-    const sorted = Object.entries(riderPoints)
-        .sort((a, b) => b[1] - a[1]);
-
-    sorted.forEach(([name, points]) => {
-
-        const div = document.createElement("div");
-
-        div.className = "result";
-
-        div.innerHTML = `
-            <div class="result-row">
-                <span>${name}</span>
-                <strong>${points} pkt</strong>
-            </div>
-        `;
-
-        finalBox.appendChild(div);
-
-    });
-
-    hide("matchScreen");
-
-    show("resultScreen");
-
-}
-
+/* =========================
+   START
+========================= */
 
 renderTeams();
 
