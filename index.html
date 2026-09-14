@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Speedway Manager 2026</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #080a0f;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .app {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #8d96a8;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #151922;
+      border: 1px solid #292f3a;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 14px;
+      background: #4da3ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .team {
+      background: #1c212c;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+    .team-name {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .team-city {
+      color: #8d96a8;
+      margin-top: 5px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <h1>🏁 Speedway Manager 2026</h1>
+
+    <div class="subtitle">
+      Twój klub. Twój skład. Twój sezon.
+    </div>
+
+    <div id="startScreen">
+
+      <div class="card">
+
+        <h2>Kariera 2026</h2>
+
+        <p>
+          Zostań menedżerem klubu żużlowego.
+          Zarządzaj składem, budżetem i meczami.
+        </p>
+
+        <button class="button" onclick="showTeams()">
+          Wybierz klub
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div id="teamsScreen" class="hidden">
+
+      <div class="card">
+
+        <h2>Wybierz klub</h2>
+
+        <div id="teams"></div>
+
+      </div>
+
+    </div>
+
+
+    <div id="clubScreen" class="hidden">
+
+      <div class="card">
+
+        <h2 id="clubName"></h2>
+
+        <p id="clubCity"></p>
+
+        <hr>
+
+        <p>
+          💰 Budżet:
+          <strong id="clubBudget"></strong>
+        </p>
+
+        <button class="button" onclick="alert('System meczowy dodamy w następnym kroku.')">
+          Rozegraj mecz
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>Skład</h2>
+
+        <div id="roster"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+const teams = [
+
+  {
+    name: "ORLEN OIL MOTOR Lublin",
+    city: "Lublin",
+    budget: 5500000,
+
+    riders: [
+      "Bartosz Zmarzlik",
+      "Fredrik Lindgren",
+      "Mateusz Cierniak",
+      "Martin Vaculik",
+      "Kacper Woryna",
+      "Bartosz Bańbor",
+      "Bartosz Jaworski"
+    ]
+  },
+
+  {
+    name: "PRES GRUPA DEWELOPERSKA Toruń",
+    city: "Toruń",
+    budget: 5000000,
+
+    riders: [
+      "Emil Sajfutdinow",
+      "Robert Lambert",
+      "Patryk Dudek",
+      "Mikkel Michelsen",
+      "Norick Bloedorn",
+      "Antoni Kawczyński",
+      "Mikołaj Duchiński"
+    ]
+  },
+
+  {
+    name: "BETARD SPARTA Wrocław",
+    city: "Wrocław",
+    budget: 5200000,
+
+    riders: [
+      "Artem Laguta",
+      "Maciej Janowski",
+      "Daniel Bewley",
+      "Brady Kurtz",
+      "Anders Rowe",
+      "Marcel Kowolik",
+      "Nikodem Mikołajczyk"
+    ]
+  },
+
+  {
+    name: "FOGO UNIA Leszno",
+    city: "Leszno",
+    budget: 4700000,
+
+    riders: [
+      "Janusz Kołodziej",
+      "Piotr Pawlicki",
+      "Grzegorz Zengota",
+      "Benjamin Cook",
+      "Keynan Rew",
+      "Nazar Parnitskyi",
+      "Kacper Mania"
+    ]
+  },
+
+  {
+    name: "BAYERSYSTEM GKM Grudziądz",
+    city: "Grudziądz",
+    budget: 4300000,
+
+    riders: [
+      "Max Fricke",
+      "Michael Jepsen Jensen",
+      "Vadim Tarasenko",
+      "Maksym Drabik",
+      "Kevin Małkiewicz",
+      "Kacper Szarszewski",
+      "Kevin Iwański-Helt"
+    ]
+  },
+
+  {
+    name: "GEZET STAL Gorzów",
+    city: "Gorzów Wielkopolski",
+    budget: 4400000,
+
+    riders: [
+      "Anders Thomsen",
+      "Jack Holder",
+      "Paweł Przedpełski",
+      "Adam Bednar",
+      "Oskar Paluch",
+      "Marcel Szymko",
+      "Igor Kordun"
+    ]
+  },
+
+  {
+    name: "STELMET FALUBAZ Zielona Góra",
+    city: "Zielona Góra",
+    budget: 4100000,
+
+    riders: [
+      "Leon Madsen",
+      "Dominik Kubera",
+      "Przemysław Pawlicki",
+      "Andzejs Lebedevs",
+      "Damian Ratajczak",
+      "Oskar Hurysz",
+      "Rafał Sękowski"
+    ]
+  },
+
+  {
+    name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
+    city: "Częstochowa",
+    budget: 4000000,
+
+    riders: [
+      "Jaimon Lidsey",
+      "Jakub Miśkowiak",
+      "Mads Hansen",
+      "Rohan Tungate",
+      "Sebastian Szostak",
+      "Franciszek Karczewski",
+      "Alan Ciurzyński"
+    ]
+  }
+
+];
+
+
+function showTeams() {
+
+  document.getElementById("startScreen")
+    .classList.add("hidden");
+
+  document.getElementById("teamsScreen")
+    .classList.remove("hidden");
+
+  const container =
+    document.getElementById("teams");
+
+  container.innerHTML = "";
+
+  teams.forEach((team, index) => {
+
+    container.innerHTML += `
+
+      <div class="team">
+
+        <div class="team-name">
+          ${team.name}
+        </div>
+
+        <div class="team-city">
+          ${team.city}
+        </div>
+
+        <button
+          class="button"
+          onclick="selectTeam(${index})">
+
+          Wybierz
+
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function selectTeam(index) {
+
+  const team = teams[index];
+
+  document.getElementById("teamsScreen")
+    .classList.add("hidden");
+
+  document.getElementById("clubScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("clubName")
+    .textContent = team.name;
+
+  document.getElementById("clubCity")
+    .textContent = team.city;
+
+  document.getElementById("clubBudget")
+    .textContent =
+    team.budget.toLocaleString("pl-PL") + " zł";
+
+  const roster =
+    document.getElementById("roster");
+
+  roster.innerHTML = "";
+
+  team.riders.forEach((rider, index) => {
+
+    roster.innerHTML += `
+
+      <div class="team">
+
+        <strong>
+          ${index + 1}. ${rider}
+        </strong>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
