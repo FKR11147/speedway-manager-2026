@@ -4,25 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1020">
-<title>Speedway Manager 2026 DEMO</title>
+
+<title>Speedway Manager 2026 BETA 2.1</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  background:#080d18;
  color:#fff;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
 }
+
 header{
  padding:20px 15px;
  text-align:center;
  background:linear-gradient(135deg,#111827,#1e293b);
  border-bottom:1px solid #334155
 }
-header h1{margin:0;font-size:24px}
-header p{margin:6px 0 0;color:#94a3b8}
-.container{max-width:720px;margin:auto;padding:15px}
+
+header h1{
+ margin:0;
+ font-size:24px
+}
+
+header p{
+ margin:6px 0 0;
+ color:#94a3b8
+}
+
+.container{
+ max-width:720px;
+ margin:auto;
+ padding:15px
+}
+
 .card{
  background:#111827;
  border:1px solid #263244;
@@ -30,7 +47,11 @@ header p{margin:6px 0 0;color:#94a3b8}
  padding:17px;
  margin-bottom:15px
 }
-.hidden{display:none}
+
+.hidden{
+ display:none
+}
+
 button,select{
  width:100%;
  padding:13px;
@@ -40,15 +61,30 @@ button,select{
  font-size:16px;
  font-weight:700
 }
-button{background:#2563eb;color:white}
-button.secondary{background:#334155}
-button.green{background:#15803d}
-button.red{background:#b91c1c}
+
+button{
+ background:#2563eb;
+ color:white
+}
+
+button.secondary{
+ background:#334155
+}
+
+button.green{
+ background:#15803d
+}
+
+button.red{
+ background:#b91c1c
+}
+
 select{
  background:#1e293b;
  color:white;
  border:1px solid #475569
 }
+
 .team{
  background:#172033;
  padding:14px;
@@ -56,7 +92,12 @@ select{
  border-radius:13px;
  border:1px solid #29364d
 }
-.small{color:#94a3b8;font-size:13px}
+
+.small{
+ color:#94a3b8;
+ font-size:13px
+}
+
 .badge{
  display:inline-block;
  background:#1d4ed8;
@@ -65,6 +106,7 @@ select{
  font-size:11px;
  font-weight:800
 }
+
 .line{
  display:flex;
  justify-content:space-between;
@@ -73,20 +115,27 @@ select{
  padding:9px 0;
  border-bottom:1px solid #263244
 }
-.line:last-child{border-bottom:0}
+
+.line:last-child{
+ border-bottom:0
+}
+
 .num{
  width:32px;
  font-weight:900;
  color:#60a5fa
 }
+
 .rider{
  flex:1;
  font-weight:600
 }
+
 .type{
  color:#94a3b8;
  font-size:12px
 }
+
 .scoreboard{
  display:grid;
  grid-template-columns:1fr auto 1fr;
@@ -94,22 +143,36 @@ select{
  align-items:center;
  gap:8px
 }
+
 .score{
  font-size:40px;
  font-weight:900
 }
-.vs{color:#64748b;font-weight:900}
+
+.vs{
+ color:#64748b;
+ font-weight:900
+}
+
 .heat{
  background:#172033;
  border-radius:13px;
  padding:12px;
  margin-top:8px
 }
+
 .result{
- padding:9px;
- border-bottom:1px solid #334155
+ padding:11px 5px;
+ border-bottom:1px solid #334155;
+ display:flex;
+ justify-content:space-between;
+ gap:10px
 }
-.result:last-child{border:0}
+
+.result:last-child{
+ border:0
+}
+
 .notice{
  background:#172033;
  border-left:4px solid #2563eb;
@@ -117,17 +180,35 @@ select{
  border-radius:8px;
  margin:10px 0
 }
-.center{text-align:center}
-.good{color:#4ade80}
-.warn{color:#fbbf24}
-.bad{color:#f87171}
-table{width:100%;border-collapse:collapse}
-td,th{
- padding:8px 4px;
- border-bottom:1px solid #263244;
- text-align:left
+
+.center{
+ text-align:center
 }
-th{font-size:12px;color:#94a3b8}
+
+.good{
+ color:#4ade80
+}
+
+.warn{
+ color:#fbbf24
+}
+
+.bad{
+ color:#f87171
+}
+
+.next-button{
+ margin-top:15px;
+ background:#15803d
+}
+
+.match-result{
+ background:#0f172a;
+ border:1px solid #334155;
+ border-radius:14px;
+ padding:14px;
+ margin-top:15px
+}
 </style>
 </head>
 
@@ -135,46 +216,59 @@ th{font-size:12px;color:#94a3b8}
 
 <header>
 <h1>🏁 Speedway Manager 2026</h1>
-<p>DEMO — Manager żużlowy</p>
+<p>BETA 2.1 — Manager żużlowy</p>
 </header>
 
 <div class="container">
 
 <!-- KLUB -->
+
 <section id="clubScreen">
 
 <div class="card">
+
 <span class="badge">KARIERA 2026</span>
+
 <h2>Wybierz klub</h2>
+
 <p class="small">
-W tej wersji demo rozpoczynamy od PGE Ekstraligi.
+W tej wersji gramy demonstracyjnie w PGE Ekstralidze.
 </p>
+
 <div id="teamList"></div>
+
 </div>
 
 </section>
 
 
 <!-- PRZECIWNIK -->
+
 <section id="opponentScreen" class="hidden">
 
 <div class="card">
+
 <span class="badge">MECZ</span>
+
 <h2 id="myTeamTitle"></h2>
 
-<p class="small">Wybierz przeciwnika:</p>
+<p class="small">
+Wybierz przeciwnika i miejsce rozegrania meczu.
+</p>
 
 <div id="opponentList"></div>
 
-<button class="secondary" onclick="backToClubs()">
+<button class="secondary" onclick="show('clubScreen')">
 ← Wróć
 </button>
+
 </div>
 
 </section>
 
 
-<!-- USTAWIANIE SKŁADU -->
+<!-- SKŁAD -->
+
 <section id="lineupScreen" class="hidden">
 
 <div class="card">
@@ -184,7 +278,7 @@ W tej wersji demo rozpoczynamy od PGE Ekstraligi.
 <h2 id="lineupTitle"></h2>
 
 <div class="notice">
-Wybierz zawodnika dla każdego numeru. Gra sprawdzi podstawowe wymagania pozycji.
+Wybierz dokładnie 8 różnych zawodników.
 </div>
 
 <div id="lineup"></div>
@@ -204,7 +298,8 @@ Wybierz zawodnika dla każdego numeru. Gra sprawdzi podstawowe wymagania pozycji
 </section>
 
 
-<!-- PODGLĄD SKŁADÓW -->
+<!-- PODGLĄD -->
+
 <section id="preMatchScreen" class="hidden">
 
 <div class="card">
@@ -229,6 +324,7 @@ Wybierz zawodnika dla każdego numeru. Gra sprawdzi podstawowe wymagania pozycji
 
 
 <!-- MECZ -->
+
 <section id="matchScreen" class="hidden">
 
 <div class="card">
@@ -263,7 +359,16 @@ BIEG <span id="heatNo">1</span> / 15
 <div id="heatInfo"></div>
 
 <button id="heatButton" onclick="runHeat()">
-▶ Odjedź bieg
+🏁 Symuluj bieg
+</button>
+
+<button
+id="nextHeatButton"
+class="next-button hidden"
+onclick="nextHeat()">
+
+Kolejny bieg ➡️
+
 </button>
 
 </div>
@@ -295,6 +400,7 @@ BIEG <span id="heatNo">1</span> / 15
 
 
 <!-- NOMINOWANE -->
+
 <section id="nominatedScreen" class="hidden">
 
 <div class="card">
@@ -321,6 +427,7 @@ BIEG <span id="heatNo">1</span> / 15
 
 
 <!-- KONIEC -->
+
 <section id="resultScreen" class="hidden">
 
 <div class="card center">
@@ -359,9 +466,9 @@ BIEG <span id="heatNo">1</span> / 15
 
 <script>
 
-/* =========================
-   DANE
-========================= */
+/* =====================================================
+   DANE DEMO
+   ===================================================== */
 
 const teams = [
 
@@ -375,8 +482,8 @@ riders:[
 {name:"Martin Vaculik",type:"SENIOR",age:36},
 {name:"Kacper Woryna",type:"SENIOR",age:29},
 {name:"Bartosz Bańbor",type:"JUNIOR",age:19},
-{name:"Bartosz Jaworski",type:"JUNIOR",age:20},
-{name:"Jakub Krawczyk",type:"REZERWA",age:22}
+{name:"Bartosz Jaworski",type:"JUNIOR",age:18},
+{name:"Dawid Cepielik",type:"REZERWA",age:20}
 ]
 },
 
@@ -391,7 +498,7 @@ riders:[
 {name:"Norick Bloedorn",type:"U24",age:22},
 {name:"Antoni Kawczyński",type:"JUNIOR",age:18},
 {name:"Mikołaj Duchiński",type:"JUNIOR",age:20},
-{name:"Kacper Grzelak",type:"REZERWA",age:23}
+{name:"Nicolai Heiselberg",type:"REZERWA",age:19}
 ]
 },
 
@@ -414,7 +521,7 @@ riders:[
 name:"FOGO UNIA Leszno",
 city:"Leszno",
 riders:[
-{name:"Janusz Kołodziej",type:"SENIOR",age:42},
+{name:"Janusz Kołodziej",type:"SENIOR",age:41},
 {name:"Piotr Pawlicki",type:"SENIOR",age:31},
 {name:"Grzegorz Zengota",type:"SENIOR",age:37},
 {name:"Benjamin Cook",type:"SENIOR",age:28},
@@ -430,9 +537,9 @@ name:"BAYERSYSTEM GKM Grudziądz",
 city:"Grudziądz",
 riders:[
 {name:"Max Fricke",type:"SENIOR",age:30},
-{name:"Michael Jepsen Jensen",type:"SENIOR",age:34},
-{name:"Vadim Tarasenko",type:"SENIOR",age:31},
-{name:"Maksym Drabik",type:"SENIOR",age:28},
+{name:"Michael Jepsen Jensen",type:"SENIOR",age34},
+{name:"Vadim Tarasenko",type:"SENIOR",age31},
+{name:"Maksym Drabik",type:"SENIOR",age28},
 {name:"Kevin Małkiewicz",type:"U24",age:21},
 {name:"Kacper Szarszewski",type:"JUNIOR",age:20},
 {name:"Kevin Iwański-Helt",type:"JUNIOR",age:19},
@@ -451,7 +558,7 @@ riders:[
 {name:"Oskar Paluch",type:"JUNIOR",age:20},
 {name:"Marcel Szymko",type:"JUNIOR",age:19},
 {name:"Igor Kordun",type:"JUNIOR",age:19},
-{name:"Jakub Stojanowski",type:"REZERWA",age:22}
+{name:"REZERWA",type:"REZERWA",age:0}
 ]
 },
 
@@ -488,18 +595,26 @@ riders:[
 ];
 
 
-/* =========================
-   STAN GRY
-========================= */
+/* =====================================================
+   STAN
+   ===================================================== */
 
 let myTeam=null;
 let opponent=null;
+
+let isHome=true;
+
+let myNumbers=[];
+let opponentNumbers=[];
+
 let myLineup={};
 let aiLineup={};
 
 let homeScore=0;
 let awayScore=0;
+
 let heat=1;
+let heatFinished=false;
 
 let stats={};
 
@@ -507,9 +622,9 @@ let nominated14=[];
 let nominated15=[];
 
 
-/* =========================
+/* =====================================================
    EKRANY
-========================= */
+   ===================================================== */
 
 function hideAll(){
 
@@ -528,7 +643,6 @@ document.getElementById(id).classList.add("hidden");
 
 }
 
-
 function show(id){
 
 hideAll();
@@ -538,9 +652,9 @@ document.getElementById(id).classList.remove("hidden");
 }
 
 
-/* =========================
+/* =====================================================
    KLUBY
-========================= */
+   ===================================================== */
 
 function renderTeams(){
 
@@ -557,7 +671,10 @@ div.className="team";
 div.innerHTML=`
 
 <strong>${team.name}</strong>
-<div class="small">${team.city}</div>
+
+<div class="small">
+${team.city}
+</div>
 
 <button onclick="chooseTeam(${i})">
 Wybierz
@@ -570,7 +687,6 @@ box.appendChild(div);
 });
 
 }
-
 
 function chooseTeam(i){
 
@@ -594,10 +710,18 @@ div.className="team";
 div.innerHTML=`
 
 <strong>${team.name}</strong>
-<div class="small">${team.city}</div>
 
-<button onclick="chooseOpponent(${index})">
-Wybierz przeciwnika
+<div class="small">
+${team.city}
+</div>
+
+<button onclick="chooseOpponent(${index},true)">
+🏠 Zagraj u siebie
+</button>
+
+<button class="secondary"
+onclick="chooseOpponent(${index},false)">
+✈️ Zagraj na wyjeździe
 </button>
 
 `;
@@ -611,20 +735,39 @@ show("opponentScreen");
 }
 
 
-function chooseOpponent(i){
+/* =====================================================
+   WYBÓR PRZECIWNIKA
+   ===================================================== */
+
+function chooseOpponent(i,home){
 
 opponent=teams[i];
 
+isHome=home;
+
+myNumbers=isHome
+?[9,10,11,12,13,14,15,16]
+:[1,2,3,4,5,6,7,8];
+
+opponentNumbers=isHome
+?[1,2,3,4,5,6,7,8]
+:[9,10,11,12,13,14,15,16];
+
 createLineup();
+
+document.getElementById("lineupTitle").textContent=
+isHome
+?"Wybierz 8 zawodników — numery 9–16"
+:"Wybierz 8 zawodników — numery 1–8";
 
 show("lineupScreen");
 
 }
 
 
-/* =========================
-   USTAWIANIE SKŁADU
-========================= */
+/* =====================================================
+   WYBÓR SKŁADU
+   ===================================================== */
 
 function createLineup(){
 
@@ -632,12 +775,7 @@ const box=document.getElementById("lineup");
 
 box.innerHTML="";
 
-const slots=[
-1,2,3,4,5,6,7,8,
-9,10,11,12,13,14,15,16
-];
-
-slots.forEach(number=>{
+myNumbers.forEach(number=>{
 
 let allowed="";
 
@@ -669,9 +807,12 @@ div.className="line";
 
 div.innerHTML=`
 
-<span class="num">${number}</span>
+<span class="num">
+${number}
+</span>
 
-<select id="slot${number}">
+<select id="slot${number}"
+onchange="preventDuplicateSelections()">
 
 <option value="">
 Wybierz zawodnika
@@ -680,7 +821,7 @@ Wybierz zawodnika
 ${options.map(r=>`
 
 <option value="${r.name}">
-${r.name} — ${r.type}
+${r.name} — ${r.age} lat — ${r.type}
 </option>
 
 `).join("")}
@@ -696,9 +837,47 @@ box.appendChild(div);
 }
 
 
-/* =========================
+/* =====================================================
+   BLOKOWANIE DUPLIKATÓW
+   ===================================================== */
+
+function preventDuplicateSelections(){
+
+const selects=
+myNumbers.map(n=>
+document.getElementById("slot"+n)
+);
+
+const used=new Set();
+
+selects.forEach(select=>{
+
+const value=select.value;
+
+if(!value)return;
+
+if(used.has(value)){
+
+alert(
+"Ten zawodnik został już wybrany. Każdy zawodnik może wystąpić tylko raz."
+);
+
+select.value="";
+
+}else{
+
+used.add(value);
+
+}
+
+});
+
+}
+
+
+/* =====================================================
    WALIDACJA
-========================= */
+   ===================================================== */
 
 function validateLineup(){
 
@@ -706,7 +885,7 @@ myLineup={};
 
 const used=new Set();
 
-for(let number=1;number<=16;number++){
+for(const number of myNumbers){
 
 const value=
 document.getElementById("slot"+number).value;
@@ -714,7 +893,7 @@ document.getElementById("slot"+number).value;
 if(!value){
 
 showLineupError(
-"Musisz obsadzić wszystkie pozycje."
+"Musisz obsadzić wszystkie 8 pozycji."
 );
 
 return;
@@ -724,7 +903,7 @@ return;
 if(used.has(value)){
 
 showLineupError(
-"Ten zawodnik został wybrany więcej niż raz."
+"Ten sam zawodnik nie może być wybrany dwa razy."
 );
 
 return;
@@ -733,20 +912,28 @@ return;
 
 used.add(value);
 
-myLineup[number]=
+const rider=
 myTeam.riders.find(r=>r.name===value);
+
+myLineup[number]=rider;
 
 }
 
 
-/* podstawowa kontrola juniorów */
+/* kontrola juniorów */
 
-for(const n of [6,7,14,15]){
+const juniorNumbers=
+isHome
+?[14,15]
+:[6,7];
 
-if(myLineup[n].type!=="JUNIOR"){
+for(const n of juniorNumbers){
+
+if(!myLineup[n] ||
+myLineup[n].type!=="JUNIOR"){
 
 showLineupError(
-`Numer ${n} musi obsadzić junior.`
+`Numer ${n} musi obsadzić junior U21.`
 );
 
 return;
@@ -756,6 +943,22 @@ return;
 }
 
 
+/* kontrola rezerwy */
+
+const reserveNumber=
+isHome?16:8;
+
+if(!myLineup[reserveNumber] ||
+myLineup[reserveNumber].type!=="REZERWA"){
+
+showLineupError(
+`Numer ${reserveNumber} musi być obsadzony rezerwowym.`
+);
+
+return;
+
+}
+
 createAI();
 
 renderPreMatch();
@@ -763,7 +966,6 @@ renderPreMatch();
 show("preMatchScreen");
 
 }
-
 
 function showLineupError(text){
 
@@ -778,122 +980,159 @@ ${text}
 }
 
 
-/* =========================
-   AI
-========================= */
+/* =====================================================
+   AI — DOKŁADNIE 8 RÓŻNYCH ZAWODNIKÓW
+   ===================================================== */
 
 function createAI(){
 
 aiLineup={};
 
-const riders=opponent.riders;
-
-const seniors=riders.filter(r=>
-r.type==="SENIOR" || r.type==="U24"
+const seniors=
+opponent.riders.filter(r=>
+r.type==="SENIOR" ||
+r.type==="U24"
 );
 
-const juniors=riders.filter(r=>
+const juniors=
+opponent.riders.filter(r=>
 r.type==="JUNIOR"
 );
 
-const reserve=riders.filter(r=>
+const reserve=
+opponent.riders.find(r=>
 r.type==="REZERWA"
-)[0];
+);
 
-let s=0;
-let j=0;
+const aiSeniorNumbers=
+opponentNumbers.filter(n=>
+![6,7,8,14,15,16].includes(n)
+);
 
-for(let n=1;n<=16;n++){
+const aiJuniorNumbers=
+opponentNumbers.filter(n=>
+[6,7,14,15].includes(n)
+);
 
-if([6,7,14,15].includes(n)){
+const aiReserveNumber=
+opponentNumbers.includes(8)
+?8
+:16;
 
-aiLineup[n]=
-juniors[j%juniors.length];
 
-j++;
+/* senior / U24 */
 
-}
+seniors.forEach((r,index)=>{
 
-else if([8,16].includes(n)){
+if(index<aiSeniorNumbers.length){
 
-aiLineup[n]=reserve;
-
-}
-
-else{
-
-aiLineup[n]=
-seniors[s%seniors.length];
-
-s++;
-
-}
+aiLineup[
+aiSeniorNumbers[index]
+]=r;
 
 }
 
+});
+
+
+/* juniorzy */
+
+juniors.forEach((r,index)=>{
+
+if(index<aiJuniorNumbers.length){
+
+aiLineup[
+aiJuniorNumbers[index]
+]=r;
+
+}
+
+});
+
+
+/* rezerwa */
+
+if(reserve){
+
+aiLineup[aiReserveNumber]=reserve;
+
+}
+
 }
 
 
-/* =========================
-   PODGLĄD
-========================= */
+/* =====================================================
+   PODGLĄD SKŁADÓW
+   ===================================================== */
 
-function lineupHTML(lineup){
+function lineupHTML(lineup,numbers){
 
 let html="";
 
-for(let n=1;n<=16;n++){
+numbers.forEach(n=>{
 
 const r=lineup[n];
+
+if(!r)return;
 
 html+=`
 
 <div class="line">
 
-<span class="num">${n}</span>
+<span class="num">
+${n}
+</span>
 
 <span class="rider">
+
 ${r.name}
-<div class="type">${r.type}</div>
+
+<div class="type">
+${r.age} lat · ${r.type}
+</div>
+
 </span>
 
 </div>
 
 `;
 
-}
+});
 
 return html;
 
 }
 
-
 function renderPreMatch(){
 
 document.getElementById("myPreName").textContent=
-myTeam.name;
+myTeam.name+
+(isHome?" — GOSPODARZ":" — GOŚĆ");
 
 document.getElementById("aiPreName").textContent=
-opponent.name;
+opponent.name+
+(isHome?" — GOŚĆ":" — GOSPODARZ");
 
 document.getElementById("myPreLineup").innerHTML=
-lineupHTML(myLineup);
+lineupHTML(myLineup,myNumbers);
 
 document.getElementById("aiPreLineup").innerHTML=
-lineupHTML(aiLineup);
+lineupHTML(aiLineup,opponentNumbers);
 
 }
 
 
-/* =========================
-   MECZ
-========================= */
+/* =====================================================
+   START MECZU
+   ===================================================== */
 
 function startMatch(){
 
 homeScore=0;
 awayScore=0;
+
 heat=1;
+heatFinished=false;
 
 stats={};
 
@@ -902,16 +1141,16 @@ stats[r.name]=0;
 });
 
 document.getElementById("matchHome").textContent=
-myTeam.city;
+isHome?myTeam.city:opponent.city;
 
 document.getElementById("matchAway").textContent=
-opponent.city;
+isHome?opponent.city:myTeam.city;
 
 document.getElementById("homeShort").textContent=
-myTeam.city;
+isHome?myTeam.city:opponent.city;
 
 document.getElementById("awayShort").textContent=
-opponent.city;
+isHome?opponent.city:myTeam.city;
 
 updateScore();
 
@@ -922,14 +1161,24 @@ prepareHeat();
 }
 
 
+/* =====================================================
+   PRZYGOTOWANIE BIEGU
+   ===================================================== */
+
 function prepareHeat(){
+
+heatFinished=false;
 
 document.getElementById("heatNo").textContent=heat;
 
 document.getElementById("heatTitle").textContent=
 `Bieg ${heat}`;
 
-let riders=getHeatRiders();
+document.getElementById("heatButton").classList.remove("hidden");
+
+document.getElementById("nextHeatButton").classList.add("hidden");
+
+const riders=getHeatRiders();
 
 let html="";
 
@@ -939,11 +1188,14 @@ html+=`
 
 <div class="heat">
 
-<strong>${i+1}. ${r.rider.name}</strong>
+<strong>
+${i+1}. ${r.rider.name}
+</strong>
 
 <div class="small">
-${r.home ? myTeam.city : opponent.city}
+${r.home ? "Gospodarz":"Gość"}
 · nr ${r.number}
+· ${r.rider.age} lat
 · ${r.rider.type}
 </div>
 
@@ -958,15 +1210,16 @@ document.getElementById("heatInfo").innerHTML=html;
 }
 
 
-/* =========================
+/* =====================================================
    OBSADA BIEGÓW
-========================= */
+   ===================================================== */
 
 function getHeatRiders(){
 
 /*
- Demo wykorzystuje stałą matrycę.
- Biegi 14/15 są ustawiane przez trenera.
+ Tymczasowa matryca demonstracyjna.
+ Docelowo podmienimy ją na oficjalną
+ matrycę PGE Ekstraligi 2026.
  */
 
 const matrix={
@@ -988,18 +1241,26 @@ const matrix={
 
 if(heat<=13){
 
-return matrix[heat].map((number,i)=>{
+return matrix[heat].map(number=>{
 
-const isHome=i<2;
+const isMyNumber=
+myLineup[number]!==undefined;
 
 const lineup=
-isHome ? myLineup : aiLineup;
+isMyNumber
+?myLineup
+:aiLineup;
+
+const teamIsHome=
+isMyNumber
+?isHome
+:!isHome;
 
 return{
 
 rider:lineup[number],
 number:number,
-home:isHome
+home:teamIsHome
 
 };
 
@@ -1007,36 +1268,82 @@ home:isHome
 
 }
 
+
+/* Bieg 14 */
+
 if(heat===14){
 
 return [
 
-{rider:myLineup[nominated14[0]],number:nominated14[0],home:true},
-{rider:myLineup[nominated14[1]],number:nominated14[1],home:true},
-{rider:aiLineup[14],number:14,home:false},
-{rider:aiLineup[15],number:15,home:false}
+{
+rider:myLineup[nominated14[0]],
+number:nominated14[0],
+home:isHome
+},
+
+{
+rider:myLineup[nominated14[1]],
+number:nominated14[1],
+home:isHome
+},
+
+{
+rider:aiLineup[isHome?14:6],
+number:isHome?14:6,
+home:!isHome
+},
+
+{
+rider:aiLineup[isHome?15:7],
+number:isHome?15:7,
+home:!isHome
+}
 
 ];
 
 }
+
+
+/* Bieg 15 */
 
 return [
 
-{rider:myLineup[nominated15[0]],number:nominated15[0],home:true},
-{rider:myLineup[nominated15[1]],number:nominated15[1],home:true},
-{rider:aiLineup[14],number:14,home:false},
-{rider:aiLineup[15],number:15,home:false}
+{
+rider:myLineup[nominated15[0]],
+number:nominated15[0],
+home:isHome
+},
+
+{
+rider:myLineup[nominated15[1]],
+number:nominated15[1],
+home:isHome
+},
+
+{
+rider:aiLineup[isHome?14:6],
+number:isHome?14:6,
+home:!isHome
+},
+
+{
+rider:aiLineup[isHome?15:7],
+number:isHome?15:7,
+home:!isHome
+}
 
 ];
 
 }
 
 
-/* =========================
-   BIEG
-========================= */
+/* =====================================================
+   SYMULACJA BIEGU
+   ===================================================== */
 
 function runHeat(){
+
+if(heatFinished)return;
 
 const riders=getHeatRiders();
 
@@ -1057,8 +1364,12 @@ if(r.home){
 
 homeScore+=p;
 
+if(myLineup[r.number]){
+
 stats[r.rider.name]=
 (stats[r.rider.name]||0)+p;
+
+}
 
 }else{
 
@@ -1070,10 +1381,20 @@ html+=`
 
 <div class="result">
 
-<strong>${i+1}. ${r.rider.name}</strong>
+<strong>
+${i+1}. ${r.rider.name}
+</strong>
 
-<span class="${p===3?"good":p===0?"bad":""}">
+<span class="${
+p===3
+?"good"
+:p===0
+?"bad"
+:""
+}">
+
 ${p} pkt
+
 </span>
 
 </div>
@@ -1082,16 +1403,45 @@ ${p} pkt
 
 });
 
-document.getElementById("heatInfo").innerHTML=html;
+
+/* pokazujemy wynik biegu */
+
+document.getElementById("heatInfo").innerHTML=`
+
+<div class="match-result">
+
+<h3>🏁 Wyniki biegu ${heat}</h3>
+
+${html}
+
+</div>
+
+`;
 
 updateScore();
 
+heatFinished=true;
+
+document.getElementById("heatButton")
+.classList.add("hidden");
+
+document.getElementById("nextHeatButton")
+.classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   KOLEJNY BIEG
+   ===================================================== */
+
+function nextHeat(){
+
+if(!heatFinished)return;
+
 if(heat===13){
 
-setTimeout(
-showNominated,
-700
-);
+showNominated();
 
 return;
 
@@ -1099,10 +1449,7 @@ return;
 
 if(heat===15){
 
-setTimeout(
-finishMatch,
-700
-);
+finishMatch();
 
 return;
 
@@ -1110,74 +1457,89 @@ return;
 
 heat++;
 
-setTimeout(
-prepareHeat,
-700
-);
+prepareHeat();
 
 }
 
 
-/* =========================
+/* =====================================================
    NOMINOWANE
-========================= */
+   ===================================================== */
 
 function showNominated(){
-
-const losingTeam=
-homeScore<awayScore
-?myTeam
-:opponent;
 
 let text="";
 
 if(homeScore<awayScore){
 
 text=
-`Przegrywasz ${homeScore}:${awayScore}. `+
-`Musisz teraz wybrać obsadę biegów nominowanych.`;
+`Gospodarze przegrywają ${homeScore}:${awayScore}.`;
 
 }else if(homeScore===awayScore){
 
 text=
-`Jest remis ${homeScore}:${awayScore}. `+
-`Wybierz swoich zawodników do biegów nominowanych.`;
+`Po 13. biegu jest remis ${homeScore}:${awayScore}.`;
 
 }else{
 
 text=
-`Prowadzisz ${homeScore}:${awayScore}. `+
-`Wybierz swoich zawodników do biegów nominowanych.`;
+`Gospodarze prowadzą ${homeScore}:${awayScore}.`;
 
 }
 
-document.getElementById("nominatedNotice").textContent=text;
+document.getElementById("nominatedNotice").textContent=
+text+
+" Wybierz swoich zawodników do biegów nominowanych.";
 
 const available=
-Object.values(myLineup)
-.filter(r=>r.type!=="REZERWA");
+Object.entries(myLineup)
+.filter(([n,r])=>
+r.type!=="REZERWA"
+)
+.map(([n,r])=>({
+number:Number(n),
+rider:r
+}));
 
-const makeSelect=(id)=>{
+function makeSelect(id){
 
 return `
 
 <select id="${id}a">
-<option value="">Pierwszy zawodnik</option>
-${available.map(r=>
-`<option value="${r.name}">${r.name}</option>`
+
+<option value="">
+Pierwszy zawodnik
+</option>
+
+${available.map(x=>
+`
+<option value="${x.number}">
+${x.rider.name} — ${x.rider.age} lat
+</option>
+`
 ).join("")}
+
 </select>
 
 <select id="${id}b">
-<option value="">Drugi zawodnik</option>
-${available.map(r=>
-`<option value="${r.name}">${r.name}</option>`
+
+<option value="">
+Drugi zawodnik
+</option>
+
+${available.map(x=>
+`
+<option value="${x.number}">
+${x.rider.name} — ${x.rider.age} lat
+</option>
+`
 ).join("")}
+
 </select>
 
 `;
 
-};
+}
 
 document.getElementById("heat14Select").innerHTML=
 makeSelect("h14");
@@ -1190,19 +1552,23 @@ show("nominatedScreen");
 }
 
 
+/* =====================================================
+   ZATWIERDZENIE NOMINOWANYCH
+   ===================================================== */
+
 function confirmNominated(){
 
 const h14a=
-document.getElementById("h14a").value;
+Number(document.getElementById("h14a").value);
 
 const h14b=
-document.getElementById("h14b").value;
+Number(document.getElementById("h14b").value);
 
 const h15a=
-document.getElementById("h15a").value;
+Number(document.getElementById("h15a").value);
 
 const h15b=
-document.getElementById("h15b").value;
+Number(document.getElementById("h15b").value);
 
 if(!h14a||!h14b||!h15a||!h15b){
 
@@ -1212,22 +1578,34 @@ return;
 
 }
 
-if(h14a===h14b||h15a===h15b){
+if(h14a===h14b){
 
-alert("Ten sam zawodnik nie może być wybrany dwa razy w jednym biegu.");
+alert(
+"Bieg 14: ten sam zawodnik nie może wystąpić dwa razy."
+);
+
+return;
+
+}
+
+if(h15a===h15b){
+
+alert(
+"Bieg 15: ten sam zawodnik nie może wystąpić dwa razy."
+);
 
 return;
 
 }
 
 nominated14=[
-findNumber(h14a),
-findNumber(h14b)
+h14a,
+h14b
 ];
 
 nominated15=[
-findNumber(h15a),
-findNumber(h15b)
+h15a,
+h15b
 ];
 
 heat=14;
@@ -1239,27 +1617,9 @@ prepareHeat();
 }
 
 
-function findNumber(name){
-
-for(let n=1;n<=16;n++){
-
-if(myLineup[n] &&
-myLineup[n].name===name){
-
-return n;
-
-}
-
-}
-
-return null;
-
-}
-
-
-/* =========================
+/* =====================================================
    WYNIK
-========================= */
+   ===================================================== */
 
 function updateScore(){
 
@@ -1333,24 +1693,28 @@ show("resultScreen");
 }
 
 
-/* =========================
+/* =====================================================
    POWROTY
-========================= */
-
-function backToClubs(){
-show("clubScreen");
-}
+   ===================================================== */
 
 function backToOpponents(){
+
 chooseTeam(
 teams.indexOf(myTeam)
 );
+
+}
+
+function showClubs(){
+
+show("clubScreen");
+
 }
 
 
-/* =========================
+/* =====================================================
    START
-========================= */
+   ===================================================== */
 
 renderTeams();
 
