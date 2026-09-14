@@ -1,375 +1,958 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>Speedway Manager 2026</title>
 
-  <title>Speedway Manager 2026</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-  <style>
-    body {
-      margin: 0;
-      background: #080a0f;
-      color: white;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0b1020;
+    color: white;
+}
 
-    .app {
-      max-width: 700px;
-      margin: auto;
-      padding: 20px;
-    }
+header {
+    background: linear-gradient(135deg, #111827, #1e293b);
+    padding: 22px 16px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
 
-    h1 {
-      margin-bottom: 5px;
-    }
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
 
-    .subtitle {
-      color: #8d96a8;
-      margin-bottom: 25px;
-    }
+header p {
+    margin: 6px 0 0;
+    color: #94a3b8;
+}
 
-    .card {
-      background: #151922;
-      border: 1px solid #292f3a;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 16px;
+}
 
-    .button {
-      width: 100%;
-      padding: 15px;
-      border: 0;
-      border-radius: 14px;
-      background: #4da3ff;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+.card {
+    background: #111827;
+    border: 1px solid #263244;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+}
 
-    .team {
-      background: #1c212c;
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 10px;
-    }
+h2, h3 {
+    margin-top: 0;
+}
 
-    .team-name {
-      font-size: 17px;
-      font-weight: bold;
-    }
+button {
+    width: 100%;
+    border: 0;
+    border-radius: 13px;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
 
-    .team-city {
-      color: #8d96a8;
-      margin-top: 5px;
-    }
+button:active {
+    transform: scale(.98);
+}
 
-    .hidden {
-      display: none;
-    }
-  </style>
+.secondary {
+    background: #334155;
+}
+
+.green {
+    background: #15803d;
+}
+
+.red {
+    background: #b91c1c;
+}
+
+.team {
+    padding: 14px;
+    background: #172033;
+    border-radius: 14px;
+    margin-top: 10px;
+    border: 1px solid #29364d;
+}
+
+.team strong {
+    font-size: 17px;
+}
+
+.small {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.score {
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.vs {
+    color: #64748b;
+    font-weight: bold;
+}
+
+.heat-number {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.riders {
+    display: grid;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.rider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #172033;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.rider-name {
+    font-weight: 600;
+}
+
+.points {
+    font-weight: 800;
+    color: #60a5fa;
+}
+
+.result {
+    background: #172033;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 12px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #263244;
+}
+
+.result-row:last-child {
+    border-bottom: 0;
+}
+
+.position {
+    width: 30px;
+    display: inline-block;
+    font-weight: 800;
+}
+
+.big-result {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 900;
+    margin: 15px 0;
+}
+
+.badge {
+    display: inline-block;
+    background: #1d4ed8;
+    padding: 5px 9px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 5px;
+    text-align: left;
+    border-bottom: 1px solid #263244;
+}
+
+th {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+footer {
+    text-align: center;
+    color: #64748b;
+    padding: 25px;
+    font-size: 12px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
-
+<header>
     <h1>🏁 Speedway Manager 2026</h1>
+    <p>Kariera menedżera</p>
+</header>
 
-    <div class="subtitle">
-      Twój klub. Twój skład. Twój sezon.
-    </div>
+<div class="container">
 
-    <div id="startScreen">
+    <!-- EKRAN KLUBU -->
+    <section id="clubScreen">
 
-      <div class="card">
+        <div class="card">
+            <h2>Wybierz klub</h2>
+            <p class="small">
+                Rozpocznij karierę w PGE Ekstralidze 2026.
+            </p>
 
-        <h2>Kariera 2026</h2>
+            <div id="teams"></div>
+        </div>
 
-        <p>
-          Zostań menedżerem klubu żużlowego.
-          Zarządzaj składem, budżetem i meczami.
-        </p>
-
-        <button class="button" onclick="showTeams()">
-          Wybierz klub
-        </button>
-
-      </div>
-
-    </div>
+    </section>
 
 
-    <div id="teamsScreen" class="hidden">
+    <!-- EKRAN DRUŻYNY -->
+    <section id="teamScreen" class="hidden">
 
-      <div class="card">
+        <div class="card">
+            <span class="badge">KARIERA 2026</span>
+            <h2 id="teamName"></h2>
 
-        <h2>Wybierz klub</h2>
+            <p id="teamCity" class="small"></p>
 
-        <div id="teams"></div>
+            <h3>Budżet</h3>
+            <p id="teamBudget"></p>
 
-      </div>
+            <button onclick="startMatch()">
+                🏁 Rozegraj mecz
+            </button>
 
-    </div>
+            <button class="secondary" onclick="backToTeams()">
+                ← Wybierz inny klub
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Skład</h3>
+            <div id="roster"></div>
+        </div>
+
+    </section>
 
 
-    <div id="clubScreen" class="hidden">
+    <!-- EKRAN MECZU -->
+    <section id="matchScreen" class="hidden">
 
-      <div class="card">
+        <div class="card">
 
-        <h2 id="clubName"></h2>
+            <div class="scoreboard">
 
-        <p id="clubCity"></p>
+                <div>
+                    <div id="homeName"></div>
+                    <div id="homeScore" class="score">0</div>
+                </div>
 
-        <hr>
+                <div class="vs">VS</div>
 
-        <p>
-          💰 Budżet:
-          <strong id="clubBudget"></strong>
-        </p>
+                <div>
+                    <div>RYWAL</div>
+                    <div id="awayScore" class="score">0</div>
+                </div>
 
-        <button class="button" onclick="alert('System meczowy dodamy w następnym kroku.')">
-          Rozegraj mecz
-        </button>
+            </div>
 
-      </div>
+        </div>
 
-      <div class="card">
 
-        <h2>Skład</h2>
+        <div class="card">
 
-        <div id="roster"></div>
+            <div class="heat-number">
+                BIEG <span id="heatNumber">1</span> / 15
+            </div>
 
-      </div>
+            <h2 id="heatTitle">Bieg 1</h2>
 
-    </div>
+            <div id="heatRiders" class="riders"></div>
 
-  </div>
+            <button id="nextHeatButton" onclick="runHeat()">
+                ▶️ Odjedź bieg
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Wynik meczu</h3>
+
+            <div class="scoreboard">
+
+                <div>
+                    <strong id="homeName2"></strong>
+                    <div id="homeScore2">0</div>
+                </div>
+
+                <div class="vs">:</div>
+
+                <div>
+                    <strong>RYWAL</strong>
+                    <div id="awayScore2">0</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KONIEC MECZU -->
+    <section id="resultScreen" class="hidden">
+
+        <div class="card">
+
+            <span class="badge">KONIEC MECZU</span>
+
+            <h2 id="resultTitle">Wynik końcowy</h2>
+
+            <div class="big-result">
+                <span id="finalHome">0</span>
+                :
+                <span id="finalAway">0</span>
+            </div>
+
+            <p id="resultMessage" style="text-align:center;"></p>
+
+            <button onclick="showTeamScreen()">
+                🏠 Wróć do klubu
+            </button>
+
+            <button class="secondary" onclick="startMatch()">
+                🔄 Rozegraj ponownie
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Wyniki zawodników</h3>
+
+            <div id="finalRiders"></div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    Speedway Manager 2026
+</footer>
 
 
 <script>
 
 const teams = [
 
-  {
-    name: "ORLEN OIL MOTOR Lublin",
-    city: "Lublin",
-    budget: 5500000,
+    {
+        name: "ORLEN OIL MOTOR Lublin",
+        city: "Lublin",
+        budget: 12500000,
+        riders: [
+            "Bartosz Zmarzlik",
+            "Fredrik Lindgren",
+            "Mateusz Cierniak",
+            "Martin Vaculik",
+            "Kacper Woryna",
+            "Bartosz Bańbor",
+            "Bartosz Jaworski"
+        ]
+    },
 
-    riders: [
-      "Bartosz Zmarzlik",
-      "Fredrik Lindgren",
-      "Mateusz Cierniak",
-      "Martin Vaculik",
-      "Kacper Woryna",
-      "Bartosz Bańbor",
-      "Bartosz Jaworski"
-    ]
-  },
+    {
+        name: "PRES GRUPA DEWELOPERSKA Toruń",
+        city: "Toruń",
+        budget: 11800000,
+        riders: [
+            "Emil Sajfutdinow",
+            "Robert Lambert",
+            "Patryk Dudek",
+            "Mikkel Michelsen",
+            "Norick Bloedorn",
+            "Antoni Kawczyński",
+            "Mikołaj Duchiński"
+        ]
+    },
 
-  {
-    name: "PRES GRUPA DEWELOPERSKA Toruń",
-    city: "Toruń",
-    budget: 5000000,
+    {
+        name: "BETARD SPARTA Wrocław",
+        city: "Wrocław",
+        budget: 12000000,
+        riders: [
+            "Artem Laguta",
+            "Maciej Janowski",
+            "Daniel Bewley",
+            "Brady Kurtz",
+            "Anders Rowe",
+            "Marcel Kowolik",
+            "Nikodem Mikołajczyk"
+        ]
+    },
 
-    riders: [
-      "Emil Sajfutdinow",
-      "Robert Lambert",
-      "Patryk Dudek",
-      "Mikkel Michelsen",
-      "Norick Bloedorn",
-      "Antoni Kawczyński",
-      "Mikołaj Duchiński"
-    ]
-  },
+    {
+        name: "FOGO UNIA Leszno",
+        city: "Leszno",
+        budget: 10500000,
+        riders: [
+            "Janusz Kołodziej",
+            "Piotr Pawlicki",
+            "Grzegorz Zengota",
+            "Benjamin Cook",
+            "Keynan Rew",
+            "Nazar Parnitskyi",
+            "Kacper Mania"
+        ]
+    },
 
-  {
-    name: "BETARD SPARTA Wrocław",
-    city: "Wrocław",
-    budget: 5200000,
+    {
+        name: "BAYERSYSTEM GKM Grudziądz",
+        city: "Grudziądz",
+        budget: 9500000,
+        riders: [
+            "Max Fricke",
+            "Michael Jepsen Jensen",
+            "Vadim Tarasenko",
+            "Maksym Drabik",
+            "Kevin Małkiewicz",
+            "Kacper Szarszewski",
+            "Kevin Iwański-Helt"
+        ]
+    },
 
-    riders: [
-      "Artem Laguta",
-      "Maciej Janowski",
-      "Daniel Bewley",
-      "Brady Kurtz",
-      "Anders Rowe",
-      "Marcel Kowolik",
-      "Nikodem Mikołajczyk"
-    ]
-  },
+    {
+        name: "GEZET STAL Gorzów",
+        city: "Gorzów Wielkopolski",
+        budget: 9800000,
+        riders: [
+            "Anders Thomsen",
+            "Jack Holder",
+            "Paweł Przedpełski",
+            "Adam Bednar",
+            "Oskar Paluch",
+            "Marcel Szymko",
+            "Igor Kordun"
+        ]
+    },
 
-  {
-    name: "FOGO UNIA Leszno",
-    city: "Leszno",
-    budget: 4700000,
+    {
+        name: "STELMET FALUBAZ Zielona Góra",
+        city: "Zielona Góra",
+        budget: 9300000,
+        riders: [
+            "Leon Madsen",
+            "Dominik Kubera",
+            "Przemysław Pawlicki",
+            "Andzejs Lebedevs",
+            "Damian Ratajczak",
+            "Oskar Hurysz",
+            "Rafał Sękowski"
+        ]
+    },
 
-    riders: [
-      "Janusz Kołodziej",
-      "Piotr Pawlicki",
-      "Grzegorz Zengota",
-      "Benjamin Cook",
-      "Keynan Rew",
-      "Nazar Parnitskyi",
-      "Kacper Mania"
-    ]
-  },
-
-  {
-    name: "BAYERSYSTEM GKM Grudziądz",
-    city: "Grudziądz",
-    budget: 4300000,
-
-    riders: [
-      "Max Fricke",
-      "Michael Jepsen Jensen",
-      "Vadim Tarasenko",
-      "Maksym Drabik",
-      "Kevin Małkiewicz",
-      "Kacper Szarszewski",
-      "Kevin Iwański-Helt"
-    ]
-  },
-
-  {
-    name: "GEZET STAL Gorzów",
-    city: "Gorzów Wielkopolski",
-    budget: 4400000,
-
-    riders: [
-      "Anders Thomsen",
-      "Jack Holder",
-      "Paweł Przedpełski",
-      "Adam Bednar",
-      "Oskar Paluch",
-      "Marcel Szymko",
-      "Igor Kordun"
-    ]
-  },
-
-  {
-    name: "STELMET FALUBAZ Zielona Góra",
-    city: "Zielona Góra",
-    budget: 4100000,
-
-    riders: [
-      "Leon Madsen",
-      "Dominik Kubera",
-      "Przemysław Pawlicki",
-      "Andzejs Lebedevs",
-      "Damian Ratajczak",
-      "Oskar Hurysz",
-      "Rafał Sękowski"
-    ]
-  },
-
-  {
-    name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
-    city: "Częstochowa",
-    budget: 4000000,
-
-    riders: [
-      "Jaimon Lidsey",
-      "Jakub Miśkowiak",
-      "Mads Hansen",
-      "Rohan Tungate",
-      "Sebastian Szostak",
-      "Franciszek Karczewski",
-      "Alan Ciurzyński"
-    ]
-  }
+    {
+        name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
+        city: "Częstochowa",
+        budget: 9000000,
+        riders: [
+            "Jaimon Lidsey",
+            "Jakub Miśkowiak",
+            "Mads Hansen",
+            "Rohan Tungate",
+            "Sebastian Szostak",
+            "Franciszek Karczewski",
+            "Alan Ciurzyński"
+        ]
+    }
 
 ];
 
 
-function showTeams() {
+let selectedTeam = null;
 
-  document.getElementById("startScreen")
-    .classList.add("hidden");
+let homeScore = 0;
+let awayScore = 0;
 
-  document.getElementById("teamsScreen")
-    .classList.remove("hidden");
+let currentHeat = 1;
 
-  const container =
-    document.getElementById("teams");
+let riderPoints = {};
 
-  container.innerHTML = "";
+let matchFinished = false;
 
-  teams.forEach((team, index) => {
 
-    container.innerHTML += `
+const heatNames = [
 
-      <div class="team">
+    "Bieg 1",
+    "Bieg 2",
+    "Bieg 3",
+    "Bieg 4",
+    "Bieg 5",
+    "Bieg 6",
+    "Bieg 7",
+    "Bieg 8",
+    "Bieg 9",
+    "Bieg 10",
+    "Bieg 11",
+    "Bieg 12",
+    "Bieg 13",
+    "Bieg 14",
+    "Bieg 15"
 
-        <div class="team-name">
-          ${team.name}
-        </div>
+];
 
-        <div class="team-city">
-          ${team.city}
-        </div>
 
-        <button
-          class="button"
-          onclick="selectTeam(${index})">
+function money(value) {
 
-          Wybierz
+    return new Intl.NumberFormat(
+        "pl-PL",
+        {
+            style: "currency",
+            currency: "PLN",
+            maximumFractionDigits: 0
+        }
+    ).format(value);
 
-        </button>
+}
 
-      </div>
 
-    `;
+function show(element) {
+    document.getElementById(element).classList.remove("hidden");
+}
 
-  });
+
+function hide(element) {
+    document.getElementById(element).classList.add("hidden");
+}
+
+
+function renderTeams() {
+
+    const box = document.getElementById("teams");
+
+    box.innerHTML = "";
+
+    teams.forEach((team, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "team";
+
+        div.innerHTML = `
+            <strong>${team.name}</strong>
+            <p class="small">${team.city}</p>
+            <button onclick="selectTeam(${index})">
+                Wybierz klub
+            </button>
+        `;
+
+        box.appendChild(div);
+
+    });
 
 }
 
 
 function selectTeam(index) {
 
-  const team = teams[index];
+    selectedTeam = teams[index];
 
-  document.getElementById("teamsScreen")
-    .classList.add("hidden");
+    document.getElementById("teamName").textContent =
+        selectedTeam.name;
 
-  document.getElementById("clubScreen")
-    .classList.remove("hidden");
+    document.getElementById("teamCity").textContent =
+        selectedTeam.city;
 
-  document.getElementById("clubName")
-    .textContent = team.name;
+    document.getElementById("teamBudget").textContent =
+        money(selectedTeam.budget);
 
-  document.getElementById("clubCity")
-    .textContent = team.city;
+    const roster = document.getElementById("roster");
 
-  document.getElementById("clubBudget")
-    .textContent =
-    team.budget.toLocaleString("pl-PL") + " zł";
+    roster.innerHTML = "";
 
-  const roster =
-    document.getElementById("roster");
+    selectedTeam.riders.forEach((rider, index) => {
 
-  roster.innerHTML = "";
+        const div = document.createElement("div");
 
-  team.riders.forEach((rider, index) => {
+        div.className = "rider";
 
-    roster.innerHTML += `
+        div.innerHTML = `
+            <span>
+                <span class="position">${index + 1}</span>
+                <span class="rider-name">${rider}</span>
+            </span>
+            <span class="points">0 pkt</span>
+        `;
 
-      <div class="team">
+        roster.appendChild(div);
 
-        <strong>
-          ${index + 1}. ${rider}
-        </strong>
+    });
 
-      </div>
-
-    `;
-
-  });
+    hide("clubScreen");
+    hide("matchScreen");
+    hide("resultScreen");
+    show("teamScreen");
 
 }
+
+
+function showTeamScreen() {
+
+    hide("clubScreen");
+    hide("matchScreen");
+    hide("resultScreen");
+    show("teamScreen");
+
+}
+
+
+function backToTeams() {
+
+    hide("teamScreen");
+    hide("matchScreen");
+    hide("resultScreen");
+    show("clubScreen");
+
+}
+
+
+function startMatch() {
+
+    homeScore = 0;
+    awayScore = 0;
+
+    currentHeat = 1;
+
+    matchFinished = false;
+
+    riderPoints = {};
+
+    selectedTeam.riders.forEach(rider => {
+        riderPoints[rider] = 0;
+    });
+
+    document.getElementById("homeName").textContent =
+        selectedTeam.city;
+
+    document.getElementById("homeName2").textContent =
+        selectedTeam.city;
+
+    updateScore();
+
+    hide("teamScreen");
+    hide("resultScreen");
+
+    show("matchScreen");
+
+    prepareHeat();
+
+}
+
+
+function prepareHeat() {
+
+    document.getElementById("heatNumber").textContent =
+        currentHeat;
+
+    document.getElementById("heatTitle").textContent =
+        heatNames[currentHeat - 1];
+
+    const ridersBox =
+        document.getElementById("heatRiders");
+
+    ridersBox.innerHTML = "";
+
+    const riders = getHeatRiders();
+
+    riders.forEach((rider, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "rider";
+
+        div.innerHTML = `
+            <span>
+                <span class="position">${index + 1}</span>
+                ${rider.name}
+            </span>
+            <span class="small">
+                ${rider.team}
+            </span>
+        `;
+
+        ridersBox.appendChild(div);
+
+    });
+
+    document.getElementById("nextHeatButton").textContent =
+        currentHeat === 15
+        ? "🏁 Odjedź bieg 15"
+        : "▶️ Odjedź bieg";
+
+}
+
+
+function getHeatRiders() {
+
+    const home = selectedTeam.riders;
+
+    const indexes = [
+
+        [0, 1],
+        [2, 3],
+        [4, 5],
+        [6, 0],
+        [2, 4],
+        [1, 6],
+        [3, 5],
+        [0, 4],
+        [1, 5],
+        [2, 6],
+        [0, 3],
+        [1, 4],
+        [2, 5],
+        [3, 6],
+        [0, 2]
+
+    ];
+
+    const pair = indexes[currentHeat - 1];
+
+    return [
+
+        {
+            name: home[pair[0]],
+            team: selectedTeam.city,
+            home: true
+        },
+
+        {
+            name: home[pair[1]],
+            team: selectedTeam.city,
+            home: true
+        },
+
+        {
+            name: "Zawodnik rywala 1",
+            team: "Rywal",
+            home: false
+        },
+
+        {
+            name: "Zawodnik rywala 2",
+            team: "Rywal",
+            home: false
+        }
+
+    ];
+
+}
+
+
+function runHeat() {
+
+    if (matchFinished) return;
+
+    const riders = getHeatRiders();
+
+    const shuffled = [...riders].sort(
+        () => Math.random() - 0.5
+    );
+
+    const points = [3, 2, 1, 0];
+
+    shuffled.forEach((rider, index) => {
+
+        const pts = points[index];
+
+        if (rider.home) {
+
+            homeScore += pts;
+
+            riderPoints[rider.name] =
+                (riderPoints[rider.name] || 0) + pts;
+
+        } else {
+
+            awayScore += pts;
+
+        }
+
+    });
+
+    updateScore();
+
+    showHeatResult(shuffled, points);
+
+    if (currentHeat >= 15) {
+
+        finishMatch();
+
+    } else {
+
+        currentHeat++;
+
+        setTimeout(() => {
+
+            prepareHeat();
+
+        }, 1000);
+
+    }
+
+}
+
+
+function showHeatResult(riders, points) {
+
+    const box =
+        document.getElementById("heatRiders");
+
+    box.innerHTML = "";
+
+    riders.forEach((rider, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "result";
+
+        div.innerHTML = `
+            <div class="result-row">
+                <span>
+                    <span class="position">${index + 1}.</span>
+                    ${rider.name}
+                </span>
+                <strong>${points[index]} pkt</strong>
+            </div>
+        `;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+function updateScore() {
+
+    document.getElementById("homeScore").textContent =
+        homeScore;
+
+    document.getElementById("awayScore").textContent =
+        awayScore;
+
+    document.getElementById("homeScore2").textContent =
+        homeScore;
+
+    document.getElementById("awayScore2").textContent =
+        awayScore;
+
+}
+
+
+function finishMatch() {
+
+    matchFinished = true;
+
+    document.getElementById("finalHome").textContent =
+        homeScore;
+
+    document.getElementById("finalAway").textContent =
+        awayScore;
+
+    let message = "";
+
+    if (homeScore > awayScore) {
+
+        message =
+            "Wygrana! Twój zespół zdobywa 2 punkty meczowe.";
+
+    } else if (homeScore < awayScore) {
+
+        message =
+            "Porażka. Czas przeanalizować wynik i przygotować się do następnego meczu.";
+
+    } else {
+
+        message =
+            "Remis. Obie drużyny zdobywają po jednym punkcie meczowym.";
+
+    }
+
+    document.getElementById("resultMessage").textContent =
+        message;
+
+    const finalBox =
+        document.getElementById("finalRiders");
+
+    finalBox.innerHTML = "";
+
+    const sorted = Object.entries(riderPoints)
+        .sort((a, b) => b[1] - a[1]);
+
+    sorted.forEach(([name, points]) => {
+
+        const div = document.createElement("div");
+
+        div.className = "result";
+
+        div.innerHTML = `
+            <div class="result-row">
+                <span>${name}</span>
+                <strong>${points} pkt</strong>
+            </div>
+        `;
+
+        finalBox.appendChild(div);
+
+    });
+
+    hide("matchScreen");
+
+    show("resultScreen");
+
+}
+
+
+renderTeams();
 
 </script>
 
