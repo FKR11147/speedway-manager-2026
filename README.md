@@ -1,0 +1,1 @@
+# speedway-manager-2026
