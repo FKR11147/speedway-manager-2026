@@ -4,16 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-
-<title>SMFK — Speedway Manager — Beta 3.1.2</title>
+<title>SMFK — Speedway Manager — Beta 3.1.3</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
 <style>
-
 * {
   box-sizing: border-box;
 }
@@ -46,7 +43,9 @@ button {
 }
 
 /* =========================================================
-   WSPÓLNE TŁO CAŁEJ GRY
+   TŁO CAŁEJ GRY
+   Zdjęcie przesłane przez użytkownika jest zapisane
+   bezpośrednio w index.html.
    ========================================================= */
 
 .app::before {
@@ -55,8 +54,9 @@ button {
   inset: 0;
   z-index: -3;
 
-  background-image:
-    url("https://commons.wikimedia.org/wiki/Special:Redirect/file/Bartosz_Zmarzlik_(2016).jpg");
+  background-image: url("data:image/jpeg;base64,
+PLACEHOLDER
+");
 
   background-size: cover;
   background-position: center center;
@@ -95,13 +95,12 @@ button {
 .header h1 {
   margin: 0;
 
-  font-family: "Permanent Marker", cursive;
-  font-size: 56px;
+  font-family: "Rubik Wet Paint", cursive;
+
+  font-size: 58px;
   line-height: 0.95;
   font-weight: 400;
   letter-spacing: 2px;
-
-  color: #ffffff;
 
   transform:
     rotate(-3deg)
@@ -111,14 +110,35 @@ button {
     4px 4px 0 #000,
     7px 7px 0 rgba(0,0,0,0.55),
     0 8px 22px rgba(0,0,0,0.85);
+
+  white-space: nowrap;
+}
+
+.logo-letter.s {
+  color: #ef233c;
+}
+
+.logo-letter.m {
+  color: #2563eb;
+}
+
+.logo-letter.f {
+  color: #ffffff;
+}
+
+.logo-letter.k {
+  color: #facc15;
 }
 
 .version {
   margin-top: 10px;
+
   color: rgba(255,255,255,0.70);
+
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 2px;
+
   text-transform: uppercase;
 }
 
@@ -135,21 +155,32 @@ button {
 }
 
 /* =========================================================
-   LOBBY / KLUBY
+   WSPÓLNE USTAWIENIA EKRANÓW
    ========================================================= */
 
-#clubScreen {
+#clubScreen,
+#lineupScreen,
+#matchScreen,
+#finishScreen {
   position: relative;
+
   min-height: calc(100vh - 120px);
+
   margin-left: -18px;
   margin-right: -18px;
   margin-top: -4px;
+
   padding: 28px 18px 40px;
+
   overflow: hidden;
+
   background: transparent;
 }
 
-#clubScreen > * {
+#clubScreen > *,
+#lineupScreen > *,
+#matchScreen > *,
+#finishScreen > * {
   position: relative;
   z-index: 2;
 }
@@ -160,8 +191,10 @@ button {
 
 .card {
   background: rgba(12,12,12,0.86);
+
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 16px;
+
   padding: 16px;
   margin-bottom: 16px;
 
@@ -197,18 +230,27 @@ h3 {
 
 .club-grid {
   display: grid;
+
   grid-template-columns: 1fr;
+
   gap: 12px;
 }
 
 .club-button {
   width: 100%;
+
   border: 1px solid rgba(255,255,255,0.13);
+
   background: rgba(20,20,20,0.84);
+
   color: white;
+
   border-radius: 14px;
+
   padding: 14px;
+
   text-align: left;
+
   cursor: pointer;
 
   transition:
@@ -222,7 +264,9 @@ h3 {
 
 .club-button:hover {
   background: rgba(35,35,35,0.92);
-  border-color: rgba(255,255,255,0.22);
+
+  border-color:
+    rgba(255,255,255,0.22);
 }
 
 .club-button:active {
@@ -231,32 +275,42 @@ h3 {
 
 .club-title-row {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
 }
 
 .club-logo {
   width: 42px;
   height: 42px;
+
   object-fit: contain;
+
   flex-shrink: 0;
 }
 
 .club-short {
   font-size: 18px;
+
   font-weight: 900;
+
   letter-spacing: 0.5px;
 }
 
 .club-name {
   font-size: 14px;
+
   color: #d1d5db;
+
   margin-top: 2px;
 }
 
 .club-city {
   font-size: 13px;
+
   color: #e5e7eb;
+
   margin-top: 8px;
 }
 
@@ -268,27 +322,37 @@ h3 {
 .primary-button,
 .secondary-button {
   width: 100%;
+
   border: 0;
+
   border-radius: 12px;
+
   padding: 13px 16px;
+
   font-size: 16px;
+
   font-weight: 800;
+
   cursor: pointer;
 }
 
 .primary-button {
   background: #2563eb;
+
   color: white;
 }
 
 .secondary-button {
   background: #374151;
+
   color: white;
 }
 
 .back-button {
   background: #374151;
+
   color: white;
+
   margin-bottom: 14px;
 }
 
@@ -296,67 +360,60 @@ h3 {
    EKRAN MECZU
    ========================================================= */
 
-#matchScreen {
-  position: relative;
-  min-height: calc(100vh - 120px);
-  margin-left: -18px;
-  margin-right: -18px;
-  margin-top: -4px;
-  padding: 28px 18px 40px;
-  overflow: hidden;
-  background: transparent;
-}
-
-#matchScreen > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* =========================================================
-   MECZ
-   ========================================================= */
-
 .match-header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+
+  grid-template-columns:
+    1fr auto 1fr;
+
   align-items: center;
+
   gap: 10px;
+
   text-align: center;
 }
 
 .team-box {
   background: rgba(17,17,17,0.88);
+
   border-radius: 12px;
+
   padding: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
 }
 
 .team-logo {
   width: 48px;
   height: 48px;
+
   object-fit: contain;
+
   display: block;
-  margin: 0 auto 6px;
+
+  margin:
+    0 auto 6px;
 }
 
-.team-short {
-  font-size: 22px;
-  font-weight: 900;
-}
-
+.team-short,
 .match-team-short {
   font-size: 22px;
+
   font-weight: 900;
 }
 
 .team-full {
   font-size: 12px;
+
   color: #9ca3af;
+
   margin-top: 4px;
 }
 
 .vs {
   font-weight: 900;
+
   color: #d1d5db;
 }
 
@@ -366,20 +423,28 @@ h3 {
 
 .slot-list {
   display: grid;
+
   gap: 9px;
 }
 
 .slot {
   background: rgba(17,17,17,0.92);
-  border: 1px solid #374151;
+
+  border:
+    1px solid #374151;
+
   border-radius: 12px;
+
   padding: 12px;
 }
 
 .slot-top {
   display: flex;
+
   justify-content: space-between;
+
   gap: 8px;
+
   align-items: center;
 }
 
@@ -389,28 +454,40 @@ h3 {
 
 .slot-role {
   font-size: 12px;
+
   color: #9ca3af;
 }
 
 .rider-button {
   width: 100%;
+
   margin-top: 8px;
-  border: 1px solid #4b5563;
+
+  border:
+    1px solid #4b5563;
+
   border-radius: 10px;
+
   background: #1f2937;
+
   color: white;
+
   padding: 10px;
+
   text-align: left;
+
   cursor: pointer;
 }
 
 .rider-button.selected {
   border-color: #2563eb;
+
   background: #1d4ed8;
 }
 
 .rider-button.disabled {
   opacity: 0.45;
+
   cursor: not-allowed;
 }
 
@@ -420,24 +497,35 @@ h3 {
 
 .rider-info {
   font-size: 12px;
+
   color: #d1d5db;
+
   margin-top: 4px;
 }
 
 .badges {
   display: flex;
+
   gap: 7px;
+
   flex-wrap: wrap;
+
   align-items: center;
+
   margin-top: 6px;
 }
 
 .badge {
   display: inline-block;
+
   padding: 3px 7px;
+
   border-radius: 999px;
+
   font-size: 10px;
+
   background: #374151;
+
   color: #e5e7eb;
 }
 
@@ -464,9 +552,12 @@ h3 {
   object-fit: cover;
 
   display: inline-block;
+
   vertical-align: middle;
 
-  border: 1px solid #000;
+  border:
+    1px solid #000;
+
   border-radius: 5px;
 
   background: #fff;
@@ -477,43 +568,10 @@ h3 {
 
 .rider-country {
   display: inline-flex;
+
   align-items: center;
+
   height: 22px;
-}
-
-/* =========================================================
-   SKŁAD MECZOWY
-   ========================================================= */
-
-.lineup-row {
-  display: grid;
-  grid-template-columns: 46px 1fr;
-  gap: 10px;
-  align-items: center;
-  padding: 9px 0;
-  border-bottom: 1px solid #374151;
-}
-
-.lineup-row:last-child {
-  border-bottom: 0;
-}
-
-.lineup-number {
-  font-weight: 900;
-  text-align: center;
-  background: #374151;
-  border-radius: 9px;
-  padding: 8px 4px;
-}
-
-.lineup-name {
-  font-weight: 900;
-}
-
-.lineup-info {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 3px;
 }
 
 /* =========================================================
@@ -526,29 +584,43 @@ h3 {
 
 .heat-number {
   color: #9ca3af;
+
   font-size: 13px;
 }
 
 .heat-title {
   font-size: 22px;
+
   font-weight: 900;
-  margin: 4px 0 16px;
+
+  margin:
+    4px 0 16px;
 }
 
 .heat-rider {
   display: grid;
-  grid-template-columns: 42px 1fr 44px;
+
+  grid-template-columns:
+    42px 1fr 44px;
+
   gap: 8px;
+
   align-items: center;
+
   padding: 10px;
+
   border-radius: 10px;
+
   background: rgba(17,17,17,0.92);
+
   margin-bottom: 8px;
+
   text-align: left;
 }
 
 .heat-position {
   font-weight: 900;
+
   text-align: center;
 }
 
@@ -558,46 +630,67 @@ h3 {
 
 .heat-team {
   font-size: 11px;
+
   color: #9ca3af;
 }
 
 .heat-points {
   font-weight: 900;
+
   text-align: right;
 }
 
 .result-box {
   text-align: center;
+
   padding: 16px;
-  background: rgba(17,17,17,0.92);
+
+  background:
+    rgba(17,17,17,0.92);
+
   border-radius: 12px;
+
   margin-top: 14px;
 }
 
 .result-score {
   font-size: 32px;
+
   font-weight: 900;
 }
 
 .small {
   font-size: 12px;
+
   color: #9ca3af;
 }
 
 .notice {
-  background: rgba(23,37,84,0.90);
-  border: 1px solid #1d4ed8;
+  background:
+    rgba(23,37,84,0.90);
+
+  border:
+    1px solid #1d4ed8;
+
   padding: 12px;
+
   border-radius: 10px;
+
   font-size: 13px;
+
   margin-bottom: 14px;
 }
 
 .error {
   background: #450a0a;
-  border: 1px solid #991b1b;
+
+  border:
+    1px solid #991b1b;
+
   padding: 12px;
+
   border-radius: 10px;
+
   margin-bottom: 14px;
 }
 
@@ -608,17 +701,19 @@ h3 {
 @media (min-width: 600px) {
 
   .club-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
   #clubScreen,
-  #matchScreen {
+  #lineupScreen,
+  #matchScreen,
+  #finishScreen {
     margin-left: -18px;
     margin-right: -18px;
   }
 
 }
-
 </style>
 </head>
 
@@ -626,12 +721,18 @@ h3 {
 
 <div class="app">
 
+  <!-- =====================================================
+       LOGO
+       ===================================================== -->
+
   <div class="header">
 
-    <h1>SMFK</h1>
+    <h1>
+      <span class="logo-letter s">S</span><span class="logo-letter m">M</span><span class="logo-letter f">F</span><span class="logo-letter k">K</span>
+    </h1>
 
     <div class="version">
-      BETA 3.1.2
+      BETA 3.1.3
     </div>
 
   </div>
@@ -640,17 +741,27 @@ h3 {
        WYBÓR KLUBU
        ===================================================== -->
 
-  <section id="clubScreen" class="screen active">
+  <section
+    id="clubScreen"
+    class="screen active"
+  >
 
     <div class="card">
 
-      <h2>Wybierz klub</h2>
+      <h2>
+        Wybierz klub
+      </h2>
 
       <div class="notice">
-        Wybierasz swój klub. Skład przeciwnika zostanie dobrany automatycznie.
+        Wybierasz swój klub.
+        Skład przeciwnika zostanie
+        dobrany automatycznie.
       </div>
 
-      <div id="clubGrid" class="club-grid"></div>
+      <div
+        id="clubGrid"
+        class="club-grid"
+      ></div>
 
     </div>
 
@@ -660,9 +771,15 @@ h3 {
        WYBÓR SKŁADU
        ===================================================== -->
 
-  <section id="lineupScreen" class="screen">
+  <section
+    id="lineupScreen"
+    class="screen"
+  >
 
-    <button class="back-button" onclick="backToClubs()">
+    <button
+      class="back-button"
+      onclick="backToClubs()"
+    >
       ← Wróć do wyboru klubu
     </button>
 
@@ -672,11 +789,17 @@ h3 {
 
         <div class="team-box">
 
-          <div id="homeShort" class="team-short">
+          <div
+            id="homeShort"
+            class="team-short"
+          >
             ---
           </div>
 
-          <div id="homeName" class="team-full">
+          <div
+            id="homeName"
+            class="team-full"
+          >
             ---
           </div>
 
@@ -688,11 +811,17 @@ h3 {
 
         <div class="team-box">
 
-          <div id="awayShort" class="team-short">
+          <div
+            id="awayShort"
+            class="team-short"
+          >
             ---
           </div>
 
-          <div id="awayName" class="team-full">
+          <div
+            id="awayName"
+            class="team-full"
+          >
             ---
           </div>
 
@@ -704,20 +833,29 @@ h3 {
 
     <div class="card">
 
-      <h2>Twój skład</h2>
+      <h2>
+        Twój skład
+      </h2>
 
       <div class="notice">
-        Wybierz 8 zawodników. Numery 1–5 to senior/U24,
-        6–7 to juniorzy U21, a 8 to rezerwa U24.
+        Wybierz 8 zawodników.
+        Numery 1–5 to senior/U24,
+        6–7 to juniorzy U21,
+        a 8 to rezerwa U24.
       </div>
 
-      <div id="lineupSlots" class="slot-list"></div>
+      <div
+        id="lineupSlots"
+        class="slot-list"
+      ></div>
 
     </div>
 
     <div class="card">
 
-      <h3>Dostępni zawodnicy</h3>
+      <h3>
+        Dostępni zawodnicy
+      </h3>
 
       <div id="riderList"></div>
 
@@ -727,10 +865,9 @@ h3 {
       id="startMatchButton"
       class="primary-button"
       onclick="startMatch()"
-      disabled>
-
+      disabled
+    >
       Rozpocznij mecz
-
     </button>
 
   </section>
@@ -739,7 +876,10 @@ h3 {
        MECZ
        ===================================================== -->
 
-  <section id="matchScreen" class="screen">
+  <section
+    id="matchScreen"
+    class="screen"
+  >
 
     <div class="card">
 
@@ -754,13 +894,17 @@ h3 {
             alt="Logo gospodarzy"
           >
 
-          <div id="matchHomeShort"
-               class="match-team-short">
+          <div
+            id="matchHomeShort"
+            class="match-team-short"
+          >
             ---
           </div>
 
-          <div id="matchHomeScore"
-               class="team-short">
+          <div
+            id="matchHomeScore"
+            class="team-short"
+          >
             0
           </div>
 
@@ -779,13 +923,17 @@ h3 {
             alt="Logo gości"
           >
 
-          <div id="matchAwayShort"
-               class="match-team-short">
+          <div
+            id="matchAwayShort"
+            class="match-team-short"
+          >
             ---
           </div>
 
-          <div id="matchAwayScore"
-               class="team-short">
+          <div
+            id="matchAwayScore"
+            class="team-short"
+          >
             0
           </div>
 
@@ -797,28 +945,36 @@ h3 {
 
     <div class="card heat-card">
 
-      <div id="heatNumber"
-           class="heat-number">
+      <div
+        id="heatNumber"
+        class="heat-number"
+      >
         Bieg 1 z 15
       </div>
 
-      <div id="heatTitle"
-           class="heat-title">
+      <div
+        id="heatTitle"
+        class="heat-title"
+      >
         Wynik biegu
       </div>
 
       <div id="heatResults"></div>
 
-      <div id="heatResultBox"
-           class="result-box"
-           style="display:none;">
+      <div
+        id="heatResultBox"
+        class="result-box"
+        style="display:none;"
+      >
 
         <div class="small">
           Wynik biegu
         </div>
 
-        <div id="heatScore"
-             class="result-score">
+        <div
+          id="heatScore"
+          class="result-score"
+        >
           0:0
         </div>
 
@@ -829,30 +985,27 @@ h3 {
     <button
       id="simulateButton"
       class="primary-button"
-      onclick="simulateCurrentHeat()">
-
+      onclick="simulateCurrentHeat()"
+    >
       🏁 Jedź bieg
-
     </button>
 
     <button
       id="nextHeatButton"
       class="primary-button"
       onclick="nextHeat()"
-      style="display:none; margin-top:10px;">
-
+      style="display:none;margin-top:10px;"
+    >
       Kolejny bieg ➡️
-
     </button>
 
     <button
       id="finishMatchButton"
       class="secondary-button"
       onclick="finishMatch()"
-      style="display:none; margin-top:10px;">
-
+      style="display:none;margin-top:10px;"
+    >
       Zakończ mecz
-
     </button>
 
   </section>
@@ -861,27 +1014,37 @@ h3 {
        KONIEC MECZU
        ===================================================== -->
 
-  <section id="finishScreen" class="screen">
+  <section
+    id="finishScreen"
+    class="screen"
+  >
 
-    <div class="card" style="text-align:center;">
+    <div
+      class="card"
+      style="text-align:center;"
+    >
 
-      <h2>Koniec meczu</h2>
+      <h2>
+        Koniec meczu
+      </h2>
 
-      <div id="finalScore"
-           class="result-score">
+      <div
+        id="finalScore"
+        class="result-score"
+      >
         0:0
       </div>
 
-      <div id="finalMessage"
-           style="margin:12px 0 18px;">
-      </div>
+      <div
+        id="finalMessage"
+        style="margin:12px 0 18px;"
+      ></div>
 
       <button
         class="primary-button"
-        onclick="backToClubs()">
-
+        onclick="backToClubs()"
+      >
         Wybierz klub ponownie
-
       </button>
 
     </div>
@@ -893,11 +1056,10 @@ h3 {
 <script>
 
 /* =========================================================
-   BETA 3.1.2
-   MECHANIKA POZOSTAJE BEZ ZMIAN
+   BETA 3.1.3
    ========================================================= */
 
-const VERSION = "3.1.2";
+const VERSION = "3.1.3";
 
 const GAME_DATE =
   new Date("2026-09-14T12:00:00");
@@ -918,9 +1080,10 @@ const LOGO_BASE =
 const clubs = {
 
   LUB: {
-    short: "LUB",
+    short: "#LUB",
     name: "ORLEN OIL MOTOR Lublin",
     city: "Lublin",
+
     logoUrl:
       LOGO_BASE +
       "14_2026_alt_128x128.png?fmtjwtp39",
@@ -1023,9 +1186,11 @@ const clubs = {
 
 
   TOR: {
-    short: "TOR",
+
+    short: "#TOR",
     name: "PRES GRUPA DEWELOPERSKA Toruń",
     city: "Toruń",
+
     logoUrl:
       LOGO_BASE +
       "1_2026_alt_128x128.png?fmtjwtp39",
@@ -1082,29 +1247,22 @@ const clubs = {
       },
 
       {
-        name: "Nicolai Heiselberg",
-        birthDate: "2007-07-10",
-        nationality: "DK",
-        type: "u24"
-      },
-
-      {
         name: "Bartosz Derek",
-        birthDate: null,
+        birthDate: "2009-08-15",
         nationality: "PL",
         type: "junior"
       },
 
       {
         name: "Ksawery Słomski",
-        birthDate: null,
+        birthDate: "2008-11-12",
         nationality: "PL",
         type: "junior"
       },
 
       {
         name: "Jan Heleniak",
-        birthDate: null,
+        birthDate: "2007-05-18",
         nationality: "PL",
         type: "junior"
       }
@@ -1114,9 +1272,11 @@ const clubs = {
 
 
   WRO: {
-    short: "WRO",
+
+    short: "#WRO",
     name: "BETARD SPARTA Wrocław",
     city: "Wrocław",
+
     logoUrl:
       LOGO_BASE +
       "3_2026_alt_128x128.png?fmtjwtp39",
@@ -1216,14 +1376,14 @@ const clubs = {
 
       {
         name: "Błażej Pasieka",
-        birthDate: null,
+        birthDate: "2010-12-14",
         nationality: "PL",
         type: "junior"
       },
 
       {
         name: "Rafał Grzędziński",
-        birthDate: null,
+        birthDate: "2010-01-21",
         nationality: "PL",
         type: "senior"
       }
@@ -1233,9 +1393,11 @@ const clubs = {
 
 
   LES: {
-    short: "LES",
+
+    short: "#LES",
     name: "FOGO UNIA Leszno",
     city: "Leszno",
+
     logoUrl:
       LOGO_BASE +
       "6_2026_alt_128x128.png?fmtjwtp39",
@@ -1317,9 +1479,11 @@ const clubs = {
 
 
   GKM: {
-    short: "GKM",
+
+    short: "#GRU",
     name: "BAYERSYSTEM GKM Grudziądz",
     city: "Grudziądz",
+
     logoUrl:
       LOGO_BASE +
       "2_2026_alt_128x128.png?fmtjwtp39",
@@ -1335,23 +1499,23 @@ const clubs = {
 
       {
         name: "Michael Jepsen Jensen",
-        birthDate: null,
+        birthDate: "1992-02-18",
         nationality: "DK",
         type: "senior"
       },
 
       {
-        name: "Jaimon Lidsey",
-        birthDate: null,
-        nationality: "AU",
-        type: "u24"
-      },
-
-      {
-        name: "Kacper Pludra",
-        birthDate: null,
+        name: "Maksym Drabik",
+        birthDate: "1998-02-22",
         nationality: "PL",
-        type: "u24"
+        type: "senior"
+      },
+      
+      {
+        name: "Vadim Tarasenko",
+        birthDate: "1994-05-12",
+        nationality: "PL",
+        type: "senior"
       },
 
       {
@@ -1359,6 +1523,13 @@ const clubs = {
         birthDate: "2007-08-03",
         nationality: "PL",
         type: "u24"
+      },
+      
+      {
+        name: "Beau Bailey",
+        birthDate: "2009-10-06",
+        nationality: "AU",
+        type: "junior"
       },
 
       {
@@ -1401,9 +1572,11 @@ const clubs = {
 
 
   GOR: {
-    short: "GOR",
+
+    short: "#GOR",
     name: "GEZET STAL Gorzów",
     city: "Gorzów Wielkopolski",
+
     logoUrl:
       LOGO_BASE +
       "8_2026_alt_128x128.png?fmtjwtp39",
@@ -1421,6 +1594,13 @@ const clubs = {
         name: "Anders Thomsen",
         birthDate: "1994-01-01",
         nationality: "DK",
+        type: "senior"
+      },
+      
+      {
+        name: "Paweł Przedpełski",
+        birthDate: "1995-06-23",
+        nationality: "PL",
         type: "senior"
       },
 
@@ -1444,7 +1624,28 @@ const clubs = {
         nationality: "PL",
         type: "u24"
       },
+      
+      {
+        name: "Charles Wright",
+        birthDate: "1988-10-26",
+        nationality: "GB",
+        type: "senior"
+      },
+      
+      {
+        name: "Mathias Pollestad",
+        birthDate: "2004-11-21",
+        nationality: "NO",
+        type: "u24"
+      },
 
+      {
+        name: "Igor Kordun",
+        birthDate: "2010-03-07",
+        nationality: "PL",
+        type: "junior"
+      },
+      
       {
         name: "Marcel Szymko",
         birthDate: "1992-02-23",
@@ -1464,9 +1665,11 @@ const clubs = {
 
 
   ZIE: {
-    short: "ZIE",
+
+    short: "#ZIE",
     name: "STELMET FALUBAZ Zielona Góra",
     city: "Zielona Góra",
+
     logoUrl:
       LOGO_BASE +
       "5_2026_alt_128x128.png?fmtjwtp39",
@@ -1475,56 +1678,56 @@ const clubs = {
 
       {
         name: "Przemysław Pawlicki",
-        birthDate: null,
+        birthDate: "1991-09-05",
         nationality: "PL",
         type: "senior"
       },
 
       {
-        name: "Jarosław Hampel",
-        birthDate: null,
-        nationality: "PL",
+        name: "Andrzejs Lebedevs",
+        birthDate: "1994-11-04",
+        nationality: "LV",
         type: "senior"
       },
 
       {
-        name: "Rasmus Jensen",
-        birthDate: null,
-        nationality: "DK",
+        name: "Dominik Kubera",
+        birthDate: "1999-04-15",
+        nationality: "PL",
         type: "senior"
       },
 
       {
         name: "Leon Madsen",
-        birthDate: null,
+        birthDate: "1988-09-05",
         nationality: "DK",
         type: "senior"
       },
 
       {
-        name: "Kacper Gomólski",
-        birthDate: null,
-        nationality: "PL",
-        type: "senior"
+        name: "Mitchell McDiarmid",
+        birthDate:  "2008-03-21",
+        nationality: "AU",
+        type: "junior"
       },
 
       {
-        name: "Wiktor Trofimow",
-        birthDate: null,
-        nationality: "PL",
-        type: "u24"
+        name: "William Cairns",
+        birthDate:  "2009-06-29",
+        nationality: "GB",
+        type: "junior"
       },
 
       {
         name: "Oskar Hurysz",
-        birthDate: null,
+        birthDate: "2005-09-05",
         nationality: "PL",
         type: "junior"
       },
 
       {
-        name: "Maksym Borowiak",
-        birthDate: null,
+        name: "Damian Ratajczak",
+        birthDate: "2005-05-23",
         nationality: "PL",
         type: "junior"
       }
@@ -1534,9 +1737,11 @@ const clubs = {
 
 
   CZE: {
-    short: "CZE",
+
+    short: "#CZE",
     name: "KRONO-PLAST WŁÓKNIARZ Częstochowa",
     city: "Częstochowa",
+
     logoUrl:
       LOGO_BASE +
       "9_2026_alt_128x128.png?fmtjwtp39",
@@ -1544,59 +1749,87 @@ const clubs = {
     riders: [
 
       {
-        name: "Kacper Woryna",
-        birthDate: "1996-08-31",
-        nationality: "PL",
-        type: "senior"
-      },
-
-      {
-        name: "Mikkel Michelsen",
-        birthDate: "1994-08-19",
-        nationality: "DK",
-        type: "senior"
-      },
-
-      {
-        name: "Jason Doyle",
-        birthDate: null,
+        name: "Rohan Tungate",
+        birthDate: "1990-01-21",
         nationality: "AU",
         type: "senior"
       },
 
       {
-        name: "Piotr Pawlicki",
-        birthDate: "1994-11-30",
+        name: "Jaimon Lidsey",
+        birthDate: "1999-02-27",
+        nationality: "AU",
+        type: "senior"
+      },
+
+      {
+        name: "Jakub Miśkowiak",
+        birthDate: "2001-08-03",
         nationality: "PL",
         type: "senior"
       },
 
       {
-        name: "Bartosz Smektała",
-        birthDate: null,
-        nationality: "PL",
+        name: "Mads Hansen",
+        birthDate: "2000-06-26",
+        nationality: "DK",
         type: "senior"
       },
 
       {
-        name: "Kacper Halkiewicz",
-        birthDate: null,
+        name: "Sebastian Szostak",
+        birthDate: "2003-09-17",
+        nationality: "PL",
+        type: "u24"
+      },
+
+      {
+        name: "Franciszek Karczewski",
+        birthDate: "2006-02-23",
         nationality: "PL",
         type: "junior"
       },
 
       {
         name: "Szymon Ludwiczak",
-        birthDate: null,
+        birthDate: "2007-09-15",
         nationality: "PL",
         type: "junior"
       },
-
+      
       {
-        name: "Wiktor Walasek",
-        birthDate: null,
+        name: "Dimitri Buch",
+        birthDate: "2008-01-22",
+        nationality: "DK",
+        type: "junior"
+      },
+      
+      {
+        name: "Bartosz Śmigielski",
+        birthDate: "2007-02-25",
+        nationality: "PL",
+        type: "junior"
+      },
+      
+      {
+        name: "Kacper Grzelak",
+        birthDate: "2003-11-22",
         nationality: "PL",
         type: "u24"
+      },      
+      
+      {
+        name: "Paweł Caban",
+        birthDate: "2008-06-09",
+        nationality: "PL",
+        type: "junior"
+      },
+      
+      {
+        name: "Alan Ciurzyński",
+        birthDate: "2008-07-18",
+        nationality: "PL",
+        type: "junior"
       }
 
     ]
@@ -1630,7 +1863,8 @@ function calculateAge(birthDate) {
     monthDifference < 0 ||
     (
       monthDifference === 0 &&
-      GAME_DATE.getDate() < birth.getDate()
+      GAME_DATE.getDate() <
+      birth.getDate()
     )
   ) {
     age--;
@@ -1642,7 +1876,6 @@ function calculateAge(birthDate) {
 
 /* =========================================================
    FORMAT DATY
-   Dane pozostają w systemie.
    ========================================================= */
 
 function formatDate(birthDate) {
@@ -1657,12 +1890,12 @@ function formatDate(birthDate) {
   const day =
     String(
       date.getDate()
-    ).padStart(2, "0");
+    ).padStart(2,"0");
 
   const month =
     String(
       date.getMonth() + 1
-    ).padStart(2, "0");
+    ).padStart(2,"0");
 
   const year =
     date.getFullYear();
@@ -1681,10 +1914,7 @@ function getFlagHtml(nationality) {
     return "";
   }
 
-  const code =
-    nationality.toLowerCase();
-
-  const countryNames = {
+  const names = {
 
     PL: "Polska",
     GB: "Wielka Brytania",
@@ -1700,7 +1930,7 @@ function getFlagHtml(nationality) {
   };
 
   const countryName =
-    countryNames[nationality] ||
+    names[nationality] ||
     nationality;
 
   return `
@@ -1708,7 +1938,7 @@ function getFlagHtml(nationality) {
 
       <img
         class="flag"
-        src="https://flagcdn.com/w40/${code}.png"
+        src="https://flagcdn.com/w40/${nationality.toLowerCase()}.png"
         alt="${countryName}"
         title="${countryName}"
       >
@@ -1818,20 +2048,24 @@ function slotAllowed(
    ========================================================= */
 
 let selectedClubKey = null;
+
 let opponentClubKey = null;
 
 let selectedRiders =
   Array(8).fill(null);
 
 let homeLineup = [];
+
 let awayLineup = [];
 
 let currentHeat = 0;
 
 let homeScore = 0;
+
 let awayScore = 0;
 
-let heatAlreadySimulated = false;
+let heatAlreadySimulated =
+  false;
 
 
 /* =========================================================
@@ -1850,9 +2084,17 @@ function showScreen(id) {
 
     });
 
-  document
-    .getElementById(id)
-    .classList.add("active");
+  const screen =
+    document.getElementById(id);
+
+  if (screen) {
+
+    screen.classList.add(
+      "active"
+    );
+
+  }
+
 }
 
 
@@ -1867,6 +2109,10 @@ function renderClubs() {
       "clubGrid"
     );
 
+  if (!grid) {
+    return;
+  }
+
   grid.innerHTML = "";
 
   Object.entries(clubs)
@@ -1878,12 +2124,18 @@ function renderClubs() {
             "button"
           );
 
+        button.type =
+          "button";
+
         button.className =
           "club-button";
 
-        button.onclick = () => {
-          chooseClub(key);
-        };
+        button.addEventListener(
+          "click",
+          () => {
+            chooseClub(key);
+          }
+        );
 
         button.innerHTML = `
 
@@ -1931,7 +2183,12 @@ function renderClubs() {
 
 function chooseClub(key) {
 
-  selectedClubKey = key;
+  if (!clubs[key]) {
+    return;
+  }
+
+  selectedClubKey =
+    key;
 
   const keys =
     Object.keys(clubs)
@@ -1977,6 +2234,7 @@ function chooseClub(key) {
     away.name;
 
   renderLineupSlots();
+
   renderRiders();
 
   updateStartButton();
@@ -2014,11 +2272,11 @@ function renderLineupSlots() {
     slot.className =
       "slot";
 
-    const number =
-      i + 1;
-
     const selected =
       selectedRiders[i];
+
+    const number =
+      i + 1;
 
     slot.innerHTML = `
 
@@ -2036,47 +2294,53 @@ function renderLineupSlots() {
 
       ${
         selected
-          ? `
-            <div class="rider-button selected">
 
-              <div class="rider-name">
-                ${selected.name}
-              </div>
+        ? `
 
-              <div class="rider-info">
-                ${getRiderAgeText(selected)}
-              </div>
+          <div class="rider-button selected">
 
-              <div class="badges">
+            <div class="rider-name">
+              ${selected.name}
+            </div>
 
-                ${getFlagHtml(selected.nationality)}
+            <div class="rider-info">
+              ${getRiderAgeText(selected)}
+            </div>
 
-                <span class="badge blue">
-                  ${selected.type.toUpperCase()}
-                </span>
+            <div class="badges">
 
-              </div>
+              ${getFlagHtml(
+                selected.nationality
+              )}
+
+              <span class="badge blue">
+                ${selected.type.toUpperCase()}
+              </span>
 
             </div>
 
-            <button
-              class="secondary-button"
-              style="margin-top:8px;"
-              onclick="removeRider(${i})">
+          </div>
 
-              Usuń
+          <button
+            class="secondary-button"
+            style="margin-top:8px;"
+            onclick="removeRider(${i})"
+          >
+            Usuń
+          </button>
 
-            </button>
-          `
-          : `
-            <div
-              class="small"
-              style="margin-top:8px;">
+        `
 
-              Brak zawodnika
+        : `
 
-            </div>
-          `
+          <div
+            class="small"
+            style="margin-top:8px;"
+          >
+            Brak zawodnika
+          </div>
+
+        `
       }
 
     `;
@@ -2084,6 +2348,7 @@ function renderLineupSlots() {
     container.appendChild(
       slot
     );
+
   }
 }
 
@@ -2103,6 +2368,10 @@ function renderRiders() {
 
   const club =
     clubs[selectedClubKey];
+
+  if (!club) {
+    return;
+  }
 
   club.riders.forEach(
     (
@@ -2128,6 +2397,9 @@ function renderRiders() {
           "button"
         );
 
+      button.type =
+        "button";
+
       button.className =
         "rider-button" +
         (
@@ -2139,13 +2411,14 @@ function renderRiders() {
       button.disabled =
         alreadySelected;
 
-      button.onclick = () => {
-
-        chooseRider(
-          riderIndex
-        );
-
-      };
+      button.addEventListener(
+        "click",
+        () => {
+          chooseRider(
+            riderIndex
+          );
+        }
+      );
 
       button.innerHTML = `
 
@@ -2159,7 +2432,9 @@ function renderRiders() {
 
         <div class="badges">
 
-          ${getFlagHtml(rider.nationality)}
+          ${getFlagHtml(
+            rider.nationality
+          )}
 
           <span class="badge blue">
             ${rider.type.toUpperCase()}
@@ -2196,7 +2471,8 @@ function chooseRider(
   const rider =
     club.riders[riderIndex];
 
-  let freeSlot = -1;
+  let freeSlot =
+    -1;
 
   for (
     let i = 0;
@@ -2212,14 +2488,17 @@ function chooseRider(
       )
     ) {
 
-      freeSlot = i;
-      break;
+      freeSlot =
+        i;
 
+      break;
     }
 
   }
 
-  if (freeSlot === -1) {
+  if (
+    freeSlot === -1
+  ) {
 
     alert(
       "Ten zawodnik nie może zostać przypisany do żadnego wolnego numeru."
@@ -2232,7 +2511,9 @@ function chooseRider(
     rider;
 
   renderLineupSlots();
+
   renderRiders();
+
   updateStartButton();
 }
 
@@ -2249,7 +2530,9 @@ function removeRider(
     null;
 
   renderLineupSlots();
+
   renderRiders();
+
   updateStartButton();
 }
 
@@ -2265,6 +2548,7 @@ function lineupIsValid() {
       Boolean
     ).length !== 8
   ) {
+
     return false;
   }
 
@@ -2276,6 +2560,7 @@ function lineupIsValid() {
   if (
     unique.size !== 8
   ) {
+
     return false;
   }
 
@@ -2293,7 +2578,6 @@ function lineupIsValid() {
     ) {
 
       return false;
-
     }
 
   }
@@ -2308,11 +2592,17 @@ function lineupIsValid() {
 
 function updateStartButton() {
 
-  document.getElementById(
-    "startMatchButton"
-  ).disabled =
-    !lineupIsValid();
+  const button =
+    document.getElementById(
+      "startMatchButton"
+    );
 
+  if (!button) {
+    return;
+  }
+
+  button.disabled =
+    !lineupIsValid();
 }
 
 
@@ -2333,7 +2623,6 @@ function buildAI(club) {
 
   let foreignJuniorUsed =
     false;
-
 
   function findForSlot(
     slotIndex,
@@ -2367,13 +2656,13 @@ function buildAI(club) {
           }
 
           return true;
-
         }
       );
 
     if (
       !candidates.length
     ) {
+
       return null;
     }
 
@@ -2387,7 +2676,7 @@ function buildAI(club) {
 
 
   for (
-    const slotIndex of [5, 6]
+    const slotIndex of [5,6]
   ) {
 
     let candidate =
@@ -2402,8 +2691,8 @@ function buildAI(club) {
       foreignJuniorUsed
     ) {
 
-      candidate = null;
-
+      candidate =
+        null;
     }
 
     if (!candidate) {
@@ -2411,11 +2700,14 @@ function buildAI(club) {
       const alternatives =
         available.filter(
           rider =>
+
             !used.has(rider) &&
+
             slotAllowed(
               rider,
               slotIndex
             ) &&
+
             (
               rider.nationality === "PL" ||
               !foreignJuniorUsed
@@ -2453,7 +2745,6 @@ function buildAI(club) {
 
         foreignJuniorUsed =
           true;
-
       }
 
     }
@@ -2497,7 +2788,6 @@ function buildAI(club) {
     used.add(
       reserve
     );
-
   }
 
 
@@ -2507,14 +2797,18 @@ function buildAI(club) {
     i++
   ) {
 
-    if (lineup[i]) {
+    if (
+      lineup[i]
+    ) {
       continue;
     }
 
     const fallback =
       available.find(
         rider =>
+
           !used.has(rider) &&
+
           slotAllowed(
             rider,
             i
@@ -2529,7 +2823,6 @@ function buildAI(club) {
       used.add(
         fallback
       );
-
     }
 
   }
@@ -2576,10 +2869,14 @@ function startMatch() {
     return;
   }
 
-  currentHeat = 0;
+  currentHeat =
+    0;
 
-  homeScore = 0;
-  awayScore = 0;
+  homeScore =
+    0;
+
+  awayScore =
+    0;
 
   heatAlreadySimulated =
     false;
@@ -2591,6 +2888,7 @@ function startMatch() {
     clubs[
       selectedClubKey
     ].short;
+
 
   document.getElementById(
     "matchAwayShort"
@@ -2607,6 +2905,7 @@ function startMatch() {
       selectedClubKey
     ].logoUrl;
 
+
   document.getElementById(
     "matchAwayLogo"
   ).src =
@@ -2620,6 +2919,7 @@ function startMatch() {
   ).textContent =
     "0";
 
+
   document.getElementById(
     "matchAwayScore"
   ).textContent =
@@ -2631,10 +2931,12 @@ function startMatch() {
   ).style.display =
     "block";
 
+
   document.getElementById(
     "nextHeatButton"
   ).style.display =
     "none";
+
 
   document.getElementById(
     "finishMatchButton"
@@ -2656,35 +2958,35 @@ function startMatch() {
 
 const heatMatrix = [
 
-  [1, 9, 3, 11],
+  [1,9,3,11],
 
-  [15, 6, 14, 7],
+  [15,6,14,7],
 
-  [5, 12, 2, 13],
+  [5,12,2,13],
 
-  [14, 4, 10, 6],
+  [14,4,10,6],
 
-  [11, 3, 12, 4],
+  [11,3,12,4],
 
-  [13, 2, 15, 1],
+  [13,2,15,1],
 
-  [7, 10, 5, 9],
+  [7,10,5,9],
 
-  [3, 13, 4, 14],
+  [3,13,4,14],
 
-  [9, 1, 10, 2],
+  [9,1,10,2],
 
-  [6, 11, 5, 12],
+  [6,11,5,12],
 
-  [12, 4, 9, 1],
+  [12,4,9,1],
 
-  [2, 15, 7, 11],
+  [2,15,7,11],
 
-  [10, 5, 13, 3],
+  [10,5,13,3],
 
-  [9, 1, 15, 7],
+  [9,1,15,7],
 
-  [1, 9, 7, 15]
+  [1,9,7,15]
 
 ];
 
@@ -2705,7 +3007,6 @@ function riderForNumber(
     return awayLineup[
       number - 1
     ];
-
   }
 
   if (
@@ -2716,7 +3017,6 @@ function riderForNumber(
     return homeLineup[
       number - 9
     ];
-
   }
 
   return null;
@@ -2739,17 +3039,21 @@ function renderCurrentHeat() {
   ).textContent =
     `Bieg ${currentHeat + 1} z 15`;
 
+
   document.getElementById(
     "heatTitle"
   ).textContent =
     "Obsada biegu";
+
 
   const container =
     document.getElementById(
       "heatResults"
     );
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
+
 
   heat.forEach(
     (
@@ -2770,10 +3074,18 @@ function renderCurrentHeat() {
       row.className =
         "heat-rider";
 
+
       const team =
         number <= 8
-          ? clubs[opponentClubKey]
-          : clubs[selectedClubKey];
+
+          ? clubs[
+              opponentClubKey
+            ]
+
+          : clubs[
+              selectedClubKey
+            ];
+
 
       row.innerHTML = `
 
@@ -2794,7 +3106,10 @@ function renderCurrentHeat() {
           </div>
 
           <div class="heat-team">
-            ${team.short} • nr ${number}
+
+            ${team.short}
+            • nr ${number}
+
           </div>
 
         </div>
@@ -2812,25 +3127,30 @@ function renderCurrentHeat() {
     }
   );
 
+
   document.getElementById(
     "heatResultBox"
   ).style.display =
     "none";
+
 
   document.getElementById(
     "simulateButton"
   ).style.display =
     "block";
 
+
   document.getElementById(
     "nextHeatButton"
   ).style.display =
     "none";
 
+
   document.getElementById(
     "finishMatchButton"
   ).style.display =
     "none";
+
 
   heatAlreadySimulated =
     false;
@@ -2843,13 +3163,12 @@ function renderCurrentHeat() {
 
 function generateHeatResult() {
 
-  const heat =
+  const riders =
     heatMatrix[
       currentHeat
-    ];
+    ]
 
-  const riders =
-    heat.map(
+    .map(
       number => ({
 
         number,
@@ -2865,26 +3184,24 @@ function generateHeatResult() {
             : "home"
 
       })
-    );
+    )
 
-  const validRiders =
-    riders.filter(
+    .filter(
       item => item.rider
     );
 
-  validRiders.sort(
+
+  riders.sort(
     () =>
       Math.random() - 0.5
   );
 
-  const points = [
-    3,
-    2,
-    1,
-    0
-  ];
 
-  validRiders.forEach(
+  const points =
+    [3,2,1,0];
+
+
+  riders.forEach(
     (
       item,
       index
@@ -2896,7 +3213,8 @@ function generateHeatResult() {
     }
   );
 
-  return validRiders;
+
+  return riders;
 }
 
 
@@ -2909,21 +3227,30 @@ function simulateCurrentHeat() {
   if (
     heatAlreadySimulated
   ) {
+
     return;
   }
 
+
   const results =
     generateHeatResult();
+
 
   const container =
     document.getElementById(
       "heatResults"
     );
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
 
-  let heatHomeScore = 0;
-  let heatAwayScore = 0;
+
+  let heatHomeScore =
+    0;
+
+  let heatAwayScore =
+    0;
+
 
   results.forEach(
     (
@@ -2942,13 +3269,20 @@ function simulateCurrentHeat() {
 
         heatAwayScore +=
           result.points;
-
       }
+
 
       const team =
         result.team === "home"
-          ? clubs[selectedClubKey]
-          : clubs[opponentClubKey];
+
+          ? clubs[
+              selectedClubKey
+            ]
+
+          : clubs[
+              opponentClubKey
+            ];
+
 
       const row =
         document.createElement(
@@ -2957,6 +3291,7 @@ function simulateCurrentHeat() {
 
       row.className =
         "heat-rider";
+
 
       row.innerHTML = `
 
@@ -2971,7 +3306,8 @@ function simulateCurrentHeat() {
           </div>
 
           <div class="heat-team">
-            ${team.short} • nr ${result.number}
+            ${team.short}
+            • nr ${result.number}
           </div>
 
         </div>
@@ -2981,6 +3317,7 @@ function simulateCurrentHeat() {
         </div>
 
       `;
+
 
       container.appendChild(
         row
@@ -3001,6 +3338,7 @@ function simulateCurrentHeat() {
     "matchHomeScore"
   ).textContent =
     homeScore;
+
 
   document.getElementById(
     "matchAwayScore"
@@ -3066,6 +3404,7 @@ function nextHeat() {
   if (
     !heatAlreadySimulated
   ) {
+
     return;
   }
 
@@ -3086,7 +3425,10 @@ function finishMatch() {
   ).textContent =
     `${homeScore}:${awayScore}`;
 
-  let message = "";
+
+  let message =
+    "";
+
 
   if (
     homeScore > awayScore
@@ -3109,10 +3451,12 @@ function finishMatch() {
 
   }
 
+
   document.getElementById(
     "finalMessage"
   ).textContent =
     message;
+
 
   showScreen(
     "finishScreen"
@@ -3126,32 +3470,63 @@ function finishMatch() {
 
 function backToClubs() {
 
-  selectedClubKey = null;
-  opponentClubKey = null;
+  selectedClubKey =
+    null;
+
+  opponentClubKey =
+    null;
 
   selectedRiders =
     Array(8).fill(null);
 
-  homeLineup = [];
-  awayLineup = [];
+  homeLineup =
+    [];
 
-  currentHeat = 0;
+  awayLineup =
+    [];
 
-  homeScore = 0;
-  awayScore = 0;
+  currentHeat =
+    0;
+
+  homeScore =
+    0;
+
+  awayScore =
+    0;
 
   heatAlreadySimulated =
     false;
 
+
   showScreen(
     "clubScreen"
   );
+
+
+  renderClubs();
 }
 
 
 /* =========================================================
-   START
+   URUCHOMIENIE GRY
    ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    renderClubs();
+
+  }
+);
+
+
+/*
+  Dodatkowe wywołanie zabezpieczające.
+  Dzięki temu lista klubów zostanie wyrenderowana
+  również wtedy, gdy skrypt zostanie wykonany
+  po załadowaniu DOM.
+*/
 
 renderClubs();
 
